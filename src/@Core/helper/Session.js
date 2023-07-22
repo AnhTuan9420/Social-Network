@@ -76,8 +76,8 @@ export const setTraveloUser = data => {
 	setDataSession(LOCAL_STORAGE, 'travelo_user', data)
 }
 
-export const getFumUser = key => {
-	const data = getDataSession(LOCAL_STORAGE, 'fum_user') ?? null
+export const getSocialUser = key => {
+	const data = getDataSession(LOCAL_STORAGE, 'social_user') ?? null
 	if (key) {
 		return get(data, key)
 	}
@@ -101,5 +101,5 @@ export const clearSession = () => {
 }
 
 export const getUserId = () => {
-	return getFumUser('user_id')
+	return getSocialUser('user_id')
 }

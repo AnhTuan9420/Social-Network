@@ -5,8 +5,8 @@ import React, { useContext, useEffect, useState } from 'react'
 
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { errorMsg, successMsg } from '@Core/helper/Message'
-import { authService } from '@App/Fum/services/authService'
-import { getFumUser, setFirebaseToken, setTraveloUser } from '@Core/helper/Session'
+import { authService } from '@App/Social/services/authService'
+import { getSocialUser, setFirebaseToken, setTraveloUser } from '@Core/helper/Session'
 
 import { hideLoadingPage, showLoadingPage } from '@Core/helper/System'
 import { CoreLoadingFullPage } from '@Core/components/Loading/CoreLoadingFullPage'
@@ -41,27 +41,13 @@ const FirebaseAuthProvider = props => {
 
 	const handleSignInFirebase = async (mail, password) => {
 		showLoadingPage()
-		// try {
-		// 	const res = await signInWithEmailAndPassword(authFirebase, mail, password)
-		// 	const user = res.user
-		// 	setAuth(user)
-		// 	setAuthRole('user')
-		// 	// setFirebaseToken(user?.stsTokenManager)
-		// 	const fum = await authService.login({ mail, password })
-		// 	setTraveloUser(fum?.user_info)
-		// 	successMsg('Login success')
-		// 	hideLoadingPage()
-		// 	return user
-		// } catch (e) {
-		// 	errorMsg('Invalid email or password')
-		// }
 		hideLoadingPage()
 	}
 
 	const handleSignout = async () => {
 		try {
 			showLoadingPage()
-			authService.logout(getFumUser())
+			authService.logout(getSocialUser())
 			// await signOut(authFirebase)
 			setAuth(null)
 			setAuthRole('guest')

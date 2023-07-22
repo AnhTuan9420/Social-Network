@@ -4,7 +4,7 @@ import React from 'react'
 import useBreadcrumbs from 'use-react-router-breadcrumbs'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { Link } from 'react-router-dom'
-import { ROUTER_FUM } from '@App/Fum/configs/constants'
+import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 
 const CoreBreadcrumb = props => {
 	const { routes, status } = props
@@ -17,11 +17,11 @@ const CoreBreadcrumb = props => {
 					''
 				) : (
 					<Box className="flex flex-wrap ">
-						{match.pathname === ROUTER_FUM.event.favorite ? (
+						{match.pathname === ROUTER_SOCIAL.event.favorite ? (
 							<Box className="flex">
 								<Link
 									className="text-[#00A0E9] sm:text-16 text-14 font-light"
-									to={ROUTER_FUM.event.event_top}
+									to={ROUTER_SOCIAL.event.event_top}
 								>
 									トップ
 								</Link>
@@ -31,11 +31,11 @@ const CoreBreadcrumb = props => {
 								</Typography>
 							</Box>
 						) : null}
-						{match.pathname === ROUTER_FUM.event.history ? (
+						{match.pathname === ROUTER_SOCIAL.event.history ? (
 							<Box className="flex">
 								<Link
 									className="text-[#00A0E9] sm:text-16 text-14 font-light"
-									to={ROUTER_FUM.event.event_top}
+									to={ROUTER_SOCIAL.event.event_top}
 								>
 									トップ
 								</Link>
@@ -45,18 +45,18 @@ const CoreBreadcrumb = props => {
 								</Typography>
 							</Box>
 						) : null}
-						{match.pathname === ROUTER_FUM.event.history_detail ? (
+						{match.pathname === ROUTER_SOCIAL.event.history_detail ? (
 							<Box className="flex">
 								<Link
 									className="text-[#00A0E9] sm:text-16 text-14 font-light"
-									to={ROUTER_FUM.event.event_top}
+									to={ROUTER_SOCIAL.event.event_top}
 								>
 									トップ
 								</Link>
 								<NavigateNextIcon fontSize="medium" className="self-center text-[#222222] mx-2" />
 								<Link
 									className="text-[#00A0E9] sm:text-16 text-14 font-light"
-									to={ROUTER_FUM.event.history}
+									to={ROUTER_SOCIAL.event.history}
 								>
 									利用履歴
 								</Link>
@@ -78,11 +78,11 @@ const CoreBreadcrumb = props => {
 								) : null}
 							</Box>
 						) : null}
-						{match.pathname === ROUTER_FUM.auth.register.profile ? (
+						{match.pathname === ROUTER_SOCIAL.auth.register.profile ? (
 							<Box className="flex">
 								<Link
 									className="text-[#00A0E9] sm:text-16 text-14 font-light"
-									to={ROUTER_FUM.event.event_top}
+									to={ROUTER_SOCIAL.event.event_top}
 								>
 									トップ
 								</Link>
@@ -92,18 +92,18 @@ const CoreBreadcrumb = props => {
 								</Typography>
 							</Box>
 						) : null}
-						{match.pathname === ROUTER_FUM.auth.register.confirm ? (
+						{match.pathname === ROUTER_SOCIAL.auth.register.confirm ? (
 							<Box className="flex flex-wrap">
 								<Link
 									className="text-[#00A0E9] sm:text-16 text-14 font-light"
-									to={ROUTER_FUM.event.event_top}
+									to={ROUTER_SOCIAL.event.event_top}
 								>
 									トップ
 								</Link>
 								<NavigateNextIcon fontSize="medium" className="self-center text-[#222222] mx-2" />
 								<Link
 									className="text-[#00A0E9] sm:text-16 text-14 font-light"
-									to={ROUTER_FUM.auth.register.profile}
+									to={ROUTER_SOCIAL.auth.register.profile}
 								>
 									会員登録
 								</Link>
@@ -113,26 +113,26 @@ const CoreBreadcrumb = props => {
 								</Typography>
 							</Box>
 						) : null}
-						{match.pathname === ROUTER_FUM.auth.register.verification_codes ? (
+						{match.pathname === ROUTER_SOCIAL.auth.register.verification_codes ? (
 							<Box className="sm:flex flex-wrap">
 								<Box className="flex items-center">
 									<Link
 										className="text-[#00A0E9] sm:text-16 text-14 font-light"
-										to={ROUTER_FUM.event.event_top}
+										to={ROUTER_SOCIAL.event.event_top}
 									>
 										トップ
 									</Link>
 									<NavigateNextIcon fontSize="medium" className="self-center text-[#222222] mx-2" />
 									<Link
 										className="text-[#00A0E9] sm:text-16 text-14 font-light"
-										to={ROUTER_FUM.auth.register.profile}
+										to={ROUTER_SOCIAL.auth.register.profile}
 									>
 										会員登録
 									</Link>
 									<NavigateNextIcon fontSize="medium" className="self-center text-[#222222] mx-2" />
 									<Link
 										className="text-[#00A0E9] sm:text-16 text-14 font-light"
-										to={ROUTER_FUM.auth.register.confirm}
+										to={ROUTER_SOCIAL.auth.register.confirm}
 									>
 										登録内容の確認
 									</Link>
@@ -145,7 +145,7 @@ const CoreBreadcrumb = props => {
 								</Box>
 							</Box>
 						) : null}
-						{match.pathname === ROUTER_FUM.auth.register.success ? (
+						{match.pathname === ROUTER_SOCIAL.auth.register.success ? (
 							<Box className="flex flex-wrap">
 								<Box className="flex">
 									<Typography className="text-[#222222] sm:text-16 text-14 font-light">

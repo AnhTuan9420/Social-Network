@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import DefaultLayout from './Fum/components/Layout/DefaultLayout'
-import { routerTraveloConfig } from './Fum/configs/routerConfig'
-import Page404 from './Fum/pages/Error/Page404'
+import DefaultLayout from './Social/components/Layout/DefaultLayout'
+import { routerTraveloConfig } from './Social/configs/routerConfig'
+import Page404 from './Social/pages/Error/Page404'
 
 export const appRouterConfig = createBrowserRouter([
 	{

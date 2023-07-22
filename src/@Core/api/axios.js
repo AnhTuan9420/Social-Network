@@ -1,9 +1,9 @@
-import { authService } from '@App/Fum/services/authService'
+import { authService } from '@App/Social/services/authService'
 import Axios from 'axios'
 import Qs from 'qs'
 import Cookies from 'js-cookie'
 import { clearSession } from '@Core/helper/Session'
-import { ROUTER_FUM } from '@App/Fum/configs/constants'
+import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 
 export const createInstance = (baseUrl = null, middleware = () => {}) => {
 	const options = {
@@ -65,7 +65,7 @@ export const createInstance = (baseUrl = null, middleware = () => {}) => {
 			}else {	
 				if(error?.response?.data?.error_code == 401 && error?.response?.data?.error_message === 'リフレッシュトークンの有効期限が切れています'){
 					clearSession()
-					window.open(ROUTER_FUM.auth.login, "_self")
+					window.open(ROUTER_SOCIAL.auth.login, "_self")
 				}
 				if (error?.response?.data) {
 					const { data } = error?.response

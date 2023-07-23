@@ -142,11 +142,11 @@ const AppFooter = props => {
 				</Box>
 				{currentUrl.includes('facility-detail') ? (
 					<Box className="text-center sm:mt-[64px] mt-32 sm:pb-[24px] pb-[122px]">
-						<Typography>© Copyright 2023</Typography>
+						<Typography>Social Network © Copyright 2023</Typography>
 					</Box>
 				) : (
 					<Box className="text-center sm:mt-[64px] mt-32 sm:pb-[24px] pb-[32px]">
-						<Typography>© Copyright 2023</Typography>
+						<Typography>Social Network © Copyright 2023</Typography>
 					</Box>
 				)}
 			</Box>

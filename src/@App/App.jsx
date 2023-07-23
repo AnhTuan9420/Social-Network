@@ -27,7 +27,6 @@ const App = props => {
 					<RouterProvider router={appRouterConfig} />
 					<ToastContainer />
 					<CoreLoadingFullPage />
-					{AddLibrary('https://js.elepay.io/v1/elepay.js')}
 				</CoreAuthProvider>
 			</CoreConfirmProvider>
 		</CoreAppTheme>

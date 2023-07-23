@@ -15,8 +15,7 @@ const LazyRegisterSuccess = React.lazy(() => import('../pages/Auth/Register/Regi
 // Event
 const LazyEventSearch = React.lazy(() => import('../pages/Facility'))
 const LazyEventFavorite = React.lazy(() => import('../pages/Facility/ListFavorite'))
-const LazyEventTop = React.lazy(() => import('../pages/Home/Top'))
-const LazyEventTeaser = React.lazy(() => import('../pages/Home/Teaser'))
+const LazyEventTop = React.lazy(() => import('../pages/Home'))
 const LazyHistoryList = React.lazy(() => import('../pages/History'))
 const LazyItemSelection = React.lazy(() => import('../pages/FacilityDetail/Entry/ItemSelection'))
 const LazyEnterInformation = React.lazy(() => import('../pages/FacilityDetail/Entry/EnterUserInformation'))
@@ -75,10 +74,6 @@ export const routerTraveloConfig = [
 	{
 		path: ROUTER_SOCIAL.event.event_top,
 		element: <LazyEventTop />
-	},
-	{
-		path: ROUTER_SOCIAL.event.teaser,
-		element: <LazyEventTeaser />
 	},
 	{
 		path: ROUTER_SOCIAL.event.history,

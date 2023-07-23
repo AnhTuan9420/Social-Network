@@ -47,7 +47,7 @@ const UserHeader = props => {
 		)
 	}
 
-	if (user) {
+	if (endpoint !== ROUTER_SOCIAL.event.event_top) {
 		return (
 			<div className="flex justify-between">
 				{!isMobile ? (
@@ -96,80 +96,6 @@ const UserHeader = props => {
 		)
 	}
 
-	return (
-		<div className="flex">
-			{isMobile ? (
-				<>
-					<HeaderNotification className='min-w-[47px]'/>
-					<Box className="cursor-pointer sm:ml-40 ml-0" onClick={() => setOpen(true)}>
-						<IconButton
-							size="small"
-							aria-label="account of current user"
-							aria-controls="menu-appbar"
-							aria-haspopup="true"
-							color="primary"
-							className="pr-16 pl-0"
-						>
-							<MenuIcon />
-						</IconButton>
-					</Box>
-				</>
-			) : (
-				<>
-					<Button className="cursor-pointer flex">
-						<img src={list} className="mr-[7px]" />
-						<Typography
-							className="font-semibold leading-[140%] text-[16px] text-[#333333]"
-							onClick={() => navigate(ROUTER_SOCIAL.event.teaser)}
-						>
-							施設を掲載する
-						</Typography>
-					</Button>
-					<Box
-						textAlign="center"
-						className="cursor-pointer ml-[30px] mr-[80px] bg-[#00A0E9] w-[200px] rounded-4"
-					>
-						{endpoint === ROUTER_SOCIAL.event.teaser ? (
-							<a href={import.meta.env.VITE_CMS_LOGIN_URL} target="_blank">
-								<Typography className="text-white py-[9px] px-28 font-semibold leading-[140%] text-[16px] ">
-									ログイン・会員登録
-								</Typography>
-							</a>
-						) : (
-							<Typography
-								className="text-white py-[9px] px-28 font-semibold leading-[140%] text-[16px] "
-								// onClick={handleShowLoginDialog}
-								onClick={() => navigate(ROUTER_SOCIAL.auth.login)}
-							>
-								ログイン・会員登録
-							</Typography>
-						)}
-					</Box>
-				</>
-			)}
-
-			<LeftMenu open={open} setOpen={setOpen} />
-			{renderShowLoginDialog()}
-			{/* <Menu
-				id="menu-appbar"
-				anchorEl={anchorEl}
-				anchorOrigin={{
-					vertical: 'top',
-					horizontal: 'right'
-				}}
-				keepMounted
-				transformOrigin={{
-					vertical: 'top',
-					horizontal: 'right'
-				}}
-				open={Boolean(anchorEl)}
-				onClose={handleClose}
-			>
-				<MenuItem onClick={handleClose}>Profile</MenuItem>
-				<MenuItem onClick={handleClose}>My account</MenuItem>
-			</Menu> */}
-		</div>
-	)
 }
 
 //UserHeader.defaultProps = {}

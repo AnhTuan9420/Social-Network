@@ -17,12 +17,11 @@ import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useSearchDialog } from './hooks/useSearchDialog'
+import { useCreatePostModal } from './hooks/useCreatePostModal'
 import AddIcon from '@mui/icons-material/Add'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 // import no_image from '@App/Social/assets/no_image.webp'
 import imagefail from '@App/Social/assets/imagefail.svg'
-import locationMobile from '@App/Social/assets/locationMobile.svg'
-import location from '@App/Social/assets/location.svg'
 import trash from '@App/Social/assets/trash.svg'
 import { removeDataSession } from '@Core/helper/Session'
 
@@ -32,6 +31,7 @@ const FacilityList = props => {
 
 	const { facility, getFacility, loadingFacility } = props
 	const { renderSearchDialog, handleOpenSearchDialog, addTags } = useSearchDialog(tags)
+	const { onOpen, render } = useCreatePostModal()
 	const [searching, setSearching] = useState(false)
 	const [searchFavorite, setSearchFavorite] = useState({
 		label: '人気順',
@@ -119,7 +119,6 @@ const FacilityList = props => {
 
 	return (
 		<EventContentPage
-			hasBreadcrumb={false}
 			header={
 				<FormProvider>
 					<Box className="bg-[#EFFAFF]">
@@ -199,13 +198,13 @@ const FacilityList = props => {
 								</div>
 								<Box className="w-full sm:w-[200px] ">
 									<Button
-										variant="contained"	
+										variant="contained"
 										disableElevation
 										size="small"
 										className="w-full h-[56px] sm:text-20 text-16 font-semibold py-12 "
 										color="primary"
 										type="submit"
-										onClick={()=> setSearchTags(addTags)}
+										onClick={() => setSearchTags(addTags)}
 									>
 										検索する
 									</Button>
@@ -215,10 +214,56 @@ const FacilityList = props => {
 					</Box>
 				</FormProvider>
 			}
-			maxWidth={1234}
 			content={
 				<>
-					<Box className="flex flex-col">
+					<Typography className='mt-20 font-bold'>
+						Top lượt thích
+					</Typography>
+
+					<Box className='mt-20 grid grid-cols-5 gap-10'>
+						<Box className='relative'>
+							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
+							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
+							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
+						</Box>
+						<Box className='relative'>
+							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
+							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
+							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
+						</Box>
+						<Box className='relative'>
+							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
+							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
+							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
+						</Box>
+						<Box className='relative'>
+							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
+							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
+							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
+						</Box>
+						<Box className='relative'>
+							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
+							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
+							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
+						</Box>
+					</Box>
+
+					<Typography className='mt-20 font-bold'>
+						Đăng bài
+					</Typography>
+
+					<Box className='flex items-center mt-20 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+						<img src='/Icons/man.png' className='h-40 w-40 mr-[30px]' />
+						<Typography className='cursor-pointer'
+							onClick={onOpen}
+						>Bạn có muốn đăng bài không?</Typography>
+					</Box>
+
+					<Typography className='mt-20 font-bold'>
+						Danh sách bài đăng
+					</Typography>
+					
+					<Box className=" flex flex-col mt-20 gap-20">
 						{loadingFacility ? (
 							<div className="my-40 min-h-[50vh] flex justify-center items-center">
 								<CircularProgress />
@@ -315,92 +360,77 @@ const FacilityList = props => {
 										) : null}
 									</>
 								) : (
-									<Typography className="sm:text-[32px] sm:mt-56 mt-24 text-20 sm:ml-0 ml-16 sm:mb-[56px] text-[#000000] not-italic mb-16 font-semibold">
-										最近掲載された施設
-									</Typography>
+									null
 								)}
 
-								<Grid container spacing={4}>
-									{facility?.data?.map((item, index) => {
-										return (
-											<Grid item xs={12} sm={6} md={4} key={index}>
-												<Box className="cursor-pointer sm:border border-b-1 max-w-full border-[#e0e0e0] sm:rounded sm:border-[#E0E0E0] sm:min-h-[540px] p-[16px]"
+								{facility?.data?.map((item, index) => {
+									return (
+										<Box className="bg-[white] sm:border border-b-1 max-w-full border-[#e0e0e0] sm:rounded-8 sm:border-[#E0E0E0] sm:min-h-[540px] p-[16px]"
+											sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
+										>
+											<Box className='mb-16 flex'>
+												<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+												<Box>
+													<Typography className='font-bold text-14'>Charlie</Typography>
+													<Typography className='text-12'>20 phút trước</Typography>
+												</Box>
+											</Box>
+
+											<Box className='mb-16'>
+												<Typography className='text_truncate_4'>
+													Đu đủ (danh pháp khoa học: Carica papaya) là một cây thuộc họ Đu đủ.[3] Đây là cây thân thảo to, không hoặc ít khi có nhánh, cao từ 3–10 m. Lá to hình chân vịt, cuống dài, đường kính 50–70 cm, có khoảng 7 khía. Hoa trắng hay xanh, đài nhỏ, vành to năm cánh. Quả đu đủ to tròn, dài, khi chín mềm, hạt màu nâu hoặc đen tùy từng loại giống, có nhiều hạt.
+												</Typography>
+											</Box>
+
+											<Box
 												onClick={() =>
 													navigate(
 														`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.id}`
 													)
-												}
-												>
-													<Box>
-														<img
-															className="h-[238px] w-full object-cover"
-															src={item?.main_image?.image_url ?? imagefail}
-															duration={500}
-														/>
-													</Box>
-													<Box className="pt-10">
-														<Typography
-															variant="subtitle2"
-															className="text_truncate_2 sm:text-[26px] text-[16px] leading-[140%] sm:h-[72px] font-semibold text-[#222222] h-[43px]"
-														>
-															{item?.name}
+												}>
+												<img
+													className="h-[500px] w-full object-cover cursor-pointer "
+													src={item?.main_image?.image_url ?? imagefail}
+													duration={500}
+												/>
+											</Box>
+											<Box className="pt-10">
+												<hr className='text-[#ddc1c1]' />
+												<Box className='py-4 flex justify-between'>
+													<Button className='w-[30%] flex'>
+														<img src='/Icons/like.png' className='h-20 w-20 mr-6' />
+														<Typography className='text-[red] lowercase font-bold'>
+															Thích
 														</Typography>
-														<Box className="py-8 flex ">
-															{isMobile ? (
-																<img
-																	src={locationMobile}
-																	className="h-[20px] mt-[2px] ml-[5px] mr-[9px] "
-																/>
-															) : (
-																<img
-																	src={location}
-																	className="h-[20px] mt-[7px] ml-[5px] mr-[9px]"
-																/>
-															)}
-															<Typography
-																variant="body1"
-																className="truncate sm:text-[20px] text-[16px] min-h-[32px] text-[#222222] font-light leading-[160%]"
-															>
-																{item?.nearby_station}
-															</Typography>
-														</Box>
-														<Typography className="sm:text_truncate_3 text_truncate_4 sm:mb-8 mb-16 sm:text-[20px] text-[16px] sm:min-h-[96px] min-h-[90px] text-[#222222] font-light sm:leading-[160%] leading-[140%]">
-															{item?.introduction}
+													</Button>
+													<Button className='w-[30%] flex'
+														onClick={() =>
+															navigate(
+																`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.id}`
+															)
+														}
+													>
+														<img src='/Icons/comment.png' className='h-20 w-20 mr-6' />
+														<Typography className='text-[#65676b] lowercase font-bold'>
+															Bình luận
 														</Typography>
-														<Box className="flex items-center gap-4 overflow-hidden sm:min-h-[30px] min-h-[30px]">
-															{item?.tags?.length <= 2
-																? item?.tags?.map((tag, i) => (
-																		<Box
-																			className="py-4 px-12 bg-[#FFFFFF] sm:text-[16px] text-[14px] truncate text-[#00A0E9] border-solid border-[1px] rounded-[160px] "
-																			key={i}
-																		>
-																			#{tag?.name}
-																		</Box>
-																  ))
-																: item?.tags?.slice(0, 2)?.map((tag, i) => (
-																		<Box
-																			className="py-4 px-12 bg-[#FFFFFF] sm:text-[16px] text-[14px] truncate text-[#00A0E9] border-solid border-[1px] rounded-[160px] "
-																			key={i}
-																		>
-																			# {tag?.name}
-																		</Box>
-																  ))}
-															{item?.tags?.length > 2 ? (
-																<Typography className="sm:text-[16px] text-[14px]">
-																	+{item?.tags?.length - 2}
-																</Typography>
-															) : null}
-														</Box>
-													</Box>
+													</Button>
+													<Button className='w-[30%] flex'>
+														<img src='/Icons/share.png' className='h-20 w-20 mr-6' />
+														<Typography className='text-[#65676b] lowercase font-bold'>
+															Chia sẻ
+														</Typography>
+													</Button>
 												</Box>
-											</Grid>
-										)
-									})}
-								</Grid>
+												<hr className='text-[#ddc1c1]' />
+											</Box>
+										</Box>
+									)
+								})}
 							</>
 						)}
 
-						{facility?.data?.length > 0 ? (
+						{/* {facility?.data?.length > 0 ? (
 							<Box className="mt-56 sm:mb-56 mb-24 sm:px-0 px-16 flex justify-center">
 								{Math.ceil(facility?.total / facility?.per_page) > 1 ? (
 									<Pagination
@@ -478,9 +508,10 @@ const FacilityList = props => {
 									/>
 								) : null}
 							</Box>
-						) : null}
+						) : null} */}
 					</Box>
 					{renderSearchDialog()}
+					{render()}
 				</>
 			}
 		/>

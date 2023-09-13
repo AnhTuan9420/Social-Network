@@ -14,7 +14,7 @@ const AppHeader = props => {
 
 	return (
 		<Box>
-			<AppBar position="sticky" className='bg-[#FFFFFF] shadow-none border-b-1 border-[#E0E0E0]'>
+			<AppBar position="fixed" className='bg-[white] shadow-none border-b-1 border-[#E0E0E0]'>
 				<Toolbar className='justify-between p-0'>
 					<Typography component="div"
 						className={endpoint === ROUTER_SOCIAL.event.event_top ?

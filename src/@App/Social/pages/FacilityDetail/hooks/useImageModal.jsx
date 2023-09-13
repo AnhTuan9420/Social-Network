@@ -30,7 +30,7 @@ export const useImageModal = () => {
 								<CloseOutlinedIcon color="primary" />
 							</IconButton>
 							<Typography className="mx-auto sm:text-[26px] text-16 font-semibold text-[#222222] leading-[140%]">
-								写真
+								Danh sách ảnh
 							</Typography>
 						</Box>
 					</DialogTitle>

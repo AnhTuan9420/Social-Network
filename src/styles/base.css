@@ -6,7 +6,7 @@
  * Custom base styles, applied after the tailwind-base classes
  */
 
-@font-face {
+/* @font-face {
 	font-family: 'Hiragino Sans';
 	font-weight: 100;
 	src: local('Hiragino Sans'), url('../assets/fonts/HiraginoGothicW1.ttf') format('truetype');
@@ -28,7 +28,7 @@
 	font-family: 'Hiragino Kaku Gothic Pro';
 	font-weight: 600;
 	src: local('Hiragino Kaku Gothic Pro'), url('../assets/fonts/HiraginoKakuGothicProW6.ttf') format('truetype');
-}
+} */
 
 html {
 	font-family: 'Hiragino Sans';

@@ -54,8 +54,8 @@ const UserHeader = props => {
 					<>
 						<Button className="cursor-pointer flex" onClick={() => navigate(ROUTER_SOCIAL.event.favorite)}>
 							<img src={Star} className="mr-[7px]" />
-							<Typography className=" sm:text-[16px] font-bold text-[14px] text-black ">
-								お気に入り
+							<Typography className="font-bold text-[14px] text-black ">
+								Yêu thích
 							</Typography>
 						</Button>
 						<Button
@@ -63,8 +63,8 @@ const UserHeader = props => {
 							onClick={() => navigate(ROUTER_SOCIAL.event.history)}
 						>
 							<img src={CalendarHeader} className="mr-[7px]" />
-							<Typography className=" sm:text-[16px] font-bold text-[14px] text-black ">
-								利用履歴
+							<Typography className="font-bold text-[14px] text-black ">
+								Lịch sử
 							</Typography>
 						</Button>
 						<HeaderNotification />

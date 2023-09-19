@@ -20,6 +20,9 @@ const LazyHistoryList = React.lazy(() => import('../pages/History'))
 const LazyItemSelection = React.lazy(() => import('../pages/FacilityDetail/Entry/ItemSelection'))
 const LazyEnterInformation = React.lazy(() => import('../pages/FacilityDetail/Entry/EnterUserInformation'))
 
+//profile
+const LazyProfile = React.lazy(() => import('../pages/Profile'))
+
 
 export const routerTraveloConfig = [
 	{
@@ -89,5 +92,10 @@ export const routerTraveloConfig = [
 		path: ROUTER_SOCIAL.entry.enter_information,
 		element: <LazyEnterInformation />,
 		breadcrumb: '利用者情報入力'
+	},
+	{
+		path: ROUTER_SOCIAL.user.profile,
+		element: <LazyProfile />,
+		breadcrumb: 'Profile'
 	},
 ]

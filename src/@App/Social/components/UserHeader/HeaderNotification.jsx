@@ -109,7 +109,7 @@ const HeaderNotification = props => {
 						<img className="sm:mr-10 sm:h-auto h-20" src={notice} />
 					)}
 					<Typography className="sm:block hidden sm:text-[16px] font-bold text-[14px] text-black ">
-						お知らせ
+						Thông báo
 					</Typography>
 				</Button>
 				<Box

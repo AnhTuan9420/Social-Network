@@ -65,39 +65,39 @@ const HeaderPerson = () => {
 				)}
 			>
 				<Box className="p-16">
-					<Typography className="text-[16px] break-all font-semibold text-[#000000] ">{user?.name} 様</Typography>
+					<Typography className="text-[16px] break-all font-semibold text-[#000000] ">{user?.name ?? 'Charlie'}</Typography>
 				</Box>
 				<Divider />
 
 				<Typography
-					className="text-[16px] px-16 pb-8 pt-16 text-[#000000] leading-[140%] cursor-pointer "
-					onClick={() => navigate(ROUTER_SOCIAL.user.info) & setOpen(!open)}
+					className="text-[16px] px-16 pb-8 pt-16 text-[#000000] cursor-pointer "
+					onClick={() => navigate(ROUTER_SOCIAL.user.profile) & setOpen(!open)}
 				>
-					マイページ
+					Trang cá nhân
 				</Typography>
 
 				<Typography
 					className="text-[16px] px-16 py-8 text-[#000000] leading-[140%] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.questions) & setOpen(!open)}
 				>
-					よくある質問
+					FAQ
 				</Typography>
 
 				<Typography
 					className="text-[16px] px-16 py-8 text-[#000000] leading-[140%] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.inquiry) & setOpen(!open)}
 				>
-					お問い合わせ
+					Chính sách và điều khoản
 				</Typography>
 
 				<Typography
 					className="text-[16px] px-16 py-8 text-[#000000] leading-[140%] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.privacy) & setOpen(!open)}
 				>
-					プライバシーポリシー
+					Đổi mật khẩu
 				</Typography>
 
-				<Typography
+				{/* <Typography
 					className="text-[16px] px-16 py-8 text-[#000000] leading-[140%] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.cancellation) & setOpen(!open)}
 				>
@@ -109,11 +109,11 @@ const HeaderPerson = () => {
 					onClick={() => navigate(ROUTER_SOCIAL.terms) & setOpen(!open)}
 				>
 					利用規約
-				</Typography>
+				</Typography> */}
 				<Divider />
 
-				<Typography className="text-[16px] p-16 text-[#000000] leading-[140%] cursor-pointer " onClick={handleOpenModal}>
-					ログアウト
+				<Typography className="text-[16px] font-bold p-16 text-[#000000] leading-[140%] cursor-pointer " onClick={handleOpenModal}>
+					Đăng xuất
 				</Typography>
 			</Box>
 

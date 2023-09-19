@@ -1,15 +1,45 @@
 <!DOCTYPE html>
 <html lang="ja">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>PhotoVibe</title>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Z8S9V5N72"></script>
-	</head>
-	<body>
-		<div id="root"></div>
-		<script type="module" src="/src/main.jsx"></script>
-	</body>
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/svg+xml" href="favicon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>PhotoVibe</title>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<style>
+		.back-to-top {
+			position: fixed;
+			display: block;
+			width: 36px;
+			height: 36px;
+			background: #3fa1e9;
+			box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+			border-radius: 40px;
+			border-radius: 100vmax;
+			bottom: 30px;
+			right: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			opacity: 1;
+			transition: 0.5s;
+			pointer-events: all;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="root"></div>
+	<script type="module" src="/src/main.jsx"></script>
+	<a href="#" class="back-to-top">
+		<svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+			xmlns="http://www.w3.org/2000/svg">
+			<path
+				d="M3.0924 5.97627C2.74719 6.31637 2.74719 6.86882 3.0924 7.20891C3.43623 7.54765 3.99267 7.54765 4.33649 7.20891L7.11921 4.46742L7.11921 13.6296C7.11921 14.1127 7.51598 14.5 8.00016 14.5C8.48435 14.5 8.88112 14.1127 8.88112 13.6296L8.88111 4.46742L11.6638 7.20891C12.0077 7.54765 12.5641 7.54765 12.9079 7.20891C13.2531 6.86882 13.2531 6.31637 12.9079 5.97627L8.62221 1.75405C8.45681 1.5911 8.23301 1.5 8.00016 1.5C7.76731 1.5 7.54351 1.5911 7.37812 1.75405L3.0924 5.97627Z"
+				fill="white" />
+		</svg>
+	</a>
+</body>
 </html>

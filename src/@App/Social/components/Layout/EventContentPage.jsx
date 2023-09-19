@@ -11,7 +11,7 @@ const EventContentPage = props => {
 	const { content, header } = props
 
 	return (
-		<Box className='bg-[#f7fcfe] mt-64'>
+		<Box className='bg-[#f0f2f5] pt-64'>
 			{/* {header && <Box className="w-full bg-[#F9F9F9]">{header}</Box>} */}
 			<Box className='flex'>
 				<Box className='w-[17%] fixed h-full'>
@@ -21,15 +21,8 @@ const EventContentPage = props => {
 					{content}
 				</Box>
 				<Box className='w-[17%] fixed right-0 h-full'>
-					Right
 					<Box className='self-center'>
 						<Typography className='text-[30px] font-bold'>Welcome to PhotoVibe!  </Typography>
-						Join us and embark on your creative journey with photos at PhotoVibe. <br />
-						Let your moments be preserved and shared with our vibrant community.
-						<br />
-						Use PhotoVibe today and share your passion with our community!
-						<br />
-						#PhotoVibe #LovePhotography #ShareMoments
 					</Box>
 				</Box>
 			</Box>

@@ -92,36 +92,33 @@ const DetailEvent = props => {
 						</div>
 					) : (
 						<>
-							{isMobile ? (
-								<FacilityImageSlide data={totalImage} />
-							) : (
-								<Box className="flex flex-wrap sm:flex-nowrap gap-10">
-									<Box className="w-full max-h-[472px]">
-										<Image src={facilityDetail?.image?.main?.image_url ?? imagefail} />
-									</Box>
-									{facilityDetail?.image?.sub ?
-										<Box className="w-full sm:w-[240px]">
-											<Stack spacing={1}>
-												{facilityDetail?.image?.sub
-													?.filter((_, index) => index < 3)
-													?.map(image => (
-														<Image src={image?.image_url ?? imagefail} height={135} />
-													))}
-												{facilityDetail?.image?.sub && facilityDetail?.image?.sub?.length > 0 ? (
-													<Button
-														variant="outlined"
-														onClick={onOpen}
-														className="sm:w-[240px] lowercase w-full px-0 text-20 text-[#00A0E9] font-semibold border-solid border-1 sm:leading-[160%] shadow-none"
-													>
-														Xem thêm ảnh
-													</Button>
-												) : null}
-											</Stack>
-										</Box>
-										: null
-									}
+
+							<Box className="flex flex-wrap sm:flex-nowrap gap-10">
+								<Box className="w-full h-[472px] object-cover">
+									<Image src={facilityDetail?.image?.main?.image_url ?? imagefail} />
 								</Box>
-							)}
+								{facilityDetail?.image?.sub ?
+									<Box className="w-[240px]">
+										<Stack spacing={1}>
+											{facilityDetail?.image?.sub
+												?.filter((_, index) => index < 3)
+												?.map(image => (
+													<Image src={image?.image_url ?? imagefail} height={135} />
+												))}
+											{facilityDetail?.image?.sub && facilityDetail?.image?.sub?.length > 0 ? (
+												<Button
+													variant="outlined"
+													onClick={onOpen}
+													className="sm:w-[240px] lowercase w-full px-0 text-20 text-[#00A0E9] font-semibold border-solid border-1 sm:leading-[160%] shadow-none"
+												>
+													Xem thêm ảnh
+												</Button>
+											) : null}
+										</Stack>
+									</Box>
+									: null
+								}
+							</Box>
 							<Box className="">
 								<Typography className='mt-16'>
 									Đu đủ (danh pháp khoa học: Carica papaya) là một cây thuộc họ Đu đủ.[3] Đây là cây thân thảo to, không hoặc ít khi có nhánh, cao từ 3–10 m. Lá to hình chân vịt, cuống dài, đường kính 50–70 cm, có khoảng 7 khía. Hoa trắng hay xanh, đài nhỏ, vành to năm cánh. Quả đu đủ to tròn, dài, khi chín mềm, hạt màu nâu hoặc đen tùy từng loại giống, có nhiều hạt.
@@ -164,7 +161,7 @@ const DetailEvent = props => {
 								<Box className='my-16 flex'>
 									<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
 									<Box>
-										<Box className='p-10 bg-[#f0f2f5] rounded-8'>
+										<Box className='p-10 bg-[#e4e6eb] rounded-8'>
 											<Typography className='font-bold text-14'>Charlie</Typography>
 											<Typography className='text-14'>Bức ảnh này đẹp quá!</Typography>
 
@@ -176,7 +173,7 @@ const DetailEvent = props => {
 								<Box className='my-16 flex'>
 									<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
 									<Box>
-										<Box className='p-10 bg-[#f0f2f5] round-8'>
+										<Box className='p-10 bg-[#e4e6eb] round-8'>
 											<Typography className='font-bold text-14'>Charlie</Typography>
 											<Typography className='text-14'>Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!</Typography>
 
@@ -188,7 +185,7 @@ const DetailEvent = props => {
 							</Box>
 						</>
 					)}
-					{render(facilityDetail?.image?.sub)}
+					{render(totalImage)}
 				</Box>
 			}
 		/>

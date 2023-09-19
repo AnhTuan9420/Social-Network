@@ -6,9 +6,6 @@ import {
 	Button,
 	Chip,
 	CircularProgress,
-	Divider,
-	Grid,
-	Pagination,
 	TextField,
 	Typography,
 	useMediaQuery
@@ -262,7 +259,7 @@ const FacilityList = props => {
 					<Typography className='mt-20 font-bold'>
 						Danh sách bài đăng
 					</Typography>
-					
+
 					<Box className=" flex flex-col mt-20 gap-20">
 						{loadingFacility ? (
 							<div className="my-40 min-h-[50vh] flex justify-center items-center">
@@ -424,6 +421,31 @@ const FacilityList = props => {
 												</Box>
 												<hr className='text-[#ddc1c1]' />
 											</Box>
+
+											<Typography className='text-[#65676b] font-semibold my-16'>
+												Bình luận
+											</Typography>
+
+											<Box className='my-16 flex'>
+												<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+												<Box>
+													<Box className='p-10 bg-[#f0f2f5] rounded-8'>
+														<Typography className='font-bold text-14'>Charlie</Typography>
+														<Typography className='text-14'>Bức ảnh này đẹp quá!</Typography>
+													</Box>
+													<Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
+
+												</Box>
+											</Box>
+
+											<Typography className='text-[#65676b] font-semibold mt-16 cursor-pointer'
+												onClick={() =>
+													navigate(
+														`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.id}`
+													)
+												}>
+												Xem thêm bình luận
+											</Typography>
 										</Box>
 									)
 								})}

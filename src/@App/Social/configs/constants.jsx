@@ -67,6 +67,7 @@ export const ROUTER_SOCIAL = {
 	},
 	user: {
 		info: '/my-page',
+		profile: '/profile',
 		edit: '/user-edit-info',
 		edit_avatar: '/user-edit-avatar',
 		change_nick_name: '/user-change-nick-name',

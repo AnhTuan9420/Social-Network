@@ -10,7 +10,7 @@ import DataPost from './components/DataPost'
 import { useEditProfile } from './hooks/useEditProfile'
 
 const Profile = props => {
-    const { onOpenEditProfile, renderEditProfile } = useEditProfile()
+	const { onOpenEditProfile, renderEditProfile } = useEditProfile()
 
 	const {
 		data: facility,
@@ -69,46 +69,49 @@ const Profile = props => {
 
 			<Box className="w-[60%] h-auto mx-auto mt-20 px-[28px]">
 				<Box className='w-full flex gap-20'>
-					<Box className='w-[40%]'>
-						<Box className='bg-[white] p-16 rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
-							<Typography className='font-bold mb-4'>Giới thiệu</Typography>
-							<hr className='text-[#ddc1c1]' />
+					<Box className='w-[40%] flex'>
+						<Box className='sticky bottom-[20px] self-end w-full'>
+							<Box className='bg-[white] p-16 rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+								<Typography className='font-bold mb-4'>Giới thiệu</Typography>
+								<hr className='text-[#ddc1c1]' />
 
-							<Box className='flex mt-8'>
-								<Typography >Làm việc tại </Typography>
-								<Typography className='font-bold ml-4'> Hà Nội</Typography>
+								<Box className='flex mt-8'>
+									<Typography >Làm việc tại </Typography>
+									<Typography className='font-bold ml-4'> Hà Nội</Typography>
+								</Box>
+
+								<Box className='flex mt-8'>
+									<Typography >Học tại </Typography>
+									<Typography className='font-bold ml-4'> Greenwich Việt Nam</Typography>
+								</Box>
+
+								<Box className='flex mt-8'>
+									<Typography >Sống tại </Typography>
+									<Typography className='font-bold ml-4'> Hà Nội</Typography>
+								</Box>
+
+								<Box className='flex mt-8'>
+									<Typography >Số điện thoại </Typography>
+									<Typography className='font-bold ml-4'> 0999999999</Typography>
+								</Box>
+
+								<Box className='flex mt-8'>
+									<Typography >Tham gia vào </Typography>
+									<Typography className='font-bold ml-4'> Tháng 7 năm 2014</Typography>
+								</Box>
+
+								<Button className='w-full mt-8 bg-[#e4e6eb] text-black font-bold' onClick={onOpenEditProfile} >
+									Chỉnh sửa thông tin
+								</Button>
+
 							</Box>
 
-							<Box className='flex mt-8'>
-								<Typography >Học tại </Typography>
-								<Typography className='font-bold ml-4'> Greenwich Việt Nam</Typography>
+							<Box className='bg-[white] p-16 rounded-8 mt-20' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+								<Typography className='font-bold mb-4'>Vị trí hiện tại</Typography>
+								<hr className='text-[#ddc1c1]' />
+								<iframe className='w-full mt-12' src="https://s.net.vn/RPtP" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 							</Box>
-
-							<Box className='flex mt-8'>
-								<Typography >Sống tại </Typography>
-								<Typography className='font-bold ml-4'> Hà Nội</Typography>
-							</Box>
-
-							<Box className='flex mt-8'>
-								<Typography >Số điện thoại </Typography>
-								<Typography className='font-bold ml-4'> 0999999999</Typography>
-							</Box>
-
-							<Box className='flex mt-8'>
-								<Typography >Tham gia vào </Typography>
-								<Typography className='font-bold ml-4'> Tháng 7 năm 2014</Typography>
-							</Box>
-
-							<Button className='w-full mt-8 bg-[#e4e6eb] text-black font-bold' onClick={onOpenEditProfile} >
-								Chỉnh sửa thông tin
-							</Button>
-
-						</Box>
-
-						<Box className='bg-[white] p-16 rounded-8 mt-20' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
-							<Typography className='font-bold mb-4'>Vị trí hiện tại</Typography>
-							<hr className='text-[#ddc1c1]' />
-							<iframe className='w-full mt-12' src="https://s.net.vn/RPtP" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+							
 						</Box>
 					</Box>
 

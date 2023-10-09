@@ -46,7 +46,7 @@ const HeaderPerson = () => {
 
 	return (
 		<div ref={el}>
-			<Box className="cursor-pointer ml-40 mt-2 lg:pr-[80px] sm:pr-[40px] pr-16" onClick={() => setOpen(!open)}>
+			<Box className="cursor-pointer ml-40 mt-2" onClick={() => setOpen(!open)}>
 				<IconButton
 					size="small"
 					aria-label="account of current user"

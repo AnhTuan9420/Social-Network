@@ -82,7 +82,7 @@ const DetailEvent = props => {
 
 	return (
 		<EventContentPage
-			maxWidth={1128}
+			maxWidth={true}
 			hasBreadcrumb={false}
 			content={
 				<Box className="sm:pt-[20px] sm:pb-[56px] pb-[80px] w-full">
@@ -91,8 +91,7 @@ const DetailEvent = props => {
 							<CircularProgress />
 						</div>
 					) : (
-						<>
-
+						<Box>
 							<Box className="flex flex-wrap sm:flex-nowrap gap-10">
 								<Box className="w-full h-[472px] object-cover">
 									<Image src={facilityDetail?.image?.main?.image_url ?? imagefail} />
@@ -158,32 +157,48 @@ const DetailEvent = props => {
 									Bình luận
 								</Typography>
 
-								<Box className='my-16 flex'>
-									<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
-									<Box>
-										<Box className='p-10 bg-[#e4e6eb] rounded-8'>
-											<Typography className='font-bold text-14'>Charlie</Typography>
-											<Typography className='text-14'>Bức ảnh này đẹp quá!</Typography>
+								<Box className='max-h-[300px] relative overflow-y-scroll'>
+									<Box className='my-16 flex'>
+										<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+										<Box>
+											<Box className='p-10 bg-[#e4e6eb] rounded-8'>
+												<Typography className='font-bold text-14'>Charlie</Typography>
+												<Typography className='text-14'>Bức ảnh này đẹp quá!</Typography>
 
+											</Box>
+											<Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
 										</Box>
-										<Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
 									</Box>
+
+									<Box className='my-16 flex'>
+										<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+										<Box>
+											<Box className='p-10 bg-[#e4e6eb] round-8'>
+												<Typography className='font-bold text-14'>Charlie</Typography>
+												<Typography className='text-14'>Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!</Typography>
+
+											</Box>
+											<Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
+										</Box>
+									</Box>
+
 								</Box>
 
-								<Box className='my-16 flex'>
-									<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
-									<Box>
-										<Box className='p-10 bg-[#e4e6eb] round-8'>
-											<Typography className='font-bold text-14'>Charlie</Typography>
-											<Typography className='text-14'>Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!</Typography>
-
-										</Box>
-										<Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
+								<Box className='mt-20 h-auto bg-[white]'>
+									<Box className='flex py-10 px-20 items-center'>
+										<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+										<textarea
+											name="desc"
+											className="w-[600px] pt-20 outline-none text-16 mr-8"
+											placeholder={'Nhập bình luận'}
+										/>
+										<Button className='font-bold text-16'>
+											Send
+										</Button>
 									</Box>
 								</Box>
-
 							</Box>
-						</>
+						</Box>
 					)}
 					{render(totalImage)}
 				</Box>

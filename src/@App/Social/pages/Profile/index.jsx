@@ -55,7 +55,7 @@ const Profile = props => {
 	return (
 		<Box className="w-full pt-[64px] bg-[#f0f2f5]" >
 			<Box className="w-full bg-white">
-				<Box className='w-[60%] mx-auto bg-white pb-20'>
+				<Box className='w-[65%] mx-auto bg-white pb-20'>
 					<img className='w-full h-[350px] object-cover rounded-b-16' src='/img/bg.jpg' />
 					<Box className='flex justify-center mb-[-80px]'>
 						<img src='/Icons/man.png' className='rounded-[50%] h-[180px] w-[180px] translate-y-[-50%]' />

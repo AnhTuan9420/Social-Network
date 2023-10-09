@@ -1,30 +1,26 @@
-import { Typography, useMediaQuery } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTranslation } from 'react-i18next'
-import CoreBreadcrumb from '@Core/components/CoreBreadcrumb'
-import { routerTraveloConfig } from '@App/Social/configs/routerConfig'
 import Left from '../Left'
+import Right from '../Right'
 
 const EventContentPage = props => {
-	const { content, header } = props
+	const { content, header, maxWidth } = props
 
 	return (
-		<Box className='bg-[#f0f2f5] pt-64'>
+		<Box className='bg-[#f2f2f2] pt-[70px]'>
 			{/* {header && <Box className="w-full bg-[#F9F9F9]">{header}</Box>} */}
-			<Box className='flex'>
-				<Box className='w-[17%] fixed h-full'>
-					<Left/>
-				</Box>
-				<Box className='w-[40%] mx-auto'>
+			<Box className='flex justify-center gap-[100px] w-full'>
+				{maxWidth ? null :
+					<Box className='w-[20%] sticky top-[70px] h-full'>
+						<Left />
+					</Box>}
+				<Box className='w-[40%]'>
 					{content}
 				</Box>
-				<Box className='w-[17%] fixed right-0 h-full'>
-					<Box className='self-center'>
-						<Typography className='text-[30px] font-bold'>Welcome to PhotoVibe!  </Typography>
-					</Box>
-				</Box>
+				{/* <Box className='w-[14%] sticky top-[100px] h-full'>
+					<Right />
+				</Box> */}
 			</Box>
 		</Box>
 	)

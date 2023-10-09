@@ -11,23 +11,23 @@ const AppHeader = props => {
 	const navigate = useNavigate()
 	const isMobile = useMediaQuery('(max-width:600px)')
 	const endpoint = useHref()
-
+	console.log(ROUTER_SOCIAL.event.event_top);
 	return (
-		<Box>
-			<AppBar position="fixed" className='bg-[white] shadow-none border-b-1 border-[#E0E0E0]'>
-				<Toolbar className='justify-between p-0'>
-					<Typography component="div"
-						className={endpoint === ROUTER_SOCIAL.event.event_top ?
-							'pointer-events-none flex items-center font-600 text-[#e91c81]' :
-							'cursor-pointer flex items-center font-600 text-[#e91c81]'}
-					>
-						<img src={isMobile ? logoMobile : logo} alt="" className="h-[40px] mr-10 text-[#E0E0E0] sm:pl-[40px] pl-16" onClick={() => navigate(ROUTER_SOCIAL.event.search)} />
-						PhotoVibe
-					</Typography>
-					<UserHeader />
-				</Toolbar>
-			</AppBar>
-		</Box>
+		endpoint === ROUTER_SOCIAL.event.event_top ?
+			null :
+			<Box>
+				<AppBar position="fixed" className='bg-[white] shadow-none border-b-1 border-[#E0E0E0]'>
+					<Toolbar className='justify-between px-[17%]'>
+						<Typography component="div"
+							className='cursor-pointer flex items-center font-600 text-[#e91c81]'
+						>
+							<img src={isMobile ? logoMobile : logo} alt="" className="h-[40px] mr-10 text-[#E0E0E0]" onClick={() => navigate(ROUTER_SOCIAL.event.search)} />
+							PhotoVibe
+						</Typography>
+						<UserHeader />
+					</Toolbar>
+				</AppBar>
+			</Box>
 	)
 }
 

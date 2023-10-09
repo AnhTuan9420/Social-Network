@@ -15,6 +15,17 @@ export const menuAboutUserConfig = [
 	}
 ]
 
+export const menu = [
+	{
+		title: 'Trang chủ',
+		url: ROUTER_SOCIAL.event.search
+	},
+	{
+		title: 'Yêu thích',
+		url: ROUTER_SOCIAL.event.favorite
+	},
+]
+
 export const menuBeforeLoginConfig = [
 	{
 		title: '施設検索',

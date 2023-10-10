@@ -91,34 +91,46 @@ export const userInfoMenus = [
 	}
 ]
 
-export const userInfoMenuMobile = [
+export const user = [
 	{
-		title: 'マイページ',
-		url: ROUTER_SOCIAL.user.info
+		username: 'User1',
+		id: 1
 	},
 	{
-		title: 'ニックネームの変更',
-		url: ROUTER_SOCIAL.user.change_nick_name
+		username: 'User2',
+		id: 2
 	},
 	{
-		title: '見積書・領収書の宛名の変更',
-		url: ROUTER_SOCIAL.user.change_address
+		username: 'User3',
+		id: 3
 	},
 	{
-		title: 'パスワードの変更',
-		url: ROUTER_SOCIAL.user.change_password
+		username: 'User4',
+		id: 4
 	},
 	{
-		title: '特別プランIDの編集',
-		url: ROUTER_SOCIAL.user.edit_id
+		username: 'User5',
+		id: 5
 	},
 	{
-		title: '電話番号の変更',
-		url: ROUTER_SOCIAL.user.change_phone
+		username: 'User6',
+		id: 6
 	},
 	{
-		title: 'メールアドレスの変更',
-		url: ROUTER_SOCIAL.user.change_email
+		username: 'User7',
+		id: 7
+	},
+	{
+		username: 'User8',
+		id: 8
+	},
+	{
+		username: 'User9',
+		id: 9
+	},
+	{
+		username: 'User10',
+		id: 10
 	}
 ]
 

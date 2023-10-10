@@ -15,7 +15,7 @@ const EventContentPage = props => {
 					<Box className='w-[20%] sticky top-[70px] h-full'>
 						<Left />
 					</Box>}
-				<Box className={chat ? 'w-[55%]' : 'w-[40%]'}>
+				<Box className={chat ? 'w-[65%] h-[calc(100vh_-_70px)]' : 'w-[40%]'}>
 					{content}
 				</Box>
 				{/* <Box className='w-[14%] sticky top-[100px] h-full'>

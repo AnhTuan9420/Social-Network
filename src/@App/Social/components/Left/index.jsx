@@ -31,28 +31,28 @@ const Left = props => {
 					<Box className='flex items-center'>
 						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer' onClick={() => navigate(ROUTER_SOCIAL.user.profile)} />
 						<Box>
-							<Typography className='font-bold'>Charlie</Typography>
+							<Typography className='font-bold'>User1</Typography>
 						</Box>
 					</Box>
-					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}?/user_id=${1}`)} />
+					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${1}`)} />
 				</Box>
 				<Box className='my-28 w-full flex items-center justify-between'>
 					<Box className='flex items-center'>
 						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer' onClick={() => navigate(ROUTER_SOCIAL.user.profile)} />
 						<Box>
-							<Typography className='font-bold'>Charlie</Typography>
+							<Typography className='font-bold'>User2</Typography>
 						</Box>
 					</Box>
-					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}?/user_id=${2}`)} />
+					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${2}`)} />
 				</Box>
 				<Box className='my-28 w-full flex items-center justify-between'>
 					<Box className='flex items-center'>
 						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer' onClick={() => navigate(ROUTER_SOCIAL.user.profile)} />
 						<Box>
-							<Typography className='font-bold'>Charlie</Typography>
+							<Typography className='font-bold'>User3</Typography>
 						</Box>
 					</Box>
-					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}?/user_id=${3}`)} />
+					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${3}`)} />
 				</Box>
 			</Box>
 		</Box>

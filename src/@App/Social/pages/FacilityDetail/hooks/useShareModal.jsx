@@ -21,7 +21,6 @@ export const useShareModal = () => {
 
 	const renderShare = useCallback(
 		facilityDetail => {
-			console.log(facilityDetail);
 			return (
 				<Dialog
 					onClose={setFalse}

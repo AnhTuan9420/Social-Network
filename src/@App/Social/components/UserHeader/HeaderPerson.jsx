@@ -31,7 +31,7 @@ const HeaderPerson = () => {
 
 	const handleLogout = () => {
 		setFalse()
-		successMsg('ログアウトしました。')
+		successMsg('Bạn đã đăng xuất khỏi PHOTOVIBE。')
 		navigate(ROUTER_SOCIAL.event.event_top)
 		clearSession()
 	}
@@ -120,40 +120,33 @@ const HeaderPerson = () => {
 			<Dialog
 				onClose={handleCloseModal}
 				open={openConfirmLogout}
-				maxWidth="md"
+				maxWidth="xs"
 				fullWidth
-				PaperProps={{
-					style: {
-						borderRadius: '20px',
-						maxWidth: '800px',
-						minWidth: '358px'
-					}
-				}}
+				
 			>
-				<DialogTitle className=" font-bold py-[19px] px-16 p-0">
+				<DialogTitle className=" font-bold py-[19px] px-16 p-0 bg-[red] relative">
 					<Box className="flex items-center">
-						<Typography className="mx-auto sm:text-[26px] text-16 font-semibold text-[#000000] leading-[140%]">
-							確認
+						<Typography className="mx-auto text-[20px] font-semibold text-[white] leading-[140%]">
+							Đăng xuất
 						</Typography>
-						<IconButton onClick={() => handleCloseModal()} className="p-0">
-							<CloseOutlinedIcon color="primary" />
+						<IconButton onClick={() => handleCloseModal()} className=" absolute top-0 right-0">
+							<CloseOutlinedIcon className='text-[white]' />
 						</IconButton>
 					</Box>
 				</DialogTitle>
 				<Divider className="" />
 				<DialogContent className="sm:py-[24px] py-16 sm:px-24 px-16">
-					<Typography className="text-[#222222] sm:text-20 sm:mb-24 mb-16 text-16 sm:leading-[160%] leading-[140%] font-light">
-						ログアウトしますか？
+					<Typography className="text-[#222222] text-20 sm:mb-24 mb-16 sm:leading-[160%] leading-[140%] font-normal">
+						Bạn có muốn đăng xuất khỏi <strong>PHOTOVIBE</strong> không?
 					</Typography>
 					<Box className="text-center mt-24">
 						<Button
 							onClick={handleLogout}
 							variant="contained"
 							type="submit"
-							color="primary"
-							className="sm:w-[400px] w-full sm:text-20 text-16 py-[17px] px-0 leading-[140%] shadow-none font-semibold text-[#FFFFFF]"
+							className="sm:w-[250px] bg-[red] w-full text-16 py-[17px] px-0 leading-[140%] font-bold text-[#FFFFFF]"
 						>
-							ログアウト
+							Đăng xuất
 						</Button>
 					</Box>
 				</DialogContent>

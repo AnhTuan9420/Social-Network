@@ -20,6 +20,9 @@ const LazyHistoryList = React.lazy(() => import('../pages/History'))
 const LazyItemSelection = React.lazy(() => import('../pages/FacilityDetail/Entry/ItemSelection'))
 const LazyEnterInformation = React.lazy(() => import('../pages/FacilityDetail/Entry/EnterUserInformation'))
 
+
+const LazyChat = React.lazy(() => import('../pages/Chat'))
+
 //profile
 const LazyProfile = React.lazy(() => import('../pages/Profile'))
 
@@ -97,5 +100,9 @@ export const routerTraveloConfig = [
 		path: ROUTER_SOCIAL.user.profile,
 		element: <LazyProfile />,
 		breadcrumb: 'Profile'
+	},
+	{
+		path: ROUTER_SOCIAL.chat,
+		element: <LazyChat />,
 	},
 ]

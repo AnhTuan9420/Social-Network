@@ -39,6 +39,7 @@ export const ROUTER_SOCIAL = {
 	cancellation: '/cancellation',
 	verification_terms: '/terms-of-use-privacy',
 	maintenance: '/maintenance',
+	chat: '/chat',
 
 	cancellation_of_reservation: {
 		reservation_confirmation: '/reservation-confirmation',
@@ -77,7 +78,7 @@ export const ROUTER_SOCIAL = {
 		edit_id: '/user-edit-id',
 		delete_acount: '/user-delete-acount',
 		change_phone: '/user-change-phone'
-	}
+	},
 }
 
 export const typeSearchEvent = {

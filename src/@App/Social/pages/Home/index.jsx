@@ -26,7 +26,7 @@ const HomeTop = props => {
 							<br />
 							Use PhotoVibe today and share your passion with our community!
 							<br />
-							[ #PhotoVibe #LovePhotography #ShareMoments ]
+							<p className='text-[red]'>[ #PhotoVibe #LovePhotography #ShareMoments #SocialImage]</p>
 						</Box>
 						<img src="/Icons/login.png" alt="" className="mt-28" />
 					</Box>

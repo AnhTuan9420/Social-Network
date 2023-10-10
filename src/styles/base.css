@@ -101,22 +101,22 @@ html {
   top: 90px;
 }
 .Toastify__toast-container .Toastify__toast--success {
-  background: #d4edda;
+  background: #bce4c6;
   color: #319c3c;
-  font-size: 14px;
+  font-size: 16px;
   border-width: 1px;
   border-color: #319c3c;
   box-shadow: none;
-  font-family: "Hiragino Sans" !important;
+  font-family: "Roboto Condensed" !important;
 }
 .Toastify__toast-container .Toastify__toast--error {
   background: #fcdcdc;
   color: #d83443;
   border-width: 1px;
-  font-size: 14px;
+  font-size: 16px;
   border-color: #d83443;
   box-shadow: none;
-  font-family: "Hiragino Sans" !important;
+  font-family: "Roboto Condensed" !important;
   padding-right: 25px;
 }
 

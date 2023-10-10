@@ -7,9 +7,11 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import Yup from "@Core/helper/Yup"
 import React, { useState } from "react"
+import { ROUTER_SOCIAL } from "@App/Social/configs/constants"
 
 const Login = props => {
     const navigate = useNavigate()
+
     const {
         control,
         handleSubmit,
@@ -42,8 +44,10 @@ const Login = props => {
     }
 
     return (
-        <Box className='mt-60'>
-            <Typography className="mb-4  text-[#222222] font-semibold border-b-2 border-solid border-[red]">
+        <Box className='mt-[30px]'>
+            <Typography className="mb-4  text-[#222222] font-semibold border-b-2 border-solid border-[red]"
+                sx={{ width: 'fit-content' }}
+            >
                 Username
             </Typography>
             <CoreInput
@@ -51,9 +55,11 @@ const Login = props => {
                 name="email"
                 className="w-full mt-8"
                 placeholder={'Tên người dùng'}
-                inputLogin={true}
+                // inputLogin={true}
             />
-            <Typography className="mb-4 mt-20 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold border-b-2 border-solid border-[red]">
+            <Typography className="mb-4 mt-20 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold border-b-2 border-solid border-[red]"
+                sx={{ width: 'fit-content' }}
+            >
                 Password
             </Typography>
             <CoreInput
@@ -68,11 +74,11 @@ const Login = props => {
                         <InputAdornment position="end">
                             {viewPassword ? (
                                 <IconButton onClick={() => setViewPassword(false)}>
-                                    <VisibilityOutlinedIcon color="primary" />
+                                    <VisibilityOutlinedIcon color="error" />
                                 </IconButton>
                             ) : (
                                 <IconButton onClick={togglePasswordVisibility}>
-                                    <VisibilityOffOutlinedIcon color="primary" />
+                                    <VisibilityOffOutlinedIcon color="error" />
                                 </IconButton>
                             )}
                         </InputAdornment>

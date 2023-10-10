@@ -9,7 +9,7 @@ export const successMsg = msg => {
 		})
 }
 
-export const errorMsg = (error, defaultMsg = 'データの取得に失敗') => {
+export const errorMsg = (error, defaultMsg = 'Không thể truy xuất dữ liệu!') => {
 	if (error instanceof Error) {
 		toast.error(error.message, {
 			position: toast.POSITION.TOP_CENTER,

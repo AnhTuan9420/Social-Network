@@ -98,8 +98,8 @@ const CoreInput = props => {
 						? {
 								'@media screen and (min-width: 600px)': {
 									'.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-										fontWeight: 300,
-										fontSize: '20px',
+										fontWeight: 400,
+										fontSize: '14px',
 										lineHeight: '160%',
 										paddingY: '12px !important',
 										paddingX: '16px !important'
@@ -119,8 +119,8 @@ const CoreInput = props => {
 						? {
 								'@media screen and (min-width: 600px)': {
 									'.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-										fontWeight: 300,
-										fontSize: '16px',
+										fontWeight: 400,
+										fontSize: '14px',
 										lineHeight: '160%',
 										paddingY: '17px !important',
 										paddingX: '12px !important',
@@ -128,7 +128,7 @@ const CoreInput = props => {
 									},
 									'.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input': {
 										fontWeight: 300,
-										fontSize: '16px',
+										fontSize: '14px',
 										lineHeight: '160%',
 										paddingY: '17px !important',
 										paddingX: '12px !important',

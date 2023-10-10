@@ -5,7 +5,7 @@ import Left from '../Left'
 import Right from '../Right'
 
 const EventContentPage = props => {
-	const { content, header, maxWidth } = props
+	const { content, header, maxWidth, chat } = props
 
 	return (
 		<Box className='bg-[#f2f2f2] pt-[70px]'>
@@ -15,7 +15,7 @@ const EventContentPage = props => {
 					<Box className='w-[20%] sticky top-[70px] h-full'>
 						<Left />
 					</Box>}
-				<Box className='w-[40%]'>
+				<Box className={chat ? 'w-[55%]' : 'w-[40%]'}>
 					{content}
 				</Box>
 				{/* <Box className='w-[14%] sticky top-[100px] h-full'>

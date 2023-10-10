@@ -42,7 +42,7 @@ const Register = props => {
     }
 
     return (
-        <Box className='mt-16'>
+        <Box className='mt-10'>
             <Typography className="mb-4 text-[#222222] font-semibold">
                 Username
             </Typography>
@@ -50,8 +50,7 @@ const Register = props => {
                 control={control}
                 name="email"
                 className="w-full"
-                placeholder={'Số điện thoại, tên người dùng hoặc email'}
-                inputLogin={true}
+                placeholder={'Tên người dùng'}
             />
 
             <Typography className="mb-4 mt-10 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
@@ -69,11 +68,11 @@ const Register = props => {
                         <InputAdornment position="end">
                             {viewPassword ? (
                                 <IconButton onClick={() => setViewPassword(false)}>
-                                    <VisibilityOutlinedIcon color="primary" />
+                                    <VisibilityOutlinedIcon color="error" />
                                 </IconButton>
                             ) : (
                                 <IconButton onClick={togglePasswordVisibility}>
-                                    <VisibilityOffOutlinedIcon color="primary" />
+                                    <VisibilityOffOutlinedIcon color="error" />
                                 </IconButton>
                             )}
                         </InputAdornment>
@@ -96,11 +95,11 @@ const Register = props => {
                         <InputAdornment position="end">
                             {viewPassword ? (
                                 <IconButton onClick={() => setViewPassword(false)}>
-                                    <VisibilityOutlinedIcon color="primary" />
+                                    <VisibilityOutlinedIcon color="error" />
                                 </IconButton>
                             ) : (
                                 <IconButton onClick={togglePasswordVisibility}>
-                                    <VisibilityOffOutlinedIcon color="primary" />
+                                    <VisibilityOffOutlinedIcon color="error" />
                                 </IconButton>
                             )}
                         </InputAdornment>

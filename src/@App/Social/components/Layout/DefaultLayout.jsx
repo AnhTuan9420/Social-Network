@@ -21,7 +21,7 @@ const DefaultLayout = props => {
 				<div className="app-content h-full bg-white">
 					<React.Suspense
 						fallback={
-							<div className="mt-200 text-center min-h-[80vh]">
+							<div className="mt-200 text-center min-h-[100vh]">
 								<CircularProgress />
 							</div>
 						}

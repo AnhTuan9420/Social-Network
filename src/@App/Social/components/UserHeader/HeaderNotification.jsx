@@ -108,7 +108,7 @@ const HeaderNotification = props => {
 					) : (
 						<img className="sm:mr-10 sm:h-auto h-20" src={notice} />
 					)}
-					<Typography className="sm:block hidden sm:text-[16px] font-bold text-[14px] text-black ">
+					<Typography className="sm:block hidden sm:text-[16px] font-bold text-[14px] text-[#e91c81]">
 						Thông báo
 					</Typography>
 				</Button>
@@ -116,19 +116,19 @@ const HeaderNotification = props => {
 					className={
 						data?.length > 0
 							? clsx(
-									'z-9999 absolute sm:top-[62px] lg:right-[230px] sm:right-[100px] top-0 right-0 bottom-0 sm:shadow-4 sm:min-w-[560px] sm:w-auto w-[100%] sm:h-[557px] bg-white rounded-[10px] ease-out duration-200 origin-top-right',
+									'z-9999 absolute sm:top-[62px] lg:right-[446px] sm:right-[100px] top-0 right-0 bottom-0 sm:shadow-4 sm:min-w-[560px] sm:w-auto w-[100%] sm:h-[557px] bg-white rounded-[10px] ease-out duration-200 origin-top-right',
 									open ? 'scale-100' : 'scale-0'
 							  )
 							: clsx(
-									'z-9999 absolute sm:top-[62px] lg:right-[230px] sm:right-[100px] top-0 right-0 bottom-0 sm:shadow-4 sm:min-w-[560px] sm:w-auto w-[100%] sm:h-full bg-white rounded-[10px] ease-out duration-200 origin-top-right',
+									'z-9999 absolute sm:top-[62px] lg:right-[446px] sm:right-[100px] top-0 right-0 bottom-0 sm:shadow-4 sm:min-w-[560px] sm:w-auto w-[100%] sm:h-full bg-white rounded-[10px] ease-out duration-200 origin-top-right',
 									open ? 'scale-100' : 'scale-0'
 							  )
 					}
 				>
 					<Box className="flex justify-center sm:justify-start items-center sm:p-16 pt-[18px] relative">
 						<img className="sm:mt-2 sm:mr-12 mr-2" src={notify} />
-						<Typography className="sm:text-[16px] font-semibold text-[20px] text-[#222222] ">
-							お知らせ
+						<Typography className="sm:text-[16px] mt-4 font-semibold text-[20px] text-[red] ">
+							Bài viết mới
 						</Typography>
 						<CloseIcon
 							color="primary"
@@ -248,8 +248,8 @@ const HeaderNotification = props => {
 									</InfiniteScroll>
 								</>
 							) : (
-								<Typography className="text-[#222222] text-16 font-light ml-16 sm:mt-16 sm:mb-16 sm:mr-16 mt-[38px]">
-									お知らせはありません。
+								<Typography className="text-[#222222] text-16 ml-16 sm:mt-16 sm:mb-16 sm:mr-16 mt-[38px]">
+									Hiện đang không có bài viết mới nào được đăng。
 								</Typography>
 							)}
 						</Box>

@@ -81,7 +81,7 @@ export const useCreatePostModal = () => {
 				<DialogTitle className="p-16">
 					<Box className="flex items-center">
 						<IconButton onClick={() => setFalse()} className="p-0">
-							<CloseOutlinedIcon color="primary" />
+							<CloseOutlinedIcon color="error" />
 						</IconButton>
 						<Typography className="mx-auto sm:text-[26px] text-16 font-semibold text-[#222222] leading-[140%]">
 							Tạo bài viết
@@ -100,7 +100,7 @@ export const useCreatePostModal = () => {
 						<textarea
 							control={control}
 							name="desc"
-							className="w-full h-auto outline-none text-20 mb-16"
+							className="bg-[white] w-full h-auto outline-none text-20 mb-16"
 							placeholder={'Nhập mô tả của bài Post'}
 						/>
 						<Box className='mb-16'>
@@ -119,7 +119,7 @@ export const useCreatePostModal = () => {
 						<Box className='text-center'>
 							<Button
 								variant="contained"
-								className="w-[60%] shadow-none font-semibold text-[#FFFFFF]"
+								className="w-[60%] bg-[red] shadow-none text-16 font-semibold text-[#FFFFFF]"
 							>
 								Đăng
 							</Button>

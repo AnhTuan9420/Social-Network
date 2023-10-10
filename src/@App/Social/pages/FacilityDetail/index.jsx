@@ -187,7 +187,7 @@ const DetailEvent = props => {
 										<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
 										<textarea
 											name="desc"
-											className="w-[600px] pt-20 outline-none text-16 mr-8"
+											className="bg-[white] w-[600px] pt-20 outline-none text-16 mr-8"
 											placeholder={'Nhập bình luận'}
 										/>
 										<Button className='font-bold text-16'>

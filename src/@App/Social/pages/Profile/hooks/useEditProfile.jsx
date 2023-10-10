@@ -89,7 +89,7 @@ export const useEditProfile = () => {
 				<DialogTitle className="p-16">
 					<Box className="flex items-center">
 						<IconButton onClick={() => setFalse()} className="p-0">
-							<CloseOutlinedIcon color="primary" />
+							<CloseOutlinedIcon color="error" />
 						</IconButton>
 						<Typography className="mx-auto sm:text-[26px] text-16 font-semibold text-[#222222] leading-[140%]">
 							Chỉnh sửa thông tin chi tiết
@@ -182,7 +182,7 @@ export const useEditProfile = () => {
 						</Button>
 						<Button
 							variant="contained"
-							className="bg-[#1b74e4] shadow-none font-semibold text-[#FFFFFF]"
+							className="bg-[red] shadow-none font-semibold text-[#FFFFFF]"
 						>
 							Cập nhật
 						</Button>

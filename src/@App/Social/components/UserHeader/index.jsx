@@ -53,8 +53,8 @@ const UserHeader = props => {
 				{!isMobile ? (
 					<>
 						<Button className="cursor-pointer flex" onClick={() => navigate(ROUTER_SOCIAL.event.favorite)}>
-							<img src={Star} className="mr-[7px]" />
-							<Typography className="font-bold text-[14px] text-black ">
+							<img src="/Icons/like.png" height={24} width={24} className="mr-[7px]" />
+							<Typography className="font-bold text-[16px] text-[#e91c81] ">
 								Yêu thích
 							</Typography>
 						</Button>
@@ -63,7 +63,7 @@ const UserHeader = props => {
 							onClick={() => navigate(ROUTER_SOCIAL.event.history)}
 						>
 							<img src={CalendarHeader} className="mr-[7px]" />
-							<Typography className="font-bold text-[14px] text-black ">
+							<Typography className="font-bold text-[16px] text-[#e91c81] ">
 								Lịch sử
 							</Typography>
 						</Button>

@@ -60,38 +60,38 @@ const HeaderPerson = () => {
 
 			<Box
 				className={clsx(
-					'z-9999 fixed sm:top-[62px] sm:right-[80px] top-0 right-0 bottom-0 shadow-4 sm:min-w-[300px] sm:w-auto w-[100%] sm:h-[370px] bg-white rounded-[10px] ease-out duration-200 origin-top-right',
+					'z-9999 fixed sm:top-[62px] sm:right-[55px] top-0 right-0 bottom-0 shadow-4 sm:min-w-[300px] sm:w-auto w-[100%] sm:h-[280px] bg-white rounded-[10px] ease-out duration-200 origin-top-left',
 					open ? 'scale-100' : 'scale-0'
 				)}
 			>
 				<Box className="p-16">
-					<Typography className="text-[16px] break-all font-semibold text-[#000000] ">{user?.name ?? 'Charlie'}</Typography>
+					<Typography className="text-[16px] break-all font-semibold text-[red] ">{user?.name ?? 'Charlie'}</Typography>
 				</Box>
 				<Divider />
 
 				<Typography
-					className="text-[16px] px-16 pb-8 pt-16 text-[#000000] cursor-pointer "
+					className="text-[16px] px-16 pb-8 pt-16 text-[#e91c81] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.user.profile) & setOpen(!open)}
 				>
 					Trang cá nhân
 				</Typography>
 
 				<Typography
-					className="text-[16px] px-16 py-8 text-[#000000] leading-[140%] cursor-pointer "
+					className="text-[16px] px-16 py-8 text-[#e91c81] leading-[140%] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.questions) & setOpen(!open)}
 				>
 					FAQ
 				</Typography>
 
 				<Typography
-					className="text-[16px] px-16 py-8 text-[#000000] leading-[140%] cursor-pointer "
+					className="text-[16px] px-16 py-8 text-[#e91c81] leading-[140%] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.inquiry) & setOpen(!open)}
 				>
 					Chính sách và điều khoản
 				</Typography>
 
 				<Typography
-					className="text-[16px] px-16 py-8 text-[#000000] leading-[140%] cursor-pointer "
+					className="text-[16px] px-16 py-8 text-[#e91c81] leading-[140%] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.privacy) & setOpen(!open)}
 				>
 					Đổi mật khẩu
@@ -112,7 +112,7 @@ const HeaderPerson = () => {
 				</Typography> */}
 				<Divider />
 
-				<Typography className="text-[16px] font-bold p-16 text-[#000000] leading-[140%] cursor-pointer " onClick={handleOpenModal}>
+				<Typography className="text-[16px] font-bold p-16 text-[red] leading-[140%] cursor-pointer " onClick={handleOpenModal}>
 					Đăng xuất
 				</Typography>
 			</Box>

@@ -26,7 +26,7 @@ const Left = props => {
 				<Typography className='py-20 font-bold'>
 					Danh sách người dùng
 				</Typography>
-				<hr />
+				<hr className='bg-[red] text-[red] h-2'/>
 				<Box className='my-28 w-full flex items-center justify-between'>
 					<Box className='flex items-center'>
 						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer' onClick={() => navigate(ROUTER_SOCIAL.user.profile)} />

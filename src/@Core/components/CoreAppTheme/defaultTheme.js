@@ -32,7 +32,7 @@ const defaultTheme = createTheme({
 		danger: 'orange'
 	},
 	typography: {
-		fontFamily: ['Hiragino Sans'].join(','),
+		fontFamily: ['Roboto Condensed'].join(','),
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,

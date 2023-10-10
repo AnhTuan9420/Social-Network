@@ -11,7 +11,7 @@ const AppHeader = props => {
 	const navigate = useNavigate()
 	const isMobile = useMediaQuery('(max-width:600px)')
 	const endpoint = useHref()
-	console.log(ROUTER_SOCIAL.event.event_top);
+
 	return (
 		endpoint === ROUTER_SOCIAL.event.event_top ?
 			null :

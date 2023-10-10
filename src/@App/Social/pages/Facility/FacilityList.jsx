@@ -18,9 +18,10 @@ import { useCreatePostModal } from './hooks/useCreatePostModal'
 import AddIcon from '@mui/icons-material/Add'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 // import no_image from '@App/Social/assets/no_image.webp'
-import imagefail from '@App/Social/assets/imagefail.svg'
 import trash from '@App/Social/assets/trash.svg'
 import { removeDataSession } from '@Core/helper/Session'
+import TopLike from './TopLike'
+import PostItem from './PostItem'
 
 const FacilityList = props => {
 	const { tags, facility_type } = props
@@ -216,34 +217,7 @@ const FacilityList = props => {
 					<Typography className='mt-20 font-bold'>
 						Top lượt thích
 					</Typography>
-
-					<Box className='mt-20 grid grid-cols-5 gap-10'>
-						<Box className='relative'>
-							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
-							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
-							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
-						</Box>
-						<Box className='relative'>
-							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
-							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
-							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
-						</Box>
-						<Box className='relative'>
-							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
-							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
-							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
-						</Box>
-						<Box className='relative'>
-							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
-							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
-							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
-						</Box>
-						<Box className='relative'>
-							<img src='/Icons/man.png' className='absolute left-[20px] top-[20px] h-40 w-40' />
-							<img className='rounded-12 h-[250px]' src='https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yCCOAE_oJHG0iGnTDNgAEA' />
-							<Typography className='absolute left-[20px] bottom-[20px] font-bold text-14 text-[white]'>Charlie</Typography>
-						</Box>
-					</Box>
+					<TopLike/>
 
 					<Typography className='mt-20 font-bold'>
 						Đăng bài
@@ -260,13 +234,13 @@ const FacilityList = props => {
 						Danh sách bài đăng
 					</Typography>
 
-					<Box className=" flex flex-col mt-20 gap-20">
+					<Box className="mt-20">
 						{loadingFacility ? (
 							<div className="my-40 min-h-[50vh] flex justify-center items-center">
 								<CircularProgress />
 							</div>
 						) : (
-							<>
+							<Box className='flex flex-col gap-20'>
 								{searching ? (
 									<>
 										<Box className="flex justify-between items-center sm:mt-[66px] mt-24 sm:mx-0 mx-16 sm:mb-[32px] mb-[16px]">
@@ -361,95 +335,9 @@ const FacilityList = props => {
 								)}
 
 								{facility?.data?.map((item, index) => {
-									return (
-										<Box className="bg-[white] sm:border border-b-1 max-w-full border-[#e0e0e0] sm:rounded-8 sm:border-[#E0E0E0] sm:min-h-[540px] p-[16px]"
-											sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
-										>
-											<Box className='mb-16 flex'>
-												<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
-												<Box>
-													<Typography className='font-bold text-14'>Charlie</Typography>
-													<Typography className='text-12'>20 phút trước</Typography>
-												</Box>
-											</Box>
-
-											<Box className='mb-16'>
-												<Typography className='text_truncate_4'>
-													Đu đủ (danh pháp khoa học: Carica papaya) là một cây thuộc họ Đu đủ.[3] Đây là cây thân thảo to, không hoặc ít khi có nhánh, cao từ 3–10 m. Lá to hình chân vịt, cuống dài, đường kính 50–70 cm, có khoảng 7 khía. Hoa trắng hay xanh, đài nhỏ, vành to năm cánh. Quả đu đủ to tròn, dài, khi chín mềm, hạt màu nâu hoặc đen tùy từng loại giống, có nhiều hạt.
-												</Typography>
-											</Box>
-
-											<Box
-												onClick={() =>
-													navigate(
-														`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.id}`
-													)
-												}>
-												<img
-													className="h-[500px] w-full object-cover cursor-pointer "
-													src={item?.main_image?.image_url ?? imagefail}
-													duration={500}
-												/>
-											</Box>
-											<Box className="pt-10">
-												<hr className='text-[#ddc1c1]' />
-												<Box className='py-4 flex justify-between'>
-													<Button className='w-[30%] flex'>
-														<img src='/Icons/like.png' className='h-20 w-20 mr-6' />
-														<Typography className='text-[red] lowercase font-bold'>
-															Thích
-														</Typography>
-													</Button>
-													<Button className='w-[30%] flex'
-														onClick={() =>
-															navigate(
-																`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.id}`
-															)
-														}
-													>
-														<img src='/Icons/comment.png' className='h-20 w-20 mr-6' />
-														<Typography className='text-[#65676b] lowercase font-bold'>
-															Bình luận
-														</Typography>
-													</Button>
-													<Button className='w-[30%] flex'>
-														<img src='/Icons/share.png' className='h-20 w-20 mr-6' />
-														<Typography className='text-[#65676b] lowercase font-bold'>
-															Chia sẻ
-														</Typography>
-													</Button>
-												</Box>
-												<hr className='text-[#ddc1c1]' />
-											</Box>
-
-											<Typography className='text-[#65676b] font-semibold my-16'>
-												Bình luận
-											</Typography>
-
-											<Box className='my-16 flex'>
-												<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
-												<Box>
-													<Box className='p-10 bg-[#f0f2f5] rounded-8'>
-														<Typography className='font-bold text-14'>Charlie</Typography>
-														<Typography className='text-14'>Bức ảnh này đẹp quá!</Typography>
-													</Box>
-													<Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
-
-												</Box>
-											</Box>
-
-											<Typography className='text-[#65676b] font-semibold mt-16 cursor-pointer'
-												onClick={() =>
-													navigate(
-														`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.id}`
-													)
-												}>
-												Xem thêm bình luận
-											</Typography>
-										</Box>
-									)
+									return <PostItem key={index} dataPost={item} />
 								})}
-							</>
+							</Box>
 						)}
 
 						{/* {facility?.data?.length > 0 ? (

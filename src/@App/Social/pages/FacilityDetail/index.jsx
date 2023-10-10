@@ -11,6 +11,7 @@ import { useEntryDialog } from './hooks/useEntryDialog'
 import { facilityService } from '@App/Social/services/facilityService'
 import { useRequest } from 'ahooks'
 import imagefail from '@App/Social/assets/imagefail.svg'
+import { useShareModal } from './hooks/useShareModal'
 
 const getUrlMap = google_map_url => {
 	const urlStartIndex = google_map_url?.indexOf('src="') + 5
@@ -22,6 +23,7 @@ const getUrlMap = google_map_url => {
 const DetailEvent = props => {
 	const { facilityDetail, loading } = useFacilityDetail()
 	const { onOpen, render } = useImageModal()
+	const { onOpenShare, renderShare } = useShareModal()
 	const isMobile = useMediaQuery('(max-width:600px)')
 
 	const { data: apiFavorite, run: getFavorite } = useRequest(facilityService.isFavorite, {
@@ -43,37 +45,16 @@ const DetailEvent = props => {
 	}, [apiFavorite?.id])
 
 	const handleLikeFacility = async () => {
-		const dataSubmit = {
-			facility_id: facilityDetail?.id
-		}
-		await facilityService.favorite(dataSubmit)
+		// const dataSubmit = {
+		// 	facility_id: facilityDetail?.id
+		// }
+		// await facilityService.favorite(dataSubmit)
 		setIsFavorited(true)
 	}
 
 	const handleUnLikeFacility = async () => {
-		await facilityService.unFavorite(apiFavorite?.id)
+		// await facilityService.unFavorite(apiFavorite?.id)
 		setIsFavorited(false)
-	}
-
-
-
-
-	const title = {
-		1: '平日',
-		2: '土曜日',
-		3: '日曜日',
-		4: '祝日'
-	}
-
-	const titleRegularHoliday = {
-		0: 'なし',
-		1: '月曜日',
-		2: '火曜日',
-		3: '水曜日',
-		4: '木曜日',
-		5: '金曜日',
-		6: '土曜日',
-		7: '日曜日'
 	}
 
 	const mainImage = []
@@ -132,19 +113,36 @@ const DetailEvent = props => {
 
 								<hr className='text-[#ddc1c1]' />
 								<Box className='py-4 flex justify-between'>
-									<Button className='w-[30%] flex'>
-										<img src='/Icons/like.png' className='h-20 w-20 mr-6' />
-										<Typography className='text-[red] lowercase font-bold'>
-											Thích
-										</Typography>
-									</Button>
+
+									{isFavorited ?
+										<Button className='w-[30%] flex'
+											onClick={handleUnLikeFacility}
+										>
+											<img src='/Icons/like.png' className='h-20 w-20 mr-6' />
+											<Typography className='text-[red] lowercase font-bold'>
+												Thích
+											</Typography>
+										</Button>
+										:
+										<Button className='w-[30%] flex'
+											onClick={handleLikeFacility}
+										>
+											<img src='/Icons/unlike.png' className='h-20 w-20 mr-6' />
+											<Typography className='text-[#65676b] lowercase font-bold'>
+												Thích
+											</Typography>
+										</Button>
+									}
+
 									<Button className='w-[30%] flex cursor-not-allowed'>
 										<img src='/Icons/comment.png' className='h-20 w-20 mr-6' />
 										<Typography className='text-[#65676b] lowercase font-bold'>
 											Bình luận
 										</Typography>
 									</Button>
-									<Button className='w-[30%] flex'>
+									<Button className='w-[30%] flex'
+										onClick={onOpenShare}
+									>
 										<img src='/Icons/share.png' className='h-20 w-20 mr-6' />
 										<Typography className='text-[#65676b] lowercase font-bold'>
 											Chia sẻ
@@ -201,6 +199,7 @@ const DetailEvent = props => {
 						</Box>
 					)}
 					{render(totalImage)}
+					{renderShare()}
 				</Box>
 			}
 		/>

@@ -134,7 +134,7 @@ const Chat = props => {
 
 						</Box>
 						<Box className='w-full'>
-							<Box className="flex gap-x-40 p-[18px] bg-[#e4e6eb]">
+							<Box className="flex gap-x-40 p-[18px] bg-[#effaff]">
 								<CoreInput
 									control={control}
 									name="comment"

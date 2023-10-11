@@ -28,12 +28,12 @@ export const useShareModal = () => {
 					maxWidth="sm"
 					fullWidth
 				>
-					<DialogTitle className="sm:p-24 p-16 bg-[red] relative">
+					<DialogTitle className="p-20 bg-[red] relative">
 						<Box className="flex items-center">
 							<IconButton onClick={() => setFalse()} className=" absolute top-0 right-0">
 								<CloseOutlinedIcon className='text-[white]' />
 							</IconButton>
-							<Typography className="mx-auto text-[30px] font-semibold text-[white] leading-[140%]">
+							<Typography className="mx-auto text-[20px] font-semibold text-[white] leading-[140%]">
 								Chia sẻ lên các nền tảng
 							</Typography>
 						</Box>

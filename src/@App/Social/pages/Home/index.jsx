@@ -10,7 +10,7 @@ const HomeTop = props => {
 
 	return (
 		//sx={{ backgroundImage: `url('https://wallpaper.dog/large/5461261.jpg')` }}
-		<Box className="relative h-full w-full bg-no-repeat bg-cover bg-[#e75348]" >
+		<Box className="!bg-[#e75348]">
 			<Box className="absolute top-[20%] left-[25%] right-[25%] bottom-[20%] bg-[white]">
 				<Box className='grid grid-cols-2 gap-20 p-40 h-full' >
 					<Box className='self-center'>
@@ -20,7 +20,7 @@ const HomeTop = props => {
 							<img src={logo} alt="" className="h-[40px] mr-10" />
 							PhotoVibe
 						</Typography>
-						<Box className='text-14'>
+						<Box className='text-12'>
 							Join us and embark on your creative journey with photos at PhotoVibe. <br />
 							Let your moments be preserved and shared with our vibrant community.
 							<br />

@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -8,9 +8,11 @@ import { useRequest } from 'ahooks'
 import { facilityService } from '@App/Social/services/facilityService'
 import DataPost from './components/DataPost'
 import { useEditProfile } from './hooks/useEditProfile'
+import { useCreatePostModal } from '../Facility/hooks/useCreatePostModal'
 
 const Profile = props => {
 	const { onOpenEditProfile, renderEditProfile } = useEditProfile()
+	const { onOpen, render } = useCreatePostModal()
 
 	const {
 		data: facility,
@@ -111,16 +113,34 @@ const Profile = props => {
 								<hr className='text-[#ddc1c1]' />
 								<iframe className='w-full mt-12' src="https://s.net.vn/RPtP" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 							</Box>
-							
+
 						</Box>
 					</Box>
 
 					<Box className='w-[60%]'>
-						<DataPost loadingFacility={loadingFacility} facility={facility} />
+						<Box className='flex items-center mb-20 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+							<img src='/Icons/man.png' className='h-40 w-40 mr-[30px]' />
+							<Typography className='cursor-pointer'
+								onClick={onOpen}
+							>Bạn có muốn đăng bài không?</Typography>
+						</Box>
+
+						<Box className='flex flex-col gap-20'>
+							{loadingFacility ? (
+								<div className="my-[15%] flex justify-center items-center">
+									<CircularProgress />
+								</div>
+							) : (
+								facility?.data?.map((item, index) => {
+									return <DataPost key={index} facility={item} />
+								})
+							)}
+						</Box>
 					</Box>
 				</Box>
 			</Box>
 			{renderEditProfile()}
+			{render()}
 		</Box>
 
 	)

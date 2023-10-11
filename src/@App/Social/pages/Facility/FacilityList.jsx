@@ -236,7 +236,7 @@ const FacilityList = props => {
 
 					<Box className="mt-20">
 						{loadingFacility ? (
-							<div className="my-40 min-h-[50vh] flex justify-center items-center">
+							<div className="my-[15%] flex justify-center items-center">
 								<CircularProgress />
 							</div>
 						) : (

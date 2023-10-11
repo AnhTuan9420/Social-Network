@@ -58,7 +58,7 @@ const UserHeader = props => {
 								Yêu thích
 							</Typography>
 						</Button>
-						<Button
+						{/* <Button
 							className="cursor-pointer flex lg:ml-40 sm:ml-20"
 							onClick={() => navigate(ROUTER_SOCIAL.event.history)}
 						>
@@ -66,7 +66,7 @@ const UserHeader = props => {
 							<Typography className="font-bold text-[16px] text-[#e91c81] ">
 								Lịch sử
 							</Typography>
-						</Button>
+						</Button> */}
 						<HeaderNotification />
 					</>
 				) : (

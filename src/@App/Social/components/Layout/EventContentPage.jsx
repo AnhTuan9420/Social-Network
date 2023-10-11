@@ -8,14 +8,14 @@ const EventContentPage = props => {
 	const { content, header, maxWidth, chat } = props
 
 	return (
-		<Box className='bg-[#f2f2f2] pt-[70px]'>
+		<Box className='pt-[70px]'>
 			{/* {header && <Box className="w-full bg-[#F9F9F9]">{header}</Box>} */}
 			<Box className='flex justify-center gap-[100px] w-full'>
 				{maxWidth ? null :
 					<Box className='w-[20%] sticky top-[70px] h-full'>
 						<Left />
 					</Box>}
-				<Box className={chat ? 'w-[65%] h-[calc(100vh_-_70px)]' : 'w-[40%]'}>
+				<Box className={chat ? 'w-[65%]' : 'w-[40%]'}>
 					{content}
 				</Box>
 				{/* <Box className='w-[14%] sticky top-[100px] h-full'>

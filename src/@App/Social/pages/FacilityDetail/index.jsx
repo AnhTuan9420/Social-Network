@@ -68,7 +68,7 @@ const DetailEvent = props => {
 			content={
 				<Box className="sm:pt-[20px] sm:pb-[56px] pb-[80px] w-full">
 					{loading ? (
-						<div className="my-40 min-h-[50vh] flex justify-center items-center">
+						<div className="my-[40%] flex justify-center items-center">
 							<CircularProgress />
 						</div>
 					) : (

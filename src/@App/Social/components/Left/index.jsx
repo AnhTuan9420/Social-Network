@@ -11,7 +11,7 @@ const Left = props => {
 	return (
 		<Box>
 			<Box className="mt-20 px-20 py-10 bg-[white] cursor-pointer" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
-				onClick={() => navigate(ROUTER_SOCIAL.user.profile)}
+				onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${9999}`)}
 			>
 				<Box className='flex items-center'>
 					<img src='/Icons/man.png' className='h-40 w-40 mr-20' />
@@ -29,7 +29,9 @@ const Left = props => {
 				<hr className='bg-[red] text-[red] h-2' />
 				<Box className='my-28 w-full flex items-center justify-between'>
 					<Box className='flex items-center'>
-						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer' onClick={() => navigate(ROUTER_SOCIAL.user.profile)} />
+						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer'
+							onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${1}`)}
+						/>
 						<Box>
 							<Typography className='font-bold'>User1</Typography>
 						</Box>
@@ -38,7 +40,9 @@ const Left = props => {
 				</Box>
 				<Box className='my-28 w-full flex items-center justify-between'>
 					<Box className='flex items-center'>
-						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer' onClick={() => navigate(ROUTER_SOCIAL.user.profile)} />
+						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer'
+							onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${2}`)}
+						/>
 						<Box>
 							<Typography className='font-bold'>User2</Typography>
 						</Box>
@@ -47,7 +51,9 @@ const Left = props => {
 				</Box>
 				<Box className='my-28 w-full flex items-center justify-between'>
 					<Box className='flex items-center'>
-						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer' onClick={() => navigate(ROUTER_SOCIAL.user.profile)} />
+						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer'
+							onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${3}`)}
+						/>
 						<Box>
 							<Typography className='font-bold'>User3</Typography>
 						</Box>

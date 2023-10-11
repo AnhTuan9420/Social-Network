@@ -30,9 +30,15 @@ const PostItem = props => {
             sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
         >
             <Box className='mb-16 flex'>
-                <img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+                <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${999}`)}
+                />
                 <Box>
-                    <Typography className='font-bold text-14'>Charlie</Typography>
+                    <Typography className='font-bold text-14 cursor-pointer'
+                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${999}`)}
+                    >
+                        Charlie
+                    </Typography>
                     <Typography className='text-12'>20 phút trước</Typography>
                 </Box>
             </Box>

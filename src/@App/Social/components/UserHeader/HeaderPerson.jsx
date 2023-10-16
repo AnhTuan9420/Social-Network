@@ -3,11 +3,12 @@ import React, { memo, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { clearSession, getSocialUser } from '@Core/helper/Session'
+import { COOKIE, clearSession, getDataSession, getSocialUser } from '@Core/helper/Session'
 import { useBoolean } from 'ahooks'
 import { successMsg } from '@Core/helper/Message'
 import Person from '@App/Social/assets/Person.svg'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import { authService } from '@App/Social/services/authService'
 
 const HeaderPerson = () => {
 	const user = getSocialUser()
@@ -24,14 +25,16 @@ const HeaderPerson = () => {
 		}
 		document.addEventListener('mousedown', handleClickOutside)
 		return () => {
-			window.removeEventListener('scroll', () => {})
+			window.removeEventListener('scroll', () => { })
 			document.removeEventListener('mousedown', handleClickOutside)
 		}
 	}, [])
 
-	const handleLogout = () => {
+	const handleLogout = async () => {
+		const res = getDataSession(COOKIE, 'refresh_token')
+		await authService.logout(res)
 		setFalse()
-		successMsg('Bạn đã đăng xuất khỏi PHOTOVIBE。')
+		successMsg('Logout success.')
 		navigate(ROUTER_SOCIAL.event.event_top)
 		clearSession()
 	}
@@ -122,7 +125,7 @@ const HeaderPerson = () => {
 				open={openConfirmLogout}
 				maxWidth="xs"
 				fullWidth
-				
+
 			>
 				<DialogTitle className=" font-bold py-[19px] px-16 p-0 bg-[red] relative">
 					<Box className="flex items-center">

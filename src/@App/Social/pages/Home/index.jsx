@@ -11,7 +11,7 @@ const HomeTop = props => {
 	return (
 		//sx={{ backgroundImage: `url('https://wallpaper.dog/large/5461261.jpg')` }}
 		<Box className="!bg-[#e75348]">
-			<Box className="absolute top-[18%] left-[25%] right-[25%] bottom-[18%] bg-[white]">
+			<Box className="absolute top-[15%] left-[25%] right-[25%] bottom-[15%] bg-[white]">
 				<Box className='grid grid-cols-2 gap-20 p-40 h-full' >
 					<Box className='self-center'>
 						<Typography component="div"

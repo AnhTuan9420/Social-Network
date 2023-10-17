@@ -61,7 +61,7 @@ const Login = props => {
 
     return (
         <form onSubmit={onSubmit}>
-            <Box className='mt-[50px]'>
+            <Box className='mt-[80px]'>
                 <Typography className="mb-4  text-[#222222] font-semibold border-b-2 border-solid border-[red]"
                     sx={{ width: 'fit-content' }}
                 >

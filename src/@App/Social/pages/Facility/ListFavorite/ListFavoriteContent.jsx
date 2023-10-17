@@ -66,30 +66,33 @@ const ListFavoriteContent = props => {
 						<Box className='grid grid-cols-3 gap-[50px]'>
 							{listLike?.results?.map((item, index) => {
 								return (
-									<Box key={index}>
-										<Box className="bg-[white] w-[300px] h-[380px]"
-											sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
-										>
-											<img
-												className="h-[300px] w-full object-cover cursor-pointer"
-												src={item?.postId?.image ?? imagefail}
-												onClick={() =>
-													navigate(
-														`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.postId?.id}`
-													)
-												}
-											/>
-
-											<Box className='flex p-20 boder border-t-1'>
-												<img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
-													onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.postId?.userId?.id}`)}
+									item?.postId?.id ?
+										<Box key={index}>
+											<Box className="bg-[white] w-[300px] h-[380px]"
+												sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
+											>
+												<img
+													className="h-[300px] w-full object-cover cursor-pointer"
+													src={item?.postId?.image ?? imagefail}
+													onClick={() =>
+														navigate(
+															`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.postId?.id}`
+														)
+													}
 												/>
-												<Typography className='font-bold self-center text-14'>{item?.postId?.userId?.fullName}</Typography>
+
+												<Box className='flex p-20 boder border-t-1'>
+													<img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+														onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.postId?.userId?.id}`)}
+													/>
+													<Typography className='font-bold self-center text-14'>{item?.postId?.userId?.fullName}</Typography>
+
+												</Box>
 
 											</Box>
-
 										</Box>
-									</Box>
+										:
+										null
 								)
 							})}
 						</Box>

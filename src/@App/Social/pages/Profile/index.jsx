@@ -112,7 +112,7 @@ const Profile = props => {
 
 								<Box className='flex mt-8'>
 									<Typography >Số điện thoại </Typography>
-									<Typography className='font-bold ml-4'> {profile?.phone}</Typography>
+									<Typography className='font-bold ml-4'> 0{profile?.phone}</Typography>
 								</Box>
 
 								<Box className='flex mt-8'>

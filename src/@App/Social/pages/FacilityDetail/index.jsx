@@ -118,8 +118,8 @@ const PostDetail = props => {
 					) : (
 						<Box>
 							<Box className="flex flex-wrap sm:flex-nowrap gap-10">
-								<Box className="w-full h-[472px] object-cover">
-									<Image src={postDetail?.image ?? imagefail} />
+								<Box className="w-full h-[500px] bg-[pink]">
+									<Image className='object-contain h-full' src={postDetail?.image ?? imagefail} />
 								</Box>
 								{/* {postDetail?.image?.sub ?
 									<Box className="w-[240px]">

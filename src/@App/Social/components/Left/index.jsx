@@ -27,7 +27,7 @@ const Left = props => {
 
 			<Box className="mt-20 px-20 py-10  bg-[white]" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
 				<Typography className='py-20 font-bold'>
-					Danh sách người dùng ({listUser?.totalResults})
+					Danh sách người dùng ({listUser?.totalResults - 1})
 				</Typography>
 				<hr className='bg-[red] text-[red] h-2' />
 
@@ -38,25 +38,21 @@ const Left = props => {
 					:
 					listUser?.results?.map((item, index) => {
 						return (
-							<Box key={index} className='my-28 w-full flex items-center justify-between'>
-								<Box className='flex items-center cursor-pointer'
-									onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.id}`)}
-								>
-									<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-20' />
-									<Typography className='font-bold'>
-										{item?.fullName}
-									</Typography>
-								</Box>
-								{user?.id === item?.id ?
-									<Typography className='text-16 font-semibold text-[red]'>
-										You
-									</Typography>
-									:
-									<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer'
+							user?.id === item?.id ? null
+								:
+								<Box key={index} className='my-28 w-full flex items-center justify-between'>
+									<Box className='flex items-center cursor-pointer'
+										onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.id}`)}
+									>
+										<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-20' />
+										<Typography className='font-bold'>
+											{item?.fullName}
+										</Typography>
+									</Box>
+									<img src='/Icons/messenger.png' className='h-[25px] w-[25px] cursor-pointer'
 										onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${item?.id}`)}
 									/>
-								}
-							</Box>
+								</Box>
 						)
 					})}
 			</Box>

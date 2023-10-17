@@ -112,13 +112,14 @@ const DataPost = (props) => {
             </Box>
 
             <Box
+                className='bg-[pink]'
                 onClick={() =>
                     navigate(
                         `${ROUTER_SOCIAL.event.detail}/?facility_id=${dataPost?.id}`
                     )
                 }>
                 <img
-                    className="h-[500px] w-full object-cover cursor-pointer "
+                    className="h-[600px] w-full object-contain cursor-pointer "
                     src={dataPost?.image ?? imagefail}
                     duration={500}
                 />

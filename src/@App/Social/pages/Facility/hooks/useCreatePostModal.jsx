@@ -22,7 +22,6 @@ export const useCreatePostModal = (refreshListPost) => {
 		mode: 'onTouched',
 		defaultValues: {
 			title: '',
-			file: undefined
 		},
 		resolver: yupResolver(
 			Yup.object({
@@ -74,8 +73,11 @@ export const useCreatePostModal = (refreshListPost) => {
 			successMsg('Create post success.')
 			setFalse()
 			refreshListPost()
+			setPreview(undefined)
+			setSelectedFile(undefined)
 		} catch (error) {
-			errorMsg(error.response.data.message)
+			setSubmit(false)
+			errorMsg(error)
 		}
 	})
 

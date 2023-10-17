@@ -17,7 +17,6 @@ const LazyEventSearch = React.lazy(() => import('../pages/Facility'))
 const LazyEventFavorite = React.lazy(() => import('../pages/Facility/ListFavorite'))
 const LazyEventTop = React.lazy(() => import('../pages/Home'))
 const LazyHistoryList = React.lazy(() => import('../pages/History'))
-const LazyItemSelection = React.lazy(() => import('../pages/FacilityDetail/Entry/ItemSelection'))
 const LazyEnterInformation = React.lazy(() => import('../pages/FacilityDetail/Entry/EnterUserInformation'))
 
 
@@ -85,11 +84,6 @@ export const routerTraveloConfig = [
 		path: ROUTER_SOCIAL.event.history,
 		element: <LazyHistoryList />,
 		breadcrumb: '利用履歴'
-	},
-	{
-		path: ROUTER_SOCIAL.entry.item_selection,
-		element: <LazyItemSelection />,
-		breadcrumb: 'オプションアイテム選択'
 	},
 	{
 		path: ROUTER_SOCIAL.entry.enter_information,

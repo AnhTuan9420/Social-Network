@@ -6,14 +6,14 @@ import FacilityList from './FacilityList'
 const HomePage = props => {
 
 	const {
-		data: facility,
-		run: getFacility,
-		loading: loadingFacility
+		data: posts,
+		run: getPost,
+		loading: loadingPost
 	} = useRequest(facilityService.getListPost, {
 		manual: true
 	})
 
-	return <FacilityList facility={facility} getFacility={getFacility} loadingFacility={loadingFacility}/>
+	return <FacilityList posts={posts} getPost={getPost} loadingPost={loadingPost}/>
 }
 
 export default React.memo(HomePage)

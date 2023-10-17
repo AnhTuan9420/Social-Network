@@ -15,11 +15,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useSearchDialog } from './hooks/useSearchDialog'
 import { useCreatePostModal } from './hooks/useCreatePostModal'
-import AddIcon from '@mui/icons-material/Add'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 // import no_image from '@App/Social/assets/no_image.webp'
 import trash from '@App/Social/assets/trash.svg'
-import { removeDataSession } from '@Core/helper/Session'
 import TopLike from './TopLike'
 import PostItem from './PostItem'
 
@@ -27,7 +25,7 @@ const FacilityList = props => {
 	const { tags, title } = props
 	const navigate = useNavigate()
 
-	const { facility, getFacility, loadingFacility } = props
+	const { posts, getPost, loadingPost } = props
 	const { onOpen, render } = useCreatePostModal()
 	const [searching, setSearching] = useState(false)
 	const [searchFavorite, setSearchFavorite] = useState({
@@ -58,7 +56,7 @@ const FacilityList = props => {
 				...data,
 				page: pageApi,
 			}
-			await getFacility(params)
+			await getPost(params)
 
 			if (!watch('title') && addTags.length === 0) {
 				setSearching(false)
@@ -75,7 +73,7 @@ const FacilityList = props => {
 			pageApi: pageApi,
 			sortBy: 'createdAt:desc'
 		}
-		getFacility(params)
+		getPost(params)
 	}, [pageApi])
 
 	return (
@@ -149,7 +147,7 @@ const FacilityList = props => {
 					</Typography>
 
 					<Box className="mt-20">
-						{loadingFacility ? (
+						{loadingPost ? (
 							<div className="my-[15%] flex justify-center items-center">
 								<CircularProgress />
 							</div>
@@ -163,7 +161,7 @@ const FacilityList = props => {
 													検索結果
 												</Typography>
 												<Typography className="sm:text-[26px] text-20 font-semibold sm:mr-8 mr-4 text-[#000000]">
-													{facility?.data?.length}
+													{posts?.data?.length}
 												</Typography>
 												<Typography className="sm:text-[26px] text-20 font-semibold text-[#000000]">
 													件
@@ -206,7 +204,7 @@ const FacilityList = props => {
 											))}
 										</Box>
 
-										{facility?.data?.length ? (
+										{posts?.results?.length ? (
 											<Autocomplete
 												id="combo-box-demo"
 												sx={{
@@ -248,7 +246,7 @@ const FacilityList = props => {
 									null
 								)}
 
-								{facility?.results?.map((item, index) => {
+								{posts?.results?.map((item, index) => {
 									return <PostItem key={index} dataPost={item} />
 								})}
 							</Box>

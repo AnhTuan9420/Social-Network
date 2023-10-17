@@ -7,11 +7,16 @@ import { useShareModal } from "../../FacilityDetail/hooks/useShareModal"
 import { timeAgo } from "@Core/helper/Date"
 import { useRequest } from "ahooks"
 import { postService } from "@App/Social/services/postService"
+import { useDeleteCommentModal } from "../hooks/useDeleteCommentModal"
+import { getSocialUser } from '@Core/helper/Session'
 
 const PostItem = props => {
     const { dataPost } = props
     const navigate = useNavigate()
+    const user = getSocialUser()
+
     const { onOpenShare, renderShare } = useShareModal()
+
 
     const [isFavorited, setIsFavorited] = useState(false)
 
@@ -30,6 +35,8 @@ const PostItem = props => {
         }
         getComment(params)
     }, [dataPost.id])
+
+    const { onOpenDeleteComment, renderDeleteComment } = useDeleteCommentModal(getComment)
 
     const { data: apiHasLike, run: getFavorite } = useRequest(postService.checkUserLike, {
         manual: true
@@ -151,34 +158,52 @@ const PostItem = props => {
                     <CircularProgress />
                 </div>
             ) : (
-                listComment?.results?.map((item, index) => {
-                    return (
-                        <Box key={index} className='my-16 flex'>
-                            <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
-                                onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
-                            />
-                            <Box>
-                                <Box className='p-10 bg-[#f0f2f5] rounded-8'>
-                                    <Typography className='font-bold text-14 cursor-pointer'
+                listComment?.results?.length > 0 ?
+                    (
+                        listComment?.results?.map((item, index) => {
+                            return (
+                                <Box key={index} className='my-16 flex'>
+                                    <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
                                         onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
-                                    >
-                                        {item?.userId?.fullName}
-                                    </Typography>
-                                    <Typography className='text-14 break-all'>
-                                        {item?.content?.split('\n').map((text, i) => (
-                                            <React.Fragment key={i}>
-                                                {text}
-                                                <br />{' '}
-                                            </React.Fragment >
-                                        ))}
-                                    </Typography>
-                                </Box>
-                                <Typography className='text-12 mt-2 ml-8'>{timeAgo(item?.createdAt)}</Typography>
+                                    />
+                                    <Box>
+                                        <Box className='p-10 bg-[#f0f2f5] rounded-8'>
+                                            <Typography className='font-bold text-14 cursor-pointer'
+                                                onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                                            >
+                                                {item?.userId?.fullName}
+                                            </Typography>
+                                            <Typography className='text-14 break-all'>
+                                                {item?.content?.split('\n').map((text, i) => (
+                                                    <React.Fragment key={i}>
+                                                        {text}
+                                                        <br />{' '}
+                                                    </React.Fragment >
+                                                ))}
+                                            </Typography>
+                                        </Box>
+                                        <Box className='flex'>
+                                            <Typography className='text-12 mt-2 ml-8 mr-10'>{timeAgo(item?.createdAt)}</Typography>
+                                            {user?.id === item?.userId?.id ?
+                                                <Typography className='text-12  text-[red] mt-2 ml-8 cursor-pointer'
+                                                    onClick={onOpenDeleteComment}
+                                                >
+                                                    delete
+                                                </Typography>
+                                                : null
+                                            }
+                                        </Box>
 
-                            </Box>
-                        </Box>
-                    )
-                })
+                                    </Box>
+                                    {user?.id === item?.userId?.id ? renderDeleteComment(item?.id, dataPost.id) : null}
+                                </Box>
+                            )
+                        })
+                    ) :
+                    <Typography className='text-[black] my-16'>
+                        Hiện bào post này chưa có bình luận.
+                    </Typography>
+
             )}
             {/* <Typography className='text-[#65676b] font-semibold mt-16 cursor-pointer'
                 onClick={() =>

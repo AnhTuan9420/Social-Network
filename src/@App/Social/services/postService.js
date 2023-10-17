@@ -41,6 +41,11 @@ class Post extends BaseService {
     return this.request.delete(endpoint);
   };
 
+  deleteComment = (commentId) => {
+    const endpoint = `/api/comment/${commentId}`;
+    return this.request.delete(endpoint);
+  };
+
   getListLike = (params) => {
     const endpoint = "/api/like";
     return this.request.get(endpoint, { params: params });

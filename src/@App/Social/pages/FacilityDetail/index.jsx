@@ -12,6 +12,8 @@ import { useShareModal } from './hooks/useShareModal'
 import { timeAgo } from '@Core/helper/Date'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 import { useNavigate } from 'react-router-dom'
+import { getSocialUser } from '@Core/helper/Session'
+import { useDeleteCommentModal } from '../Facility/hooks/useDeleteCommentModal'
 
 const getUrlMap = google_map_url => {
 	const urlStartIndex = google_map_url?.indexOf('src="') + 5
@@ -23,6 +25,7 @@ const getUrlMap = google_map_url => {
 const PostDetail = props => {
 	const { postDetail, loadingPostDetail } = usePostDetail()
 	const navigate = useNavigate()
+	const user = getSocialUser()
 	const { onOpen, render } = useImageModal()
 	const { onOpenShare, renderShare } = useShareModal()
 
@@ -48,6 +51,8 @@ const PostDetail = props => {
 		}
 		getComment(params)
 	}, [postDetail?.id])
+
+	const { onOpenDeleteComment, renderDeleteComment } = useDeleteCommentModal(getComment)
 
 	useEffect(() => {
 		getFavorite(postDetail?.id)
@@ -189,35 +194,52 @@ const PostDetail = props => {
 											<CircularProgress />
 										</div>
 									) : (
-										listComment?.results?.map((item, index) => {
-											return (
-												<Box key={index} className='my-16 flex'>
-													<img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
-														onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
-													/>
-													<Box>
-														<Box className='p-10 bg-[#e4e6eb] rounded-8'>
-															<Typography className='font-bold text-14 cursor-pointer'
+										listComment?.results?.length > 0 ?
+											(
+												listComment?.results?.map((item, index) => {
+													return (
+														<Box key={index} className='my-16 flex'>
+															<img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
 																onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
-															>
-																{item?.userId?.fullName}
-															</Typography>
-															<Typography className='text-14 break-all'>
-																{item?.content?.split('\n').map((text, i) => (
-																	<React.Fragment key={i}>
-																		{text}
-																		<br />{' '}
-																	</React.Fragment >
-																))}
-															</Typography>
+															/>
+															<Box>
+																<Box className='p-10 bg-[#e4e6eb] rounded-8'>
+																	<Typography className='font-bold text-14 cursor-pointer'
+																		onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+																	>
+																		{item?.userId?.fullName}
+																	</Typography>
+																	<Typography className='text-14 break-all'>
+																		{item?.content?.split('\n').map((text, i) => (
+																			<React.Fragment key={i}>
+																				{text}
+																				<br />{' '}
+																			</React.Fragment >
+																		))}
+																	</Typography>
 
 
+																</Box>
+																<Box className='flex'>
+																	<Typography className='text-12 mt-2 ml-8 mr-10'>{timeAgo(item?.createdAt)}</Typography>
+																	{user?.id === item?.userId?.id ?
+																		<Typography className='text-12  text-[red] mt-2 ml-8 cursor-pointer'
+																			onClick={onOpenDeleteComment}
+																		>
+																			delete
+																		</Typography>
+																		: null
+																	}
+																</Box>
+															</Box>
+															{user?.id === item?.userId?.id ? renderDeleteComment(item?.id, postDetail?.id) : null}
 														</Box>
-														<Typography className='text-12 mt-2 ml-8'>{timeAgo(item?.createdAt)}</Typography>
-													</Box>
-												</Box>
-											)
-										})
+													)
+												})
+											) :
+											<Typography className='text-[black] my-16'>
+												Hiện bào post này chưa có bình luận.
+											</Typography>
 
 									)}
 								</Box>

@@ -29,12 +29,12 @@ const PostItem = props => {
     })
 
     const {
-		data: totalLike,
-		run: getTotalLike,
-		loading: loadingTotalLike
-	} = useRequest(postService.totalLike, {
-		manual: true
-	})
+        data: totalLike,
+        run: getTotalLike,
+        loading: loadingTotalLike
+    } = useRequest(postService.totalLike, {
+        manual: true
+    })
 
     useEffect(() => {
         const params = {
@@ -42,7 +42,7 @@ const PostItem = props => {
             sortBy: 'createdAt:desc'
         }
         getComment(params)
-		getTotalLike(dataPost?.id)
+        getTotalLike(dataPost?.id)
     }, [dataPost.id])
 
     const { onOpenDeleteComment, renderDeleteComment } = useDeleteCommentModal(getComment)
@@ -68,13 +68,13 @@ const PostItem = props => {
         }
         await postService.like(dataSubmit)
         setIsFavorited(true)
-		getTotalLike(dataPost?.id)
+        getTotalLike(dataPost?.id)
     }
 
     const handleUnLikeFacility = async () => {
         await postService.unLike(apiHasLike?.id)
         setIsFavorited(false)
-		getTotalLike(dataPost?.id)
+        getTotalLike(dataPost?.id)
     }
 
     return (
@@ -114,7 +114,7 @@ const PostItem = props => {
                 />
             </Box>
 
-            <Box className='my-16 flex justify-between mx-14'>
+            <Box className='mt-10 flex justify-between mx-14'>
                 <Typography className='text-16 underline'>{totalLike?.totalLike} lượt thích</Typography>
                 <Typography className='text-16 underline'>{listComment?.totalResults} bình luận</Typography>
             </Box>
@@ -168,7 +168,7 @@ const PostItem = props => {
             </Box>
 
             <Typography className='text-[#65676b] font-semibold my-16'>
-                Bình luận
+                Bình luận ({listComment?.totalResults})
             </Typography>
             {loadingComment ? (
                 <div className="my-[15%] flex justify-center items-center">
@@ -176,7 +176,62 @@ const PostItem = props => {
                 </div>
             ) : (
                 listComment?.results?.length > 0 ?
-                    (
+                    (listComment?.results?.length > 5 ?
+                        <Box>
+                            {listComment?.results?.slice(0, 5)?.map((item, index) => {
+                                return (
+                                    <Box key={index} className='my-16 flex'>
+                                        <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                                            onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                                        />
+                                        <Box>
+                                            <Box className='p-10 bg-[#f0f2f5] rounded-8'>
+                                                <Typography className='font-bold text-14 cursor-pointer'
+                                                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                                                >
+                                                    {item?.userId?.fullName}
+                                                </Typography>
+                                                <Typography className='text-14 break-all'>
+                                                    {item?.content?.split('\n').map((text, i) => (
+                                                        <React.Fragment key={i}>
+                                                            {text}
+                                                            <br />{' '}
+                                                        </React.Fragment >
+                                                    ))}
+                                                </Typography>
+                                            </Box>
+                                            <Box className='flex'>
+                                                <Typography className='text-12 mt-2 ml-8 mr-10'>{timeAgo(item?.createdAt)}</Typography>
+                                                {user?.id === item?.userId?.id ?
+                                                    <Typography className='text-12  text-[red] mt-2 ml-8 cursor-pointer'
+                                                        onClick={onOpenDeleteComment}
+                                                    >
+                                                        delete
+                                                    </Typography>
+                                                    : null
+                                                }
+                                            </Box>
+
+                                        </Box>
+                                        {user?.id === item?.userId?.id ? renderDeleteComment(item?.id, dataPost.id) : null}
+                                    </Box>
+                                )
+                            })}
+                            {
+                                listComment?.results?.length > 5 ?
+                                    <Typography className='text-[black] my-16 underline cursor-pointer'
+                                        onClick={() =>
+                                            navigate(
+                                                `${ROUTER_SOCIAL.event.detail}/?facility_id=${dataPost?.id}`
+                                            )
+                                        }
+                                    >
+                                        Xem thêm bình luận
+                                    </Typography>
+                                    : null
+                            }
+                        </Box>
+                        :
                         listComment?.results?.map((item, index) => {
                             return (
                                 <Box key={index} className='my-16 flex'>
@@ -222,14 +277,7 @@ const PostItem = props => {
                     </Typography>
 
             )}
-            {/* <Typography className='text-[#65676b] font-semibold mt-16 cursor-pointer'
-                onClick={() =>
-                    navigate(
-                        `${ROUTER_SOCIAL.event.detail}/?facility_id=${dataPost?.id}`
-                    )
-                }>
-                Xem thêm bình luận
-            </Typography> */}
+
             {renderShare()}
         </Box>
 

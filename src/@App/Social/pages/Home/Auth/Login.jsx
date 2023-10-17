@@ -47,7 +47,8 @@ const Login = props => {
             const res = await authService.login(data)
             setDataSession('local', 'social_user', {
                 id: res?.user?.id,
-                username: res?.username?.username,
+                username: res?.user?.username,
+                fullName: res?.user?.fullName,
             })
             Cookies.set('token', res?.tokens?.access?.token)
             Cookies.set('refresh_token', res?.tokens?.refresh?.token)

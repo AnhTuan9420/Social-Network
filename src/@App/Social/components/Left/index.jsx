@@ -2,22 +2,23 @@ import { Box, MenuItem, Typography } from '@mui/material'
 import React from 'react'
 import { useNavigate, useLocation, Link, useHref } from 'react-router-dom'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
-import { menu } from '@App/Social/configs/menuConfig'
+import { getSocialUser } from '@Core/helper/Session'
 
 const Left = props => {
 	const navigate = useNavigate()
 	const currentUrl = useHref()
+    const user = getSocialUser()
 
 	return (
 		<Box>
 			<Box className="mt-20 px-20 py-10 bg-[white] cursor-pointer" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
-				onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${9999}`)}
+				onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${user?.id}`)}
 			>
 				<Box className='flex items-center'>
 					<img src='/Icons/man.png' className='h-40 w-40 mr-20' />
 					<Box>
-						<Typography className='font-bold'>Charlie</Typography>
-						<Typography >@anhtuan_ss</Typography>
+						<Typography className='font-bold'>{user?.fullName}</Typography>
+						<Typography >@{user?.username}</Typography>
 					</Box>
 				</Box>
 			</Box>

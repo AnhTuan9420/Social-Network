@@ -155,7 +155,7 @@ const PostDetail = props => {
 									</Box>
 								</Box>
 
-								<Box className='my-16 flex justify-between mx-14'>
+								<Box className='my-10 flex justify-between mx-14'>
 										<Typography className='text-16 underline'>{totalLike?.totalLike} lượt thích</Typography>
 										<Typography className='text-16 underline'>{listComment?.totalResults} bình luận</Typography>
 								</Box>

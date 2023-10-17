@@ -15,6 +15,11 @@ class Post extends BaseService {
     return this.request.post(endpoint, data);
   };
 
+  deletePost = (postId) => {
+    const endpoint = `/api/post/${postId}`;
+    return this.request.delete(endpoint);
+  };
+
   getListPost = (params) => {
     const endpoint = "/api/post";
     return this.request.get(endpoint, { params });

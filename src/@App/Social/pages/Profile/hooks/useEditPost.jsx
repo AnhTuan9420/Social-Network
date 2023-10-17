@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Yup from '@Core/helper/Yup'
 import imagefail from '@App/Social/assets/imagefail.svg'
+import { postService } from '@App/Social/services/postService'
+import { successMsg } from '@Core/helper/Message'
 
 export const useEditPost = (dataPost, refreshListPost) => {
 	const [open, { setTrue, setFalse }] = useBoolean()
@@ -64,10 +66,12 @@ export const useEditPost = (dataPost, refreshListPost) => {
 		setSelectedFile(undefined)
 	}
 
-	useEffect(() => {
-		setValue('desc', 'Charlie')
-		setValue('file', 'Greenwich Việt Nam')
-	}, [])
+	const deletePost = async () => {
+		const res = await postService.deletePost(dataPost?.id)
+		refreshListPost()
+		successMsg('Delete post success.')
+		setFalse()
+	}
 
 	const renderEditPost = useCallback(() => {
 		return (
@@ -141,12 +145,21 @@ export const useEditPost = (dataPost, refreshListPost) => {
 						>
 							Hủy
 						</Button>
-						<Button
-							variant="contained"
-							className="bg-[red] shadow-none font-semibold text-[#FFFFFF]"
-						>
-							Cập nhật
-						</Button>
+						<Box className='flex'>
+							<Button
+								variant="contained"
+								onClick={deletePost}
+								className="bg-[red] mr-10 shadow-none font-semibold text-[#FFFFFF]"
+							>
+								Xóa
+							</Button>
+							<Button
+								variant="contained"
+								className="bg-[red] shadow-none font-semibold text-[#FFFFFF]"
+							>
+								Cập nhật
+							</Button>
+						</Box>
 					</Box>
 				</DialogActions>
 			</Dialog >

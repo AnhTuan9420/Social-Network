@@ -68,13 +68,13 @@ const HeaderPerson = () => {
 				)}
 			>
 				<Box className="p-16">
-					<Typography className="text-[16px] break-all font-semibold text-[red] ">{user?.name ?? 'Charlie'}</Typography>
+					<Typography className="text-[16px] break-all font-semibold text-[black] ">{user?.fullName}</Typography>
 				</Box>
 				<Divider />
 
 				<Typography
 					className="text-[16px] px-16 pb-8 pt-16 text-[#e91c81] cursor-pointer "
-					onClick={() => navigate(ROUTER_SOCIAL.user.profile) & setOpen(!open)}
+					onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${user?.id}`) & setOpen(!open)}
 				>
 					Trang cá nhân
 				</Typography>
@@ -99,23 +99,9 @@ const HeaderPerson = () => {
 				>
 					Đổi mật khẩu
 				</Typography>
-
-				{/* <Typography
-					className="text-[16px] px-16 py-8 text-[#000000] leading-[140%] cursor-pointer "
-					onClick={() => navigate(ROUTER_SOCIAL.cancellation) & setOpen(!open)}
-				>
-					キャンセルポリシー
-				</Typography>
-
-				<Typography
-					className="text-[16px] px-16 pt-8 pb-16 text-[#000000] leading-[140%] cursor-pointer "
-					onClick={() => navigate(ROUTER_SOCIAL.terms) & setOpen(!open)}
-				>
-					利用規約
-				</Typography> */}
 				<Divider />
 
-				<Typography className="text-[16px] font-bold p-16 text-[red] leading-[140%] cursor-pointer " onClick={handleOpenModal}>
+				<Typography className="text-[16px] font-bold p-16 text-[black] leading-[140%] cursor-pointer " onClick={handleOpenModal}>
 					Đăng xuất
 				</Typography>
 			</Box>

@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Yup from '@Core/helper/Yup'
 import imagefail from '@App/Social/assets/imagefail.svg'
 
-export const useEditPost = (props) => {
+export const useEditPost = (dataPost, refreshListPost) => {
 	const [open, { setTrue, setFalse }] = useBoolean()
 
 	const {
@@ -56,7 +56,6 @@ export const useEditPost = (props) => {
 			setSelectedFile(undefined)
 			return
 		}
-
 		setSelectedFile(e.target.files[0])
 	}
 
@@ -70,7 +69,7 @@ export const useEditPost = (props) => {
 		setValue('file', 'Greenwich Việt Nam')
 	}, [])
 
-	const renderEditPost = useCallback((dataPost) => {
+	const renderEditPost = useCallback(() => {
 		return (
 			<Dialog
 				onClose={setFalse}
@@ -101,16 +100,17 @@ export const useEditPost = (props) => {
 						<Box className='mb-16 flex items-center'>
 							<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
 							<Box>
-								<Typography className='font-bold text-14'>Charlie</Typography>
+								<Typography className='font-bold text-14'>{dataPost?.userId?.fullName}</Typography>
 							</Box>
 						</Box>
 						<textarea
 							control={control}
-							name="desc"
-							defaultValue={dataPost?.address_line1}
-							className="w-full outline-none text-20 mb-16"
+							name="title"
+							defaultValue={dataPost?.title}
+							className="w-full outline-none text-20 mb-16 min-h-[100px]"
 							placeholder={'Nhập mô tả của bài Post'}
 						/>
+
 						<Box className='mb-16'>
 							<Box>
 								{selectedFile && preview ?
@@ -123,7 +123,7 @@ export const useEditPost = (props) => {
 										</IconButton>
 									</Box>
 									:
-									<img className='mb-16 object-contain w-full h-256' src={dataPost?.main_image?.image_url ?? imagefail} />
+									<img className='mb-16 object-contain w-full h-256' src={dataPost?.image ?? imagefail} />
 								}
 							</Box>
 							<input type='file' onChange={onSelectFile} />

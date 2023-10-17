@@ -10,8 +10,18 @@ class Post extends BaseService {
     this.setRequest();
   }
 
+  createPost = (data) => {
+    const endpoint = "/api/post";
+    return this.request.post(endpoint, data);
+  };
+
   getListPost = (params) => {
     const endpoint = "/api/post";
+    return this.request.get(endpoint, { params });
+  };
+
+  listPostOfUser = (params, user_id) => {
+    const endpoint = `/api/post?userId=${user_id}`;
     return this.request.get(endpoint, { params });
   };
 

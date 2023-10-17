@@ -26,7 +26,6 @@ export const createInstance = (baseUrl = null, middleware = () => {}) => {
 			return requestConfig
 		},
 		requestError => {
-			// console.log(requestError)
 			return Promise.reject(requestError)	
 		}
 	)
@@ -52,7 +51,6 @@ export const createInstance = (baseUrl = null, middleware = () => {}) => {
 		},
 		async error => {
 			// hideLoadingPage()
-			// console.log('============= error', error)
 			if(error?.response?.data?.error_code == 401 && error?.response?.data?.error_message === 'トークンの有効期限が切れています'){
 				const refreshToken = Cookies.get('refresh_token')
 				const res = await authService.refreshToken({token:refreshToken})

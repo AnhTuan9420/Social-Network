@@ -1,33 +1,50 @@
 import { Box, Button, CircularProgress, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Yup from '@Core/helper/Yup'
 import { useRequest } from 'ahooks'
 import { postService } from '@App/Social/services/postService'
+import { userService } from '@App/Social/services/userService'
 import DataPost from './components/DataPost'
 import { useEditProfile } from './hooks/useEditProfile'
 import { useCreatePostModal } from '../Facility/hooks/useCreatePostModal'
+import { convertDate } from '@Core/helper/Date'
+import { getSocialUser } from '@Core/helper/Session'
 
 const Profile = props => {
-	const { onOpenEditProfile, renderEditProfile } = useEditProfile()
-	const { onOpen, render } = useCreatePostModal()
-
+	let [searchParams] = useSearchParams()
+	const user_id = searchParams.get('user_id')
+	const user = getSocialUser()
+	
 	const {
-		data: facility,
-		run: getFacility,
-		loading: loadingFacility
-	} = useRequest(postService.getListFacility, {
+		data: posts,
+		run: getPost,
+		loading: loadingPost,
+		refresh: refreshListPost
+	} = useRequest(postService.listPostOfUser, {
 		manual: true
 	})
-
+	
+	const {
+		data: profile,
+		run: getProfile,
+		loading: loadingProfile
+	} = useRequest(userService.profile, {
+		manual: true
+	})
+	
 	useEffect(() => {
 		const params = {
-			favorite: 1
+			sortBy: 'createdAt:desc',
 		}
-		getFacility(params)
-	}, [])
+		getPost(params, user_id)
+		getProfile(user_id)
+	}, [user_id])
+	
+	const { onOpen, render } = useCreatePostModal(refreshListPost)
+	const { onOpenEditProfile, renderEditProfile } = useEditProfile(profile, getProfile)
 
 	const {
 		control,
@@ -60,11 +77,11 @@ const Profile = props => {
 				<Box className='w-[65%] mx-auto bg-white pb-20'>
 					<img className='w-full h-[350px] object-cover rounded-b-16' src='/img/bg.jpg' />
 					<Box className='flex justify-center mb-[-80px]'>
-						<img src='/Icons/man.png' className='rounded-[50%] h-[180px] w-[180px] translate-y-[-50%]' />
+						<img src={profile?.avatar ?? '/Icons/man.png'} className='rounded-[50%] h-[180px] w-[180px] translate-y-[-50%]' />
 					</Box>
 					<Box className='text-center'>
-						<Typography className='text-36 font-bold'>Charlie</Typography>
-						<Typography >@anhtuan_ss</Typography>
+						<Typography className='text-36 font-bold'>{profile?.fullName}</Typography>
+						<Typography >@{profile?.username}</Typography>
 					</Box>
 				</Box>
 			</Box>
@@ -78,33 +95,36 @@ const Profile = props => {
 								<hr className='text-[#ddc1c1]' />
 
 								<Box className='flex mt-8'>
-									<Typography >Làm việc tại </Typography>
-									<Typography className='font-bold ml-4'> Hà Nội</Typography>
-								</Box>
-
-								<Box className='flex mt-8'>
 									<Typography >Học tại </Typography>
-									<Typography className='font-bold ml-4'> Greenwich Việt Nam</Typography>
+									<Typography className='font-bold ml-4'> {profile?.study}</Typography>
 								</Box>
 
 								<Box className='flex mt-8'>
 									<Typography >Sống tại </Typography>
-									<Typography className='font-bold ml-4'> Hà Nội</Typography>
+									<Typography className='font-bold ml-4'> {profile?.liveIn}</Typography>
 								</Box>
 
 								<Box className='flex mt-8'>
+									<Typography >Làm việc tại </Typography>
+									<Typography className='font-bold ml-4'>{profile?.workspace}</Typography>
+								</Box>
+
+
+								<Box className='flex mt-8'>
 									<Typography >Số điện thoại </Typography>
-									<Typography className='font-bold ml-4'> 0999999999</Typography>
+									<Typography className='font-bold ml-4'> {profile?.phone}</Typography>
 								</Box>
 
 								<Box className='flex mt-8'>
 									<Typography >Tham gia vào </Typography>
-									<Typography className='font-bold ml-4'> Tháng 7 năm 2014</Typography>
+									<Typography className='font-bold ml-4'> {convertDate(profile?.createdAt)}</Typography>
 								</Box>
-
-								<Button className='w-full mt-8 bg-[#e4e6eb] text-black font-bold' onClick={onOpenEditProfile} >
-									Chỉnh sửa thông tin
-								</Button>
+								{user?.id === user_id ?
+									<Button className='w-full mt-8 bg-[#e4e6eb] text-black font-bold' onClick={onOpenEditProfile} >
+										Chỉnh sửa thông tin
+									</Button>
+									: null
+								}
 
 							</Box>
 
@@ -125,14 +145,14 @@ const Profile = props => {
 							>Bạn có muốn đăng bài không?</Typography>
 						</Box>
 
-						<Box className='flex flex-col gap-20'>
-							{loadingFacility ? (
+						<Box className='flex flex-col gap-20 mb-20'>
+							{loadingPost ? (
 								<div className="my-[15%] flex justify-center items-center">
 									<CircularProgress />
 								</div>
 							) : (
-								facility?.data?.map((item, index) => {
-									return <DataPost key={index} facility={item} />
+								posts?.results?.map((item, index) => {
+									return <DataPost key={index} dataPost={item} refreshListPost={refreshListPost}/>
 								})
 							)}
 						</Box>

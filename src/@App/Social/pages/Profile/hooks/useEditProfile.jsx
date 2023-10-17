@@ -6,8 +6,10 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Yup from '@Core/helper/Yup'
 import CoreInput from '@Core/components/Input/CoreInput'
+import { userService } from '@App/Social/services/userService'
+import { errorMsg, successMsg } from '@Core/helper/Message'
 
-export const useEditProfile = () => {
+export const useEditProfile = (profile, getProfile) => {
 	const [open, { setTrue, setFalse }] = useBoolean()
 
 	const {
@@ -19,19 +21,18 @@ export const useEditProfile = () => {
 	} = useForm({
 		mode: 'onTouched',
 		defaultValues: {
-			email: '',
-			password: ''
+			fullName: '',
+			study: '',
+			liveIn: '',
+			phone: '',
+			workspace: ''
 		},
 		resolver: yupResolver(
 			Yup.object({
-				email: Yup.string()
+				fullName: Yup.string()
 					.required('Required')
-					.email('Error!')
-					.min(3, 'Error'),
-				password: Yup.string()
-					.required('Required')
-					.min(8, 'Error')
-					.max(20, 'Error')
+					.min(8, 'Full Name must be between 8 and 20 characters')
+					.max(20, 'Full Name must be between 8 and 20 characters'),
 			})
 		)
 	})
@@ -66,11 +67,23 @@ export const useEditProfile = () => {
 	}
 
 	useEffect(() => {
-		setValue('name', 'Charlie')
-		setValue('study', 'Greenwich Việt Nam')
-		setValue('live', 'Hà Nội')
-		setValue('phone', '0999999999')
-	}, [])
+		setValue('fullName', profile?.fullName)
+		setValue('study', profile?.study)
+		setValue('liveIn', profile?.liveIn)
+		setValue('phone', profile?.phone)
+		setValue('workspace', profile?.workspace)
+	}, [profile])
+
+	const onSubmit = handleSubmit(async data => {
+		try {
+			await userService.updateProfile(data)
+			successMsg('Update profile success.')
+			setFalse()
+			getProfile(profile?.id)
+		} catch (error) {
+			errorMsg(error.response.data.message)
+		}
+	})
 
 	const renderEditProfile = useCallback(() => {
 		return (
@@ -86,112 +99,126 @@ export const useEditProfile = () => {
 					}
 				}}
 			>
-				<DialogTitle className="p-16">
-					<Box className="flex items-center">
-						<IconButton onClick={() => setFalse()} className="p-0">
-							<CloseOutlinedIcon color="error" />
-						</IconButton>
-						<Typography className="mx-auto sm:text-[26px] text-16 font-semibold text-[#222222] leading-[140%]">
-							Chỉnh sửa thông tin chi tiết
-						</Typography>
-					</Box>
-				</DialogTitle>
-				<Divider />
-
-				<DialogContent className="p-0">
-					<Box className="p-16 h-auto">
-						<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
-							Ảnh đại diện
-						</Typography>
-						<Box className='mb-16'>
-							<Box>
-								{selectedFile && preview ?
-									<Box className='flex items-start'>
-										<Box className='w-[180px] h-[180px] mx-auto'>
-											<img className=' object-cover w-full h-full rounded-[50%]' src={preview} />
-										</Box>
-										<IconButton onClick={() => handleClose()} className="p-0">
-											<CloseOutlinedIcon color="error"/>
-										</IconButton>
-									</Box>
-									:
-									<Box className='w-[180px] h-[180px] mx-auto'>
-										<img className=' object-cover w-full h-full rounded-[50%]'src='/Icons/man.png' />
-									</Box>
-								}
-							</Box>
-							<input type='file' onChange={onSelectFile} />
+				<form onSubmit={onSubmit}>
+					<DialogTitle className="p-16">
+						<Box className="flex items-center">
+							<IconButton onClick={() => setFalse()} className="p-0">
+								<CloseOutlinedIcon color="error" />
+							</IconButton>
+							<Typography className="mx-auto sm:text-[26px] text-16 font-semibold text-[#222222] leading-[140%]">
+								Chỉnh sửa thông tin chi tiết
+							</Typography>
 						</Box>
+					</DialogTitle>
+					<Divider />
 
-						<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
-							Tên
-						</Typography>
-						<CoreInput
-							control={control}
-							name="name"
-							className="w-full mb-8"
-							placeholder={'Nhập tên của bạn '}
-							inputLogin={true}
-						/>
+					<DialogContent className="p-0">
+						<Box className="p-16 h-auto">
+							<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
+								Ảnh đại diện
+							</Typography>
+							<Box className='mb-16'>
+								<Box>
+									{selectedFile && preview ?
+										<Box className='flex items-start'>
+											<Box className='w-[180px] h-[180px] mx-auto'>
+												<img className=' object-cover w-full h-full rounded-[50%]' src={preview} />
+											</Box>
+											<IconButton onClick={() => handleClose()} className="p-0">
+												<CloseOutlinedIcon color="error" />
+											</IconButton>
+										</Box>
+										:
+										<Box className='w-[180px] h-[180px] mx-auto'>
+											<img className=' object-cover w-full h-full rounded-[50%]' src='/Icons/man.png' />
+										</Box>
+									}
+								</Box>
+								<input type='file' onChange={onSelectFile} />
+							</Box>
 
-						<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
-							Trường học
-						</Typography>
-						<CoreInput
-							control={control}
-							name="study"
-							className="w-full mb-8"
-							placeholder={'Nhập trường học'}
-							inputLogin={true}
-						/>
+							<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
+								Tên
+							</Typography>
+							<CoreInput
+								control={control}
+								name="fullName"
+								className="w-full mb-8"
+								placeholder={'Nhập tên của bạn '}
+								inputLogin={true}
+							/>
 
-						<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
-							Nơi sống
-						</Typography>
-						<CoreInput
-							control={control}
-							name="live"
-							className="w-full mb-8"
-							placeholder={'Nhập nơi sống'}
-							inputLogin={true}
-						/>
+							<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
+								Trường học
+							</Typography>
+							<CoreInput
+								control={control}
+								name="study"
+								className="w-full mb-8"
+								placeholder={'Nhập trường học'}
+								inputLogin={true}
+							/>
 
-						<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
-							Số điện thoại
-						</Typography>
-						<CoreInput
-							control={control}
-							name="phone"
-							className="w-full mb-8"
-							placeholder={'Nhập số điện thoại'}
-							inputLogin={true}
-						/>
+							<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
+								Nơi sống
+							</Typography>
+							<CoreInput
+								control={control}
+								name="liveIn"
+								className="w-full mb-8"
+								placeholder={'Nhập nơi sống'}
+								inputLogin={true}
+							/>
 
-					</Box>
-				</DialogContent>
-				<Divider />
+							<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
+								Nơi làm việc
+							</Typography>
+							<CoreInput
+								control={control}
+								name="workspace"
+								className="w-full mb-8"
+								placeholder={'Nhập nơi làm việc'}
+								inputLogin={true}
+							/>
 
-				<DialogActions>
-					<Box className='text-center p-8 flex justify-between w-full'>
-						<Button
-							variant="contained"
-							className="bg-[#e4e6eb] shadow-none font-bold text-[black]"
-							onClick={() => setFalse()}
-						>
-							Hủy
-						</Button>
-						<Button
-							variant="contained"
-							className="bg-[red] shadow-none font-semibold text-[#FFFFFF]"
-						>
-							Cập nhật
-						</Button>
-					</Box>
-				</DialogActions>
+							<Typography className="text-16 text-[#222222] sm:leading-[160%] leading-[140%] font-semibold">
+								Số điện thoại
+							</Typography>
+							<CoreInput
+								control={control}
+								name="phone"
+								className="w-full mb-8"
+								placeholder={'Nhập số điện thoại'}
+								inputLogin={true}
+							/>
+
+						</Box>
+					</DialogContent>
+					<Divider />
+
+					<DialogActions>
+						<Box className='text-center p-8 flex justify-between w-full'>
+							<Button
+								variant="contained"
+								className="bg-[#e4e6eb] shadow-none font-bold text-[black]"
+								onClick={() => setFalse()}
+							>
+								Hủy
+							</Button>
+							<Button
+								variant="contained"
+								type='submit'
+								className="bg-[red] shadow-none font-semibold text-[#FFFFFF]"
+							>
+								Cập nhật
+							</Button>
+						</Box>
+					</DialogActions>
+				</form>
 			</Dialog>
 		)
 	},
-		[open, selectedFile, preview]
+		[open, selectedFile, preview, profile, setTrue]
 	)
 
 	return { onOpenEditProfile: setTrue, renderEditProfile }

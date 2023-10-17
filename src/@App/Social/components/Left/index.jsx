@@ -1,18 +1,20 @@
-import { Box, MenuItem, Typography } from '@mui/material'
+import { Box, CircularProgress, MenuItem, Typography } from '@mui/material'
 import React from 'react'
-import { useNavigate, useLocation, Link, useHref } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 import { getSocialUser } from '@Core/helper/Session'
+import { useListUser } from './hooks/useListUser'
 
 const Left = props => {
 	const navigate = useNavigate()
-	const currentUrl = useHref()
-    const user = getSocialUser()
+	const user = getSocialUser()
+
+	const { listUser, loadingListUser } = useListUser()
 
 	return (
 		<Box>
 			<Box className="mt-20 px-20 py-10 bg-[white] cursor-pointer" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
-				onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${user?.id}`)}
+				onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${user?.id}`)}
 			>
 				<Box className='flex items-center'>
 					<img src='/Icons/man.png' className='h-40 w-40 mr-20' />
@@ -25,42 +27,38 @@ const Left = props => {
 
 			<Box className="mt-20 px-20 py-10  bg-[white]" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
 				<Typography className='py-20 font-bold'>
-					Danh sách người dùng
+					Danh sách người dùng ({listUser?.totalResults})
 				</Typography>
 				<hr className='bg-[red] text-[red] h-2' />
-				<Box className='my-28 w-full flex items-center justify-between'>
-					<Box className='flex items-center'>
-						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer'
-							onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${1}`)}
-						/>
-						<Box>
-							<Typography className='font-bold'>User1</Typography>
-						</Box>
-					</Box>
-					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${1}`)} />
-				</Box>
-				<Box className='my-28 w-full flex items-center justify-between'>
-					<Box className='flex items-center'>
-						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer'
-							onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${2}`)}
-						/>
-						<Box>
-							<Typography className='font-bold'>User2</Typography>
-						</Box>
-					</Box>
-					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${2}`)} />
-				</Box>
-				<Box className='my-28 w-full flex items-center justify-between'>
-					<Box className='flex items-center'>
-						<img src='/Icons/man.png' className='h-40 w-40 mr-20 cursor-pointer'
-							onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${3}`)}
-						/>
-						<Box>
-							<Typography className='font-bold'>User3</Typography>
-						</Box>
-					</Box>
-					<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer' onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${3}`)} />
-				</Box>
+
+				{loadingListUser ?
+					<div className="my-[40%] flex justify-center items-center">
+						<CircularProgress />
+					</div>
+					:
+					listUser?.results?.map((item, index) => {
+						return (
+							<Box key={index} className='my-28 w-full flex items-center justify-between'>
+								<Box className='flex items-center cursor-pointer'
+									onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.id}`)}
+								>
+									<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-20' />
+									<Typography className='font-bold'>
+										{item?.fullName}
+									</Typography>
+								</Box>
+								{user?.id === item?.id ?
+									<Typography className='text-16 font-semibold text-[red]'>
+										You
+									</Typography>
+									:
+									<img src='/Icons/messenger.png' className='h-[30px] w-[30px] cursor-pointer'
+										onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${item?.id}`)}
+									/>
+								}
+							</Box>
+						)
+					})}
 			</Box>
 		</Box>
 	)

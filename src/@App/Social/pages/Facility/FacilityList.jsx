@@ -24,21 +24,20 @@ import TopLike from './TopLike'
 import PostItem from './PostItem'
 
 const FacilityList = props => {
-	const { tags, facility_type } = props
+	const { tags, title } = props
 	const navigate = useNavigate()
 
 	const { facility, getFacility, loadingFacility } = props
-	const { renderSearchDialog, handleOpenSearchDialog, addTags } = useSearchDialog(tags)
 	const { onOpen, render } = useCreatePostModal()
 	const [searching, setSearching] = useState(false)
 	const [searchFavorite, setSearchFavorite] = useState({
 		label: '人気順',
 		value: 1
 	})
+	const [pageApi, setPageApi] = useState(1)
 
 	const isMobile = useMediaQuery('(max-width:600px)')
 
-	const [pageApi, setPageApi] = useState(1)
 	const [searchTags, setSearchTags] = useState(tags ?? [])
 
 	useEffect(() => {
@@ -48,7 +47,7 @@ const FacilityList = props => {
 	const { control, getValues, handleSubmit, watch, setValue } = useForm({
 		mode: 'onTouched',
 		defaultValues: {
-			facility_type: facility_type ?? ''
+			title: title ?? ''
 		}
 	})
 
@@ -58,11 +57,10 @@ const FacilityList = props => {
 			const params = {
 				...data,
 				page: pageApi,
-				tags: addTags?.map(item => item?.id)
 			}
 			await getFacility(params)
 
-			if (!watch('facility_type') && addTags.length === 0) {
+			if (!watch('title') && addTags.length === 0) {
 				setSearching(false)
 				return
 			}
@@ -73,47 +71,12 @@ const FacilityList = props => {
 	})
 
 	useEffect(() => {
-		const data = getValues()
-		if (facility_type || tags?.length > 0) {
-			const listTags = tags?.map(item => item?.id)
-			const params = {
-				facility_type: facility_type,
-				page: pageApi,
-				tags: listTags
-			}
-			if (searchFavorite.value === 1) {
-				params.favorite = 1
-			} else if (searchFavorite.value === 2) {
-				delete params.favorite
-				params.created_at = 2
-			}
-			getFacility(params)
-			setSearching(true)
-		} else if (searchFavorite) {
-			const params = {
-				...data,
-				page: pageApi,
-				tags: addTags?.map(item => item?.id)
-			}
-			if (searchFavorite.value === 1) {
-				params.favorite = 1
-			} else if (searchFavorite.value === 2) {
-				delete params.favorite
-				params.created_at = 2
-			}
-			getFacility(params)
+		const params = {
+			pageApi: pageApi,
+			sortBy: 'createdAt:desc'
 		}
-	}, [searchFavorite, pageApi])
-
-	const handleRefresh = () => {
-		while (addTags.length > 0) {
-			addTags.pop()
-		}
-		removeDataSession('session', 'tags')
-		setValue('facility_type', '')
-		getFacility()
-		setSearching(false)
-	}
+		getFacility(params)
+	}, [pageApi])
 
 	return (
 		<EventContentPage
@@ -125,60 +88,11 @@ const FacilityList = props => {
 							className="flex sm:flex-wrap items-center sm:w-[80%] lg:w-[1234px] w-full mx-auto py-16 sm:px-0 px-16 sm:py-[22px] overflow-auto"
 						>
 							<Box className="flex flex-wrap sm:flex-nowrap items-center justify-between w-full gap-x-22">
-								<Box
-									className={
-										isMobile
-											? 'flex w-full sm:w-[477px] bg-white cursor-pointer sm:mb-0 mb-16'
-											: 'flex w-full sm:w-[477px] bg-white cursor-pointer overflow-hidden '
-									}
-									onClick={handleOpenSearchDialog}
-								>
-									<Box className="w-full sm:w-[477px] text-[#00A0E9] h-[56px] px-16 sm:pr-0 sm:text-[20px] text-16 sm:py-12 py-20 not-italic font-semibold flex items-center sm:justify-start justify-between">
-										{addTags?.length == 0 ? (
-											'タグを選択'
-										) : (
-											<Box className="flex overflow-hidden w-full">
-												{isMobile ? (
-													<>
-														{addTags?.slice(0, 2)?.map((tag, i) => (
-															<Box className="mr-10">
-																<Chip
-																	key={i}
-																	label={tag?.name}
-																	color="secondary"
-																	className="text-white text-16 font-light"
-																/>
-															</Box>
-														))}
-														{addTags?.length >= 2 && (
-															<Typography className="">...</Typography>
-														)}
-													</>
-												) : (
-													addTags?.map((tag, i) => (
-														<Box className="mr-10">
-															<Chip
-																key={i}
-																label={tag?.name}
-																color="secondary"
-																className="text-white text-16 font-light"
-															/>
-														</Box>
-													))
-												)}
-											</Box>
-										)}
-										{!isMobile ? (
-											<> {addTags?.length > 0 ? null : <AddIcon fontSize="medium" />} </>
-										) : (
-											<AddIcon fontSize="medium" />
-										)}
-									</Box>
-								</Box>
+
 								<div className="w-full sm:w-[477px] sm:mb-0 mb-16">
 									<CoreInput
 										control={control}
-										name="facility_type"
+										name="title"
 										placeholder="フリーワード"
 										variant="outlined"
 										size="small"
@@ -202,7 +116,7 @@ const FacilityList = props => {
 										className="w-full h-[56px] sm:text-20 text-16 font-semibold py-12 "
 										color="primary"
 										type="submit"
-										onClick={() => setSearchTags(addTags)}
+										onClick={() => setSearchTags()}
 									>
 										検索する
 									</Button>
@@ -217,7 +131,7 @@ const FacilityList = props => {
 					<Typography className='mt-20 font-bold'>
 						Top lượt thích
 					</Typography>
-					<TopLike/>
+					<TopLike />
 
 					<Typography className='mt-20 font-bold'>
 						Đăng bài
@@ -334,93 +248,13 @@ const FacilityList = props => {
 									null
 								)}
 
-								{facility?.data?.map((item, index) => {
+								{facility?.results?.map((item, index) => {
 									return <PostItem key={index} dataPost={item} />
 								})}
 							</Box>
 						)}
 
-						{/* {facility?.data?.length > 0 ? (
-							<Box className="mt-56 sm:mb-56 mb-24 sm:px-0 px-16 flex justify-center">
-								{Math.ceil(facility?.total / facility?.per_page) > 1 ? (
-									<Pagination
-										count={Math.ceil(facility?.total / facility?.per_page)}
-										siblingCount={0}
-										size="large"
-										page={pageApi}
-										color="primary"
-										onChange={(_, value) => setPageApi(value)}
-										sx={{
-											'@media screen and (min-width: 600px)': {
-												'.MuiPagination-ul': {
-													gap: '16px'
-												},
-												'.MuiPaginationItem-root': {
-													fontSize: '20px',
-													fontWeight: 300,
-													color: '#00A0E9',
-													lineHeight: '160%',
-													margin: '0px',
-													padding: '0px'
-												},
-												'.MuiPaginationItem-icon': {
-													color: '#00A0E9'
-												},
-												'.MuiPaginationItem-root.Mui-selected ': {
-													fontWeight: 600,
-													fontSize: '20px',
-													color: '#00A0E9',
-													lineHeight: '160%',
-													backgroundColor: '#ffffff !important'
-												},
-												'li:first-child': {
-													marginRight: '54px'
-												},
-												'li:last-child': {
-													marginLeft: '54px'
-												}
-											},
-											'@media screen and (max-width: 600px)': {
-												width: '100%',
-												'.MuiPagination-ul': {
-													justifyContent: 'center',
-													gap: '8px'
-												},
-												'.MuiPaginationItem-root': {
-													fontSize: '16px',
-													fontWeight: 300,
-													color: '#00A0E9',
-													lineHeight: '140%',
-													margin: '0px',
-													padding: '0px'
-												},
-												'.MuiPaginationItem-icon': {
-													color: '#00A0E9'
-												},
-												'.MuiPaginationItem-root.Mui-selected ': {
-													fontWeight: 600,
-													fontSize: '16px',
-													color: '#00A0E9',
-													lineHeight: '140%',
-													backgroundColor: '#ffffff !important'
-												},
-												'.MuiPaginationItem-root.MuiPaginationItem-previousNext': {
-													minWidth: '24px'
-												},
-												'li:first-child': {
-													marginRight: 'auto'
-												},
-												'li:last-child': {
-													marginLeft: 'auto'
-												}
-											}
-										}}
-									/>
-								) : null}
-							</Box>
-						) : null} */}
 					</Box>
-					{renderSearchDialog()}
 					{render()}
 				</>
 			}

@@ -1,17 +1,17 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Chip, CircularProgress, Divider, Stack, Typography, useMediaQuery } from '@mui/material'
 import Image from 'mui-image'
-import { get } from 'lodash'
 import EventContentPage from '@App/Social/components/Layout/EventContentPage'
-import { useFacilityDetail } from './hooks/useEventDetail'
+import { usePostDetail } from './hooks/usePostDetail'
 import './EventDetail.css'
 import { useImageModal } from './hooks/useImageModal'
-import FacilityImageSlide from './components/FacilityImageSlide'
-import { useEntryDialog } from './hooks/useEntryDialog'
 import { facilityService } from '@App/Social/services/facilityService'
 import { useRequest } from 'ahooks'
 import imagefail from '@App/Social/assets/imagefail.svg'
 import { useShareModal } from './hooks/useShareModal'
+import { timeAgo } from '@Core/helper/Date'
+import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
+import { useNavigate } from 'react-router-dom'
 
 const getUrlMap = google_map_url => {
 	const urlStartIndex = google_map_url?.indexOf('src="') + 5
@@ -20,46 +20,74 @@ const getUrlMap = google_map_url => {
 	return url
 }
 
-const DetailEvent = props => {
-	const { facilityDetail, loading } = useFacilityDetail()
+const PostDetail = props => {
+	const { postDetail, loadingPostDetail } = usePostDetail()
+	const navigate = useNavigate()
 	const { onOpen, render } = useImageModal()
 	const { onOpenShare, renderShare } = useShareModal()
-	const isMobile = useMediaQuery('(max-width:600px)')
 
-	const { data: apiFavorite, run: getFavorite } = useRequest(facilityService.isFavorite, {
+	const [isFavorited, setIsFavorited] = useState(false)
+	const [comment, setComment] = useState('')
+
+	const { data: apiHasLike, run: getFavorite } = useRequest(facilityService.checkUserLike, {
 		manual: true
 	})
 
-	const [isFavorited, setIsFavorited] = useState(false)
+	const {
+		data: listComment,
+		run: getComment,
+		loading: loadingComment
+	} = useRequest(facilityService.listComment, {
+		manual: true
+	})
 
 	useEffect(() => {
-		if (facilityDetail?.id) {
-			getFavorite(facilityDetail?.id)
+		const params = {
+			postId: postDetail?.id,
+			sortBy: 'createdAt:desc'
 		}
-	}, [facilityDetail?.id, isFavorited])
+		getComment(params)
+	}, [postDetail?.id])
 
 	useEffect(() => {
-		if (apiFavorite?.id) {
+		getFavorite(postDetail?.id)
+	}, [postDetail?.id, isFavorited])
+
+	useEffect(() => {
+		if (apiHasLike?.id) {
 			setIsFavorited(true)
 		}
-	}, [apiFavorite?.id])
+	}, [apiHasLike?.id])
 
 	const handleLikeFacility = async () => {
-		// const dataSubmit = {
-		// 	facility_id: facilityDetail?.id
-		// }
-		// await facilityService.favorite(dataSubmit)
+		const dataSubmit = {
+			postId: postDetail?.id
+		}
+		await facilityService.like(dataSubmit)
 		setIsFavorited(true)
 	}
 
 	const handleUnLikeFacility = async () => {
-		// await facilityService.unFavorite(apiFavorite?.id)
+		await facilityService.unLike(apiHasLike?.id)
 		setIsFavorited(false)
 	}
 
-	const mainImage = []
-	mainImage?.push(facilityDetail?.image?.main)
-	const totalImage = mainImage?.concat(facilityDetail?.image?.sub)
+
+	const handleComment = async () => {
+		const dataSubmit = {
+			content: comment,
+			postId: postDetail?.id
+		}
+		const res = await facilityService.comment(dataSubmit)
+		if (res) {
+			const params = {
+				postId: postDetail?.id,
+				sortBy: 'createdAt:desc'
+			}
+			setComment('')
+			getComment(params)
+		}
+	}
 
 	return (
 		<EventContentPage
@@ -67,7 +95,7 @@ const DetailEvent = props => {
 			hasBreadcrumb={false}
 			content={
 				<Box className="sm:pt-[20px] sm:pb-[56px] pb-[80px] w-full">
-					{loading ? (
+					{loadingPostDetail ? (
 						<div className="my-[40%] flex justify-center items-center">
 							<CircularProgress />
 						</div>
@@ -75,17 +103,17 @@ const DetailEvent = props => {
 						<Box>
 							<Box className="flex flex-wrap sm:flex-nowrap gap-10">
 								<Box className="w-full h-[472px] object-cover">
-									<Image src={facilityDetail?.image?.main?.image_url ?? imagefail} />
+									<Image src={postDetail?.image ?? imagefail} />
 								</Box>
-								{facilityDetail?.image?.sub ?
+								{/* {postDetail?.image?.sub ?
 									<Box className="w-[240px]">
 										<Stack spacing={1}>
-											{facilityDetail?.image?.sub
+											{postDetail?.image?.sub
 												?.filter((_, index) => index < 3)
 												?.map(image => (
 													<Image src={image?.image_url ?? imagefail} height={135} />
 												))}
-											{facilityDetail?.image?.sub && facilityDetail?.image?.sub?.length > 0 ? (
+											{postDetail?.image?.sub && facilityDetail?.image?.sub?.length > 0 ? (
 												<Button
 													variant="outlined"
 													onClick={onOpen}
@@ -97,17 +125,17 @@ const DetailEvent = props => {
 										</Stack>
 									</Box>
 									: null
-								}
+								} */}
 							</Box>
 							<Box className="">
-								<Typography className='mt-16'>
-									Đu đủ (danh pháp khoa học: Carica papaya) là một cây thuộc họ Đu đủ.[3] Đây là cây thân thảo to, không hoặc ít khi có nhánh, cao từ 3–10 m. Lá to hình chân vịt, cuống dài, đường kính 50–70 cm, có khoảng 7 khía. Hoa trắng hay xanh, đài nhỏ, vành to năm cánh. Quả đu đủ to tròn, dài, khi chín mềm, hạt màu nâu hoặc đen tùy từng loại giống, có nhiều hạt.
+								<Typography className='mt-16 break-keep'>
+									{postDetail?.title}
 								</Typography>
 								<Box className='my-16 flex'>
 									<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
 									<Box>
-										<Typography className='font-bold text-14'>Charlie</Typography>
-										<Typography className='text-12'>20 phút trước</Typography>
+										<Typography className='font-bold text-14'>{postDetail?.userId?.fullName}</Typography>
+										<Typography className='text-12'>{timeAgo(postDetail?.createdAt)}</Typography>
 									</Box>
 								</Box>
 
@@ -156,41 +184,55 @@ const DetailEvent = props => {
 								</Typography>
 
 								<Box className='max-h-[300px] relative overflow-y-scroll'>
-									<Box className='my-16 flex'>
-										<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
-										<Box>
-											<Box className='p-10 bg-[#e4e6eb] rounded-8'>
-												<Typography className='font-bold text-14'>Charlie</Typography>
-												<Typography className='text-14'>Bức ảnh này đẹp quá!</Typography>
+									{loadingComment ? (
+										<div className="my-[15%] flex justify-center items-center">
+											<CircularProgress />
+										</div>
+									) : (
+										listComment?.results?.map((item, index) => {
+											return (
+												<Box key={index} className='my-16 flex'>
+													<img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+														onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+													/>
+													<Box>
+														<Box className='p-10 bg-[#e4e6eb] rounded-8'>
+															<Typography className='font-bold text-14 cursor-pointer'
+																onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+															>
+																{item?.userId?.fullName}
+															</Typography>
+															<Typography className='text-14 break-all'>
+																{item?.content?.split('\n').map((text, i) => (
+																	<React.Fragment key={i}>
+																		{text}
+																		<br />{' '}
+																	</React.Fragment >
+																))}
+															</Typography>
 
-											</Box>
-											<Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
-										</Box>
-									</Box>
 
-									<Box className='my-16 flex'>
-										<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
-										<Box>
-											<Box className='p-10 bg-[#e4e6eb] round-8'>
-												<Typography className='font-bold text-14'>Charlie</Typography>
-												<Typography className='text-14'>Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!Bức ảnh này đẹp quá!</Typography>
+														</Box>
+														<Typography className='text-12 mt-2 ml-8'>{timeAgo(item?.createdAt)}</Typography>
+													</Box>
+												</Box>
+											)
+										})
 
-											</Box>
-											<Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
-										</Box>
-									</Box>
-
+									)}
 								</Box>
-
 								<Box className='mt-20 h-auto bg-[white]'>
 									<Box className='flex py-10 px-20 items-center'>
 										<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
 										<textarea
-											name="desc"
+											value={comment}
+											onChange={(value) => setComment(value?.target?.value)}
 											className="bg-[white] w-[600px] pt-20 outline-none text-16 mr-8"
 											placeholder={'Nhập bình luận'}
 										/>
-										<Button className='font-bold text-16'>
+										<Button className='font-bold text-16'
+											onClick={handleComment}
+										>
 											Send
 										</Button>
 									</Box>
@@ -198,7 +240,7 @@ const DetailEvent = props => {
 							</Box>
 						</Box>
 					)}
-					{render(totalImage)}
+					{render()}
 					{renderShare()}
 				</Box>
 			}
@@ -206,4 +248,4 @@ const DetailEvent = props => {
 	)
 }
 
-export default React.memo(DetailEvent)
+export default React.memo(PostDetail)

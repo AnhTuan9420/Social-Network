@@ -1,87 +1,56 @@
-import { env } from '@App/env'
-import BaseService from '@Core/api/BaseService'
-import moment from 'moment'
+import { env } from "@App/env";
+import BaseService from "@Core/api/BaseService";
+import moment from "moment";
 
 class Facility extends BaseService {
-	BASE_URL = env.WEB_BASE_URL
+  BASE_URL = env.WEB_BASE_URL;
 
-	constructor(props) {
-		super(props)
-		this.setRequest()
-	}
+  constructor(props) {
+    super(props);
+    this.setRequest();
+  }
 
-	getListFacility = (params) => {
-		const endpoint = '/api/facility'
-		return this.request.get(endpoint, {params})
-	}
+  getListPost = (params) => {
+    const endpoint = "/api/post";
+    return this.request.get(endpoint, { params });
+  };
 
-	facilityDetail = (facility_id) => {
-		const endpoint = `/api/facility/${facility_id}`
-		return this.request.get(endpoint)
-	}
+  comment = (data) => {
+    const endpoint = "/api/comment";
+    return this.request.post(endpoint, data);
+  };
 
-	getListFavorite = (params) => {
-		const endpoint = '/api/customer/favorite-facility'
-		return this.request.get(endpoint, {params: params})
-	}
 
-	favorite = (data) => {
-		const endpoint = '/api/customer/favorite-facility'
-		return this.request.post(endpoint, data)
-	}
+  listComment = (params) => {
+    const endpoint = "/api/comment";
+    return this.request.get(endpoint, { params });
+  };
 
-	unFavorite = (favorite_id) => {
-		const endpoint = `/api/customer/favorite-facility/${favorite_id}`
-		return this.request.delete(endpoint)
-	}
+  checkUserLike = (postId) => {
+    const endpoint = `/api/like/checkUserLike?postId=${postId}`;
+    return this.request.get(endpoint);
+  };
 
-	getRentalPlan = (facility_id) => {
-		const endpoint = `/api/rental-plan?facility_id=${facility_id}`
-		return this.request.get(endpoint)
-	}
+  like = (data) => {
+    const endpoint = "/api/like";
+    return this.request.post(endpoint, data);
+  };
 
-	booking = (data) => {
-		const endpoint = '/api/booking-information'
-		return this.request.get(endpoint, {params: data})
-	}
+  unLike = (postId) => {
+    const endpoint = `/api/like/${postId}`;
+    return this.request.delete(endpoint);
+  };
 
-	payment = (data) => {
-		const endpoint = '/api/customer/payment'
-		return this.request.post(endpoint, data)
-	}
+  getListLike = (params) => {
+    const endpoint = "/api/like";
+    return this.request.get(endpoint, { params: params });
+  };
 
-	timeBookingHistory = (history_id, facility_id, init_date) => {
-		const start_date = moment(init_date).format('YYYY-MM-DD')
-		const endpoint = `/api/time-booking/facility?history_id=${history_id}&facility_id=${facility_id}&start_date=${start_date}`
-		return this.request.get(endpoint)
-	}
-
-	timeBookingFacility = (facility_id, init_date) => {
-		const start_date = moment(init_date).format('YYYY-MM-DD')
-		const endpoint = `/api/time-booking/facility?facility_id=${facility_id}&start_date=${start_date}`
-		return this.request.get(endpoint)
-	}
-
-	invoice = (codeId) => {
-		const endpoint = `/api/invoice/completed?code_id=${codeId}`
-		return this.request.get(endpoint)
-	}
-
-	bookingCompleted = (data) => {
-		const endpoint = '/api/payment/completed'
-		return this.request.post(endpoint, data)
-	}
-
-	isFavorite = (facility_id) => {
-		const endpoint = `/api/customer/favorite?facility_id=${facility_id}`
-		return this.request.get(endpoint)
-	}
-
-	getInvoiceData = (data) => {
-		const endpoint = '/api/booking-information/export-invoice?'
-		return this.request.get(endpoint, {params: data})
-	}
+  postDetail = (postId) => {
+    const endpoint = `/api/post/${postId}`;
+    return this.request.get(endpoint);
+  };
 
 }
 
-export const facilityService = new Facility()
+export const facilityService = new Facility();

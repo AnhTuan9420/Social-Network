@@ -1,9 +1,12 @@
 import { ROUTER_SOCIAL } from "@App/Social/configs/constants"
-import { Box, Button, Typography } from "@mui/material"
-import React, { useState } from "react"
+import { Box, Button, CircularProgress, Typography } from "@mui/material"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import imagefail from '@App/Social/assets/imagefail.svg'
 import { useShareModal } from "../../FacilityDetail/hooks/useShareModal"
+import { timeAgo } from "@Core/helper/Date"
+import { useRequest } from "ahooks"
+import { facilityService } from "@App/Social/services/facilityService"
 
 const PostItem = props => {
     const { dataPost } = props
@@ -12,16 +15,47 @@ const PostItem = props => {
 
     const [isFavorited, setIsFavorited] = useState(false)
 
+    const {
+        data: listComment,
+        run: getComment,
+        loading: loadingComment
+    } = useRequest(facilityService.listComment, {
+        manual: true
+    })
+
+    useEffect(() => {
+        const params = {
+            postId: dataPost.id,
+            sortBy: 'createdAt:desc'
+        }
+        getComment(params)
+    }, [dataPost.id])
+
+    const { data: apiHasLike, run: getFavorite } = useRequest(facilityService.checkUserLike, {
+        manual: true
+    })
+
+
+    useEffect(() => {
+        getFavorite(dataPost.id)
+    }, [dataPost.id, isFavorited])
+
+    useEffect(() => {
+        if (apiHasLike?.id) {
+            setIsFavorited(true)
+        }
+    }, [apiHasLike?.id])
+
     const handleLikeFacility = async () => {
-        // const dataSubmit = {
-        //     facility_id: facilityDetail?.id
-        // }
-        // await facilityService.favorite(dataSubmit)
+        const dataSubmit = {
+            postId: dataPost?.id
+        }
+        await facilityService.like(dataSubmit)
         setIsFavorited(true)
     }
 
     const handleUnLikeFacility = async () => {
-        // await facilityService.unFavorite(apiFavorite?.id)
+        await facilityService.unLike(apiHasLike?.id)
         setIsFavorited(false)
     }
 
@@ -31,21 +65,21 @@ const PostItem = props => {
         >
             <Box className='mb-16 flex'>
                 <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
-                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${999}`)}
+                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${dataPost?.userId?.id}`)}
                 />
                 <Box>
                     <Typography className='font-bold text-14 cursor-pointer'
-                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${999}`)}
+                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${dataPost?.userId?.id}`)}
                     >
-                        Charlie
+                        {dataPost?.userId?.fullName}
                     </Typography>
-                    <Typography className='text-12'>20 phút trước</Typography>
+                    <Typography className='text-12'>{timeAgo(dataPost?.createdAt)}</Typography>
                 </Box>
             </Box>
 
             <Box className='mb-16'>
-                <Typography className='text_truncate_4'>
-                    Đu đủ (danh pháp khoa học: Carica papaya) là một cây thuộc họ Đu đủ.[3] Đây là cây thân thảo to, không hoặc ít khi có nhánh, cao từ 3–10 m. Lá to hình chân vịt, cuống dài, đường kính 50–70 cm, có khoảng 7 khía. Hoa trắng hay xanh, đài nhỏ, vành to năm cánh. Quả đu đủ to tròn, dài, khi chín mềm, hạt màu nâu hoặc đen tùy từng loại giống, có nhiều hạt.
+                <Typography className='break-keep'>
+                    {dataPost.title}
                 </Typography>
             </Box>
 
@@ -57,7 +91,7 @@ const PostItem = props => {
                 }>
                 <img
                     className="h-[500px] w-full object-cover cursor-pointer "
-                    src={dataPost?.main_image?.image_url ?? imagefail}
+                    src={dataPost?.image ?? imagefail}
                     duration={500}
                 />
             </Box>
@@ -112,27 +146,48 @@ const PostItem = props => {
             <Typography className='text-[#65676b] font-semibold my-16'>
                 Bình luận
             </Typography>
+            {loadingComment ? (
+                <div className="my-[15%] flex justify-center items-center">
+                    <CircularProgress />
+                </div>
+            ) : (
+                listComment?.results?.map((item, index) => {
+                    return (
+                        <Box key={index} className='my-16 flex'>
+                            <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                                onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                            />
+                            <Box>
+                                <Box className='p-10 bg-[#f0f2f5] rounded-8'>
+                                    <Typography className='font-bold text-14 cursor-pointer'
+                                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                                    >
+                                        {item?.userId?.fullName}
+                                    </Typography>
+                                    <Typography className='text-14 break-all'>
+                                        {item?.content?.split('\n').map((text, i) => (
+                                            <React.Fragment key={i}>
+                                                {text}
+                                                <br />{' '}
+                                            </React.Fragment >
+                                        ))}
+                                    </Typography>
+                                </Box>
+                                <Typography className='text-12 mt-2 ml-8'>{timeAgo(item?.createdAt)}</Typography>
 
-            <Box className='my-16 flex'>
-                <img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
-                <Box>
-                    <Box className='p-10 bg-[#f0f2f5] rounded-8'>
-                        <Typography className='font-bold text-14'>Charlie</Typography>
-                        <Typography className='text-14'>Bức ảnh này đẹp quá!</Typography>
-                    </Box>
-                    <Typography className='text-12 mt-2 ml-8'>20 phút trước</Typography>
-
-                </Box>
-            </Box>
-
-            <Typography className='text-[#65676b] font-semibold mt-16 cursor-pointer'
+                            </Box>
+                        </Box>
+                    )
+                })
+            )}
+            {/* <Typography className='text-[#65676b] font-semibold mt-16 cursor-pointer'
                 onClick={() =>
                     navigate(
                         `${ROUTER_SOCIAL.event.detail}/?facility_id=${dataPost?.id}`
                     )
                 }>
                 Xem thêm bình luận
-            </Typography>
+            </Typography> */}
             {renderShare()}
         </Box>
 

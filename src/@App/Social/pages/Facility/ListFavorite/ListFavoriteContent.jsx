@@ -12,7 +12,7 @@ import location from '@App/Social/assets/locationMobile.svg'
 import { useRequest } from 'ahooks'
 
 const ListFavoriteContent = props => {
-	const { listFavorite, refresh, loadingFavorite, getFavorite } = props
+	const { listLike, loadingListLike, getListLike, refresh } = props
 	const isMobile = useMediaQuery('(max-width:600px)')
 	const [pageApi, setPageApi] = useState(1)
 	const navigate = useNavigate()
@@ -23,10 +23,10 @@ const ListFavoriteContent = props => {
 
 	useEffect(() => {
 		const params = {
-			per_page: 15,
-			page: pageApi
+			page: pageApi,
+			sortBy: 'createdAt:desc'
 		}
-		getFavorite(params)
+		getListLike(params)
 	}, [pageApi])
 
 	const handleUnLikeFacility = async favorite_id => {
@@ -34,20 +34,20 @@ const ListFavoriteContent = props => {
 		refresh()
 	}
 
-	const {
-		data: facility,
-		run: getFacility,
-		loading: loadingFacility
-	} = useRequest(facilityService.getListFacility, {
-		manual: true
-	})
+	// const {
+	// 	data: facility,
+	// 	run: getFacility,
+	// 	loading: loadingFacility
+	// } = useRequest(facilityService.getListFacility, {
+	// 	manual: true
+	// })
 
-	useEffect(() => {
-		const params = {
-			favorite: 1
-		}
-		getFacility(params)
-	}, [])
+	// useEffect(() => {
+	// 	const params = {
+	// 		favorite: 1
+	// 	}
+	// 	getFacility(params)
+	// }, [])
 
 	return (
 		<EventContentPage
@@ -58,13 +58,13 @@ const ListFavoriteContent = props => {
 					<Typography className="text-start text-[20px] my-[32px] text-[black] font-semibold">
 						Danh sách yêu thích của bạn
 					</Typography>
-					{loadingFavorite ? (
+					{loadingListLike ? (
 						<div className="my-[30%] flex justify-center items-center">
 							<CircularProgress />
 						</div>
 					) : (
 						<Box className='grid grid-cols-3 gap-[50px]'>
-							{facility?.data?.map((item, index) => {
+							{listLike?.results?.map((item, index) => {
 								return (
 									<Box key={index}>
 										<Box className="bg-[white] w-[300px] h-[380px]"
@@ -72,19 +72,19 @@ const ListFavoriteContent = props => {
 										>
 											<img
 												className="h-[300px] w-full object-cover cursor-pointer"
-												src={item?.main_image?.image_url ?? imagefail}
+												src={item?.postId?.image ?? imagefail}
 												onClick={() =>
 													navigate(
-														`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.id}`
+														`${ROUTER_SOCIAL.event.detail}/?facility_id=${item?.postId?.id}`
 													)
 												}
 											/>
 
-											<Box className='flex p-20'>
+											<Box className='flex p-20 boder border-t-1'>
 												<img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
-													onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${9999}`)}
+													onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.postId?.userId?.id}`)}
 												/>
-												<Typography className='font-bold self-center text-14'>Charlie</Typography>
+												<Typography className='font-bold self-center text-14'>{item?.postId?.userId?.fullName}</Typography>
 
 											</Box>
 
@@ -94,7 +94,7 @@ const ListFavoriteContent = props => {
 							})}
 						</Box>
 					)}
-					{!loadingFavorite && listFavorite?.facility?.length > 0 ? (
+					{/* {!loadingFavorite && listFavorite?.facility?.length > 0 ? (
 						<Box className="sm:mt-40 mt-56 sm:mb-56 sm:px-0 px-16 mb-24 flex justify-center">
 							{Math.ceil(listFavorite?.total / listFavorite?.per_page) > 1 ? (
 								<Pagination
@@ -172,7 +172,7 @@ const ListFavoriteContent = props => {
 								/>
 							) : null}
 						</Box>
-					) : null}
+					) : null} */}
 				</Box>
 			}
 		/>

@@ -44,12 +44,21 @@ const PostDetail = props => {
 		manual: true
 	})
 
+	const {
+		data: totalLike,
+		run: getTotalLike,
+		loading: loadingTotalLike
+	} = useRequest(postService.totalLike, {
+		manual: true
+	})
+
 	useEffect(() => {
 		const params = {
 			postId: postDetail?.id,
 			sortBy: 'createdAt:desc'
 		}
 		getComment(params)
+		getTotalLike(postDetail?.id)
 	}, [postDetail?.id])
 
 	const { onOpenDeleteComment, renderDeleteComment } = useDeleteCommentModal(getComment)
@@ -70,11 +79,13 @@ const PostDetail = props => {
 		}
 		await postService.like(dataSubmit)
 		setIsFavorited(true)
+		getTotalLike(postDetail?.id)
 	}
 
 	const handleUnLikeFacility = async () => {
 		await postService.unLike(apiHasLike?.id)
 		setIsFavorited(false)
+		getTotalLike(postDetail?.id)
 	}
 
 
@@ -142,6 +153,11 @@ const PostDetail = props => {
 										<Typography className='font-bold text-14'>{postDetail?.userId?.fullName}</Typography>
 										<Typography className='text-12'>{timeAgo(postDetail?.createdAt)}</Typography>
 									</Box>
+								</Box>
+
+								<Box className='my-16 flex justify-between mx-14'>
+										<Typography className='text-16 underline'>{totalLike?.totalLike} lượt thích</Typography>
+										<Typography className='text-16 underline'>{listComment?.totalResults} bình luận</Typography>
 								</Box>
 
 								<hr className='text-[#ddc1c1]' />

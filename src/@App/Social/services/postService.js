@@ -31,6 +31,11 @@ class Post extends BaseService {
     return this.request.get(endpoint);
   };
 
+  totalLike = (postId) => {
+    const endpoint = `/api/like/totalLike?postId=${postId}`;
+    return this.request.get(endpoint);
+  };
+
   like = (data) => {
     const endpoint = "/api/like";
     return this.request.post(endpoint, data);

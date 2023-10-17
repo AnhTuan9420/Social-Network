@@ -26,6 +26,6 @@ export const usePostDetail = initDate => {
 	return {
 		postDetail,
 		getPostDetail,
-		loadingPostDetail
+		loadingPostDetail,
 	}
 }

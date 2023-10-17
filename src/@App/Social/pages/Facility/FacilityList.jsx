@@ -152,7 +152,7 @@ const FacilityList = props => {
 								<CircularProgress />
 							</div>
 						) : (
-							<Box className='flex flex-col gap-20'>
+							<Box className='flex flex-col gap-20 mb-20'>
 								{searching ? (
 									<>
 										<Box className="flex justify-between items-center sm:mt-[66px] mt-24 sm:mx-0 mx-16 sm:mb-[32px] mb-[16px]">

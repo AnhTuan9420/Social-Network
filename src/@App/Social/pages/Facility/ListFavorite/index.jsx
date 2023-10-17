@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRequest } from 'ahooks'
 import ListFavoriteContent from './ListFavoriteContent'
-import { facilityService } from '@App/Social/services/facilityService'
+import { postService } from '@App/Social/services/postService'
 
 const ListFavorite = props => {
 	const {
@@ -9,7 +9,7 @@ const ListFavorite = props => {
 		runAsync: getListLike,
 		loading: loadingListLike,
 		refresh
-	} = useRequest(facilityService.getListLike, {
+	} = useRequest(postService.getListLike, {
 		manual: true
 	})
 

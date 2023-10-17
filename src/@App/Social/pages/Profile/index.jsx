@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Yup from '@Core/helper/Yup'
 import { useRequest } from 'ahooks'
-import { facilityService } from '@App/Social/services/facilityService'
+import { postService } from '@App/Social/services/postService'
 import DataPost from './components/DataPost'
 import { useEditProfile } from './hooks/useEditProfile'
 import { useCreatePostModal } from '../Facility/hooks/useCreatePostModal'
@@ -18,7 +18,7 @@ const Profile = props => {
 		data: facility,
 		run: getFacility,
 		loading: loadingFacility
-	} = useRequest(facilityService.getListFacility, {
+	} = useRequest(postService.getListFacility, {
 		manual: true
 	})
 

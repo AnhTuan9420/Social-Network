@@ -33,12 +33,12 @@ const HeaderNotification = props => {
 		}
 	})
 
-	useEffect(() => {
-		const params = {
-			page: page
-		}
-		getNotification(params)
-	}, [])
+	// useEffect(() => {
+	// 	const params = {
+	// 		page: page
+	// 	}
+	// 	getNotification(params)
+	// }, [])
 
 	const [data, setData] = useState([])
 

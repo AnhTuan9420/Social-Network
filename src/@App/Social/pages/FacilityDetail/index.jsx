@@ -5,7 +5,7 @@ import EventContentPage from '@App/Social/components/Layout/EventContentPage'
 import { usePostDetail } from './hooks/usePostDetail'
 import './EventDetail.css'
 import { useImageModal } from './hooks/useImageModal'
-import { facilityService } from '@App/Social/services/facilityService'
+import { postService } from '@App/Social/services/postService'
 import { useRequest } from 'ahooks'
 import imagefail from '@App/Social/assets/imagefail.svg'
 import { useShareModal } from './hooks/useShareModal'
@@ -29,7 +29,7 @@ const PostDetail = props => {
 	const [isFavorited, setIsFavorited] = useState(false)
 	const [comment, setComment] = useState('')
 
-	const { data: apiHasLike, run: getFavorite } = useRequest(facilityService.checkUserLike, {
+	const { data: apiHasLike, run: getFavorite } = useRequest(postService.checkUserLike, {
 		manual: true
 	})
 
@@ -37,7 +37,7 @@ const PostDetail = props => {
 		data: listComment,
 		run: getComment,
 		loading: loadingComment
-	} = useRequest(facilityService.listComment, {
+	} = useRequest(postService.listComment, {
 		manual: true
 	})
 
@@ -63,12 +63,12 @@ const PostDetail = props => {
 		const dataSubmit = {
 			postId: postDetail?.id
 		}
-		await facilityService.like(dataSubmit)
+		await postService.like(dataSubmit)
 		setIsFavorited(true)
 	}
 
 	const handleUnLikeFacility = async () => {
-		await facilityService.unLike(apiHasLike?.id)
+		await postService.unLike(apiHasLike?.id)
 		setIsFavorited(false)
 	}
 
@@ -78,7 +78,7 @@ const PostDetail = props => {
 			content: comment,
 			postId: postDetail?.id
 		}
-		const res = await facilityService.comment(dataSubmit)
+		const res = await postService.comment(dataSubmit)
 		if (res) {
 			const params = {
 				postId: postDetail?.id,

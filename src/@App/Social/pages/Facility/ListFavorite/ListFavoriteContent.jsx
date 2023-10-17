@@ -5,7 +5,7 @@ import Image from 'mui-image'
 import React, { useEffect, useState } from 'react'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 import { Link, useNavigate } from 'react-router-dom'
-import { facilityService } from '@App/Social/services/facilityService'
+import { postService } from '@App/Social/services/postService'
 // import no_image from '@App/Social/assets/no_image.webp'
 import imagefail from '@App/Social/assets/imagefail.svg'
 import location from '@App/Social/assets/locationMobile.svg'
@@ -30,7 +30,7 @@ const ListFavoriteContent = props => {
 	}, [pageApi])
 
 	const handleUnLikeFacility = async favorite_id => {
-		await facilityService.unFavorite(favorite_id)
+		await postService.unFavorite(favorite_id)
 		refresh()
 	}
 
@@ -38,7 +38,7 @@ const ListFavoriteContent = props => {
 	// 	data: facility,
 	// 	run: getFacility,
 	// 	loading: loadingFacility
-	// } = useRequest(facilityService.getListFacility, {
+	// } = useRequest(postService.getListFacility, {
 	// 	manual: true
 	// })
 

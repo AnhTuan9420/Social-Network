@@ -6,7 +6,7 @@ import imagefail from '@App/Social/assets/imagefail.svg'
 import { useShareModal } from "../../FacilityDetail/hooks/useShareModal"
 import { timeAgo } from "@Core/helper/Date"
 import { useRequest } from "ahooks"
-import { facilityService } from "@App/Social/services/facilityService"
+import { postService } from "@App/Social/services/postService"
 
 const PostItem = props => {
     const { dataPost } = props
@@ -19,7 +19,7 @@ const PostItem = props => {
         data: listComment,
         run: getComment,
         loading: loadingComment
-    } = useRequest(facilityService.listComment, {
+    } = useRequest(postService.listComment, {
         manual: true
     })
 
@@ -31,7 +31,7 @@ const PostItem = props => {
         getComment(params)
     }, [dataPost.id])
 
-    const { data: apiHasLike, run: getFavorite } = useRequest(facilityService.checkUserLike, {
+    const { data: apiHasLike, run: getFavorite } = useRequest(postService.checkUserLike, {
         manual: true
     })
 
@@ -50,12 +50,12 @@ const PostItem = props => {
         const dataSubmit = {
             postId: dataPost?.id
         }
-        await facilityService.like(dataSubmit)
+        await postService.like(dataSubmit)
         setIsFavorited(true)
     }
 
     const handleUnLikeFacility = async () => {
-        await facilityService.unLike(apiHasLike?.id)
+        await postService.unLike(apiHasLike?.id)
         setIsFavorited(false)
     }
 

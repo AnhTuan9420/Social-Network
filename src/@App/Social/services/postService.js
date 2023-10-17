@@ -2,7 +2,7 @@ import { env } from "@App/env";
 import BaseService from "@Core/api/BaseService";
 import moment from "moment";
 
-class Facility extends BaseService {
+class Post extends BaseService {
   BASE_URL = env.WEB_BASE_URL;
 
   constructor(props) {
@@ -53,4 +53,4 @@ class Facility extends BaseService {
 
 }
 
-export const facilityService = new Facility();
+export const postService = new Post();

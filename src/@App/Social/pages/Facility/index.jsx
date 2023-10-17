@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useRequest } from 'ahooks'
-import { facilityService } from '@App/Social/services/facilityService'
+import { postService } from '@App/Social/services/postService'
 import FacilityList from './FacilityList'
 
 const HomePage = props => {
@@ -9,7 +9,7 @@ const HomePage = props => {
 		data: posts,
 		run: getPost,
 		loading: loadingPost
-	} = useRequest(facilityService.getListPost, {
+	} = useRequest(postService.getListPost, {
 		manual: true
 	})
 

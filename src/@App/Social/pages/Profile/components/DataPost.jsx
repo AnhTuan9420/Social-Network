@@ -25,12 +25,12 @@ const DataPost = (props) => {
         // const dataSubmit = {
         //     facility_id: facilityDetail?.id
         // }
-        // await facilityService.favorite(dataSubmit)
+        // await postService.favorite(dataSubmit)
         setIsFavorited(true)
     }
 
     const handleUnLikeFacility = async () => {
-        // await facilityService.unFavorite(apiFavorite?.id)
+        // await postService.unFavorite(apiFavorite?.id)
         setIsFavorited(false)
     }
 

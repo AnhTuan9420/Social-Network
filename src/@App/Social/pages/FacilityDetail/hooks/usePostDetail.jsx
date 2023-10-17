@@ -1,11 +1,7 @@
-import { authService } from '@App/Social/services/authService'
-import { facilityService } from '@App/Social/services/facilityService'
+import { postService } from '@App/Social/services/postService'
 import { useRequest } from 'ahooks'
 import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import Cookies from 'js-cookie'
-import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
-import { setDataSession } from '@Core/helper/Session'
 
 export const usePostDetail = initDate => {
 	const navigate = useNavigate()
@@ -16,7 +12,7 @@ export const usePostDetail = initDate => {
 		data: postDetail,
 		run: getPostDetail,
 		loading: loadingPostDetail
-	} = useRequest(facilityService.postDetail, {
+	} = useRequest(postService.postDetail, {
 		manual: true
 	})
 

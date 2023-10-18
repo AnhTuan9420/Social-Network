@@ -83,11 +83,11 @@ const PostItem = props => {
         >
             <Box className='mb-16 flex'>
                 <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
-                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${dataPost?.userId?.id}`)}
+                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${dataPost?.userId?.id}`)}
                 />
                 <Box>
                     <Typography className='font-bold text-14 cursor-pointer'
-                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${dataPost?.userId?.id}`)}
+                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${dataPost?.userId?.id}`)}
                     >
                         {dataPost?.userId?.fullName}
                     </Typography>
@@ -183,12 +183,12 @@ const PostItem = props => {
                                 return (
                                     <Box key={index} className='my-16 flex'>
                                         <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
-                                            onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                                            onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
                                         />
                                         <Box>
                                             <Box className='p-10 bg-[#f0f2f5] rounded-8'>
                                                 <Typography className='font-bold text-14 cursor-pointer'
-                                                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                                                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
                                                 >
                                                     {item?.userId?.fullName}
                                                 </Typography>
@@ -237,12 +237,12 @@ const PostItem = props => {
                             return (
                                 <Box key={index} className='my-16 flex'>
                                     <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
-                                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
                                     />
                                     <Box>
                                         <Box className='p-10 bg-[#f0f2f5] rounded-8'>
                                             <Typography className='font-bold text-14 cursor-pointer'
-                                                onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user=${item?.userId?.id}`)}
+                                                onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
                                             >
                                                 {item?.userId?.fullName}
                                             </Typography>

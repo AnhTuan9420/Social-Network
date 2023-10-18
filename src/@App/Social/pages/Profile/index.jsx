@@ -12,12 +12,14 @@ import { useEditProfile } from './hooks/useEditProfile'
 import { useCreatePostModal } from '../Facility/hooks/useCreatePostModal'
 import { convertDate } from '@Core/helper/Date'
 import { getSocialUser } from '@Core/helper/Session'
+import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 
 const Profile = props => {
 	let [searchParams] = useSearchParams()
 	const user_id = searchParams.get('user_id')
 	const user = getSocialUser()
-	
+	const navigate = useNavigate()
+
 	const {
 		data: posts,
 		run: getPost,
@@ -26,7 +28,7 @@ const Profile = props => {
 	} = useRequest(postService.listPostOfUser, {
 		manual: true
 	})
-	
+
 	const {
 		data: profile,
 		run: getProfile,
@@ -34,7 +36,7 @@ const Profile = props => {
 	} = useRequest(userService.profile, {
 		manual: true
 	})
-	
+
 	useEffect(() => {
 		const params = {
 			sortBy: 'createdAt:desc',
@@ -42,7 +44,7 @@ const Profile = props => {
 		getPost(params, user_id)
 		getProfile(user_id)
 	}, [user_id])
-	
+
 	const { onOpen, render } = useCreatePostModal(refreshListPost)
 	const { onOpenEditProfile, renderEditProfile } = useEditProfile(profile, getProfile)
 
@@ -83,6 +85,15 @@ const Profile = props => {
 						<Typography className='text-36 font-bold'>{profile?.fullName}</Typography>
 						<Typography >@{profile?.username}</Typography>
 					</Box>
+
+					{user_id !== user?.id ?
+						<Box className='flex justify-center mt-10'>
+							<img src='/Icons/messenger.png' className='h-[25px] w-[25px] cursor-pointer'
+								onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${profile?.id}`)}
+							/>
+						</Box>
+						: null
+					}
 				</Box>
 			</Box>
 
@@ -96,17 +107,17 @@ const Profile = props => {
 
 								<Box className='flex mt-8'>
 									<Typography >Học tại </Typography>
-									<Typography className='font-bold ml-4'> {profile?.study}</Typography>
+									<Typography className='font-bold ml-4'> {profile?.study ?? 'Updating'}</Typography>
 								</Box>
 
 								<Box className='flex mt-8'>
 									<Typography >Sống tại </Typography>
-									<Typography className='font-bold ml-4'> {profile?.liveIn}</Typography>
+									<Typography className='font-bold ml-4'> {profile?.liveIn ?? 'Updating'}</Typography>
 								</Box>
 
 								<Box className='flex mt-8'>
 									<Typography >Làm việc tại </Typography>
-									<Typography className='font-bold ml-4'>{profile?.workspace}</Typography>
+									<Typography className='font-bold ml-4'>{profile?.workspace ?? 'Updating'}</Typography>
 								</Box>
 
 
@@ -138,12 +149,15 @@ const Profile = props => {
 					</Box>
 
 					<Box className='w-[60%]'>
-						<Box className='flex items-center mb-20 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
-							<img src='/Icons/man.png' className='h-40 w-40 mr-[30px]' />
-							<Typography className='cursor-pointer'
-								onClick={onOpen}
-							>Bạn có muốn đăng bài không?</Typography>
-						</Box>
+						{user_id === user?.id ?
+							<Box className='flex items-center mb-20 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+								<img src='/Icons/man.png' className='h-40 w-40 mr-[30px]' />
+								<Typography className='cursor-pointer'
+									onClick={onOpen}
+								>Bạn có muốn đăng bài không?</Typography>
+							</Box>
+							: null
+						}
 
 						<Box className='flex flex-col gap-20 mb-20'>
 							{loadingPost ? (
@@ -151,9 +165,14 @@ const Profile = props => {
 									<CircularProgress />
 								</div>
 							) : (
-								posts?.results?.map((item, index) => {
-									return <DataPost key={index} dataPost={item} refreshListPost={refreshListPost}/>
-								})
+								posts?.results?.length > 0 ?
+									posts?.results?.map((item, index) => {
+										return <DataPost key={index} dataPost={item} refreshListPost={refreshListPost} />
+									})
+									:
+									<Typography className='text-16 text-center'>
+										Hiện tại {profile?.fullName} đang chưa có bài viết nào.
+									</Typography>
 							)}
 						</Box>
 					</Box>

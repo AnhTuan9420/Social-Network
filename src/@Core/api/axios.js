@@ -51,19 +51,21 @@ export const createInstance = (baseUrl = null, middleware = () => {}) => {
 		},
 		async error => {
 			// hideLoadingPage()
-			if(error?.response?.data?.error_code == 401 && error?.response?.data?.error_message === 'トークンの有効期限が切れています'){
-				const refreshToken = Cookies.get('refresh_token')
-				const res = await authService.refreshToken({token:refreshToken})
-				Cookies.set('token', res?.account?.idToken, { expires: 1 / 24 })
-				Cookies.set('refresh_token', res?.account?.refreshToken, { expires: 30 })	
-				error.config.headers = {
-					Authorization: "Bearer " + res?.account?.idToken,
-				  }
-				  return instance(error.config);
+			if(error?.response?.data?.code == 403 && error?.response?.data?.message === 'Forbidden'){
+				// const refreshToken = Cookies.get('refresh_token')
+				// const res = await authService.refreshToken({token:refreshToken})
+				// Cookies.set('token', res?.tokens?.access?.token)
+				// Cookies.set('refresh_token', res?.tokens?.refresh?.token)
+				// error.config.headers = {
+				// 	Authorization: "Bearer " + res?.tokens?.access?.token,
+				//   }
+				// return instance(error.config);
+				clearSession()
+				window.open(ROUTER_SOCIAL.event.event_top, "_self")
 			}else {	
-				if(error?.response?.data?.error_code == 401 && error?.response?.data?.error_message === 'リフレッシュトークンの有効期限が切れています'){
+				if(error?.response?.data?.code == 401 && error?.response?.data?.message === 'Please authenticate'){
 					clearSession()
-					window.open(ROUTER_SOCIAL.auth.login, "_self")
+					window.open(ROUTER_SOCIAL.event.event_top, "_self")
 				}
 				if (error?.response?.data) {
 					const { data } = error?.response

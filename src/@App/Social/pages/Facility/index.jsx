@@ -8,12 +8,13 @@ const HomePage = props => {
 	const {
 		data: posts,
 		run: getPost,
-		loading: loadingPost
+		loading: loadingPost,
+		refresh: refreshListPost
 	} = useRequest(postService.getListPost, {
 		manual: true
 	})
 
-	return <FacilityList posts={posts} getPost={getPost} loadingPost={loadingPost}/>
+	return <FacilityList posts={posts} getPost={getPost} loadingPost={loadingPost} refreshListPost={refreshListPost}/>
 }
 
 export default React.memo(HomePage)

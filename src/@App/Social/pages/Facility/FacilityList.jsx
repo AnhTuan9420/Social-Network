@@ -25,8 +25,8 @@ const FacilityList = props => {
 	const { tags, title } = props
 	const navigate = useNavigate()
 
-	const { posts, getPost, loadingPost } = props
-	const { onOpen, render } = useCreatePostModal()
+	const { posts, getPost, loadingPost, refreshListPost } = props
+	const { onOpen, render } = useCreatePostModal(refreshListPost)
 	const [searching, setSearching] = useState(false)
 	const [searchFavorite, setSearchFavorite] = useState({
 		label: '人気順',

@@ -11,6 +11,7 @@ import { postService } from "@App/Social/services/postService"
 import { useRequest } from "ahooks"
 import { timeAgo } from "@Core/helper/Date"
 import { useDeleteCommentModal } from "../../Facility/hooks/useDeleteCommentModal"
+import Image from "mui-image"
 
 const DataPost = (props) => {
     const { dataPost, refreshListPost } = props
@@ -118,10 +119,10 @@ const DataPost = (props) => {
                         `${ROUTER_SOCIAL.event.detail}/?facility_id=${dataPost?.id}`
                     )
                 }>
-                <img
+                <Image
                     className="h-[600px] w-full object-contain cursor-pointer "
                     src={dataPost?.image ?? imagefail}
-                    duration={500}
+                    // duration={500}
                 />
             </Box>
 

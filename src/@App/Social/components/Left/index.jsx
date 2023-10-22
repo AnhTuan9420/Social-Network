@@ -27,7 +27,7 @@ const Left = props => {
 
 			<Box className="mt-20 px-20 py-10  bg-[white]" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
 				<Typography className='py-20 font-bold'>
-					Danh sách người dùng ({listUser?.totalResults - 1})
+					List User ({listUser?.totalResults - 1})
 				</Typography>
 				<hr className='bg-[red] text-[red] h-2' />
 

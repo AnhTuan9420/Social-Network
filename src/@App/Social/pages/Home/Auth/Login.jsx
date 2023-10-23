@@ -50,6 +50,7 @@ const Login = props => {
                 id: res?.user?.id,
                 username: res?.user?.username,
                 fullName: res?.user?.fullName,
+                avatar: res?.user?.avatar,
             })
             Cookies.set('token', res?.tokens?.access?.token)
             Cookies.set('refresh_token', res?.tokens?.refresh?.token)

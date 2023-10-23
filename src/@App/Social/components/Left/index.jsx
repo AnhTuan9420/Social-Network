@@ -17,7 +17,7 @@ const Left = props => {
 				onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${user?.id}`)}
 			>
 				<Box className='flex items-center'>
-					<img src='/Icons/man.png' className='h-40 w-40 mr-20' />
+					<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-20' />
 					<Box>
 						<Typography className='font-bold'>{user?.fullName}</Typography>
 						<Typography >@{user?.username}</Typography>
@@ -29,7 +29,7 @@ const Left = props => {
 				sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
 			>
 				<Typography className='py-20 font-bold'>
-					List User ({listUser?.totalResults - 1})
+					Danh sách người dùng ({listUser?.totalResults - 1})
 				</Typography>
 				<hr className='bg-[red] text-[red] h-2' />
 

@@ -61,7 +61,7 @@ const ListFavoriteContent = props => {
 													</Box>
 
 													<Box className='flex p-20 boder border-t-1'>
-														<img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+														<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer'
 															onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.postId?.userId?.id}`)}
 														/>
 														<Typography className='font-bold self-center text-14'>{item?.postId?.userId?.fullName}</Typography>

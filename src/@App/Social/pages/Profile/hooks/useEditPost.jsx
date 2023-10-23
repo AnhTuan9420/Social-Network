@@ -1,8 +1,6 @@
 import imagefail from '@App/Social/assets/imagefail.svg'
 import { postService } from '@App/Social/services/postService'
 import { successMsg } from '@Core/helper/Message'
-import Yup from '@Core/helper/Yup'
-import { yupResolver } from '@hookform/resolvers/yup'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
 import { useBoolean } from 'ahooks'
@@ -16,18 +14,13 @@ export const useEditPost = (dataPost, refreshListPost) => {
 		control,
 		handleSubmit,
 		setValue,
-		formState: { isSubmitting },
+		formState: { isSubmitting, errors },
 		watch
 	} = useForm({
 		mode: 'onTouched',
 		defaultValues: {
 			title: '',
 		},
-		resolver: yupResolver(
-			Yup.object({
-				title: Yup.string().required('Required')
-			})
-		)
 	})
 
 	const [selectedFile, setSelectedFile] = useState()
@@ -68,7 +61,12 @@ export const useEditPost = (dataPost, refreshListPost) => {
 	const onSubmit = handleSubmit(async data => {
 		try {
 			const formData = new FormData();
-			formData.append('title', data?.title);
+			if (data?.title) {
+				formData.append('title', data?.title);
+			}
+			if (selectedFile) {
+				formData.append('file', selectedFile);
+			}
 			await postService.updatePost(formData, dataPost?.id)
 			successMsg('Update post success.')
 			setFalse()

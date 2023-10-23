@@ -1,8 +1,6 @@
 import { userService } from '@App/Social/services/userService'
 import CoreInput from '@Core/components/Input/CoreInput'
 import { errorMsg, successMsg } from '@Core/helper/Message'
-import Yup from '@Core/helper/Yup'
-import { yupResolver } from '@hookform/resolvers/yup'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
 import { useBoolean } from 'ahooks'
@@ -27,14 +25,6 @@ export const useEditProfile = (profile, getProfile) => {
 			phone: '',
 			workspace: ''
 		},
-		resolver: yupResolver(
-			Yup.object({
-				fullName: Yup.string()
-					.required('Required')
-					.min(8, 'Full Name must be between 8 and 20 characters')
-					.max(20, 'Full Name must be between 8 and 20 characters'),
-			})
-		)
 	})
 
 	const [selectedFile, setSelectedFile] = useState()
@@ -76,7 +66,26 @@ export const useEditProfile = (profile, getProfile) => {
 
 	const onSubmit = handleSubmit(async data => {
 		try {
-			await userService.updateProfile(data)
+			const formData = new FormData();
+			if (data?.fullName) {
+				formData.append('fullName', data?.fullName);
+			}
+			if (data?.study) {
+				formData.append('study', data?.study);
+			}
+			if (data?.liveIn) {
+				formData.append('liveIn', data?.liveIn);
+			}
+			if (data?.phone) {
+				formData.append('phone', data?.phone);
+			}
+			if (data?.workspace) {
+				formData.append('workspace', data?.workspace);
+			}
+			if (selectedFile) {
+				formData.append('file', selectedFile);
+			}
+			await userService.updateProfile(formData)
 			successMsg('Update profile success.')
 			setFalse()
 			getProfile(profile?.id)
@@ -130,7 +139,7 @@ export const useEditProfile = (profile, getProfile) => {
 										</Box>
 										:
 										<Box className='w-[180px] h-[180px] mx-auto'>
-											<img className=' object-cover w-full h-full rounded-[50%]' src='/Icons/man.png' />
+											<img className=' object-cover w-full h-full rounded-[50%]' src={profile?.avatar ?? '/Icons/man.png'} />
 										</Box>
 									}
 								</Box>

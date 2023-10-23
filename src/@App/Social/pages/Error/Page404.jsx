@@ -1,9 +1,8 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
 
 const Page404 = props => {
 	return (
-		<section className="flex items-center h-full p-16 dark:bg-gray-900 dark:text-gray-100">
+		<section className="mt-[200px] flex items-center h-full p-16 dark:bg-gray-900 dark:text-gray-100">
 			<div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
 				<div className="max-w-md text-center">
 					<h2 className="mb-8 font-extrabold text-9xl dark:text-gray-600">
@@ -15,7 +14,7 @@ const Page404 = props => {
 					</p>
 					<a
 						rel="noopener noreferrer"
-						href="#"
+						href="/facility"
 						className="px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
 					>
 						Back to homepage

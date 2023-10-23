@@ -15,6 +15,11 @@ class Post extends BaseService {
     return this.request.post(endpoint, data);
   };
 
+  postDetail = (postId) => {
+    const endpoint = `/api/post/${postId}`;
+    return this.request.get(endpoint);
+  };
+
   updatePost = (data, postId) => {
     const endpoint = `/api/post/${postId}`;
     return this.request.put(endpoint, data);
@@ -35,16 +40,33 @@ class Post extends BaseService {
     return this.request.get(endpoint, { params });
   };
 
+  //comment
   comment = (data) => {
     const endpoint = "/api/comment";
     return this.request.post(endpoint, data);
   };
 
-
   listComment = (params) => {
     const endpoint = "/api/comment";
     return this.request.get(endpoint, { params });
   };
+
+  deleteComment = (commentId) => {
+    const endpoint = `/api/comment/${commentId}`;
+    return this.request.delete(endpoint);
+  };
+
+  //like
+  like = (data) => {
+    const endpoint = "/api/like";
+    return this.request.post(endpoint, data);
+  };
+
+  unLike = (postId) => {
+    const endpoint = `/api/like/${postId}`;
+    return this.request.delete(endpoint);
+  };
+
 
   checkUserLike = (postId) => {
     const endpoint = `/api/like/checkUserLike?postId=${postId}`;
@@ -56,29 +78,9 @@ class Post extends BaseService {
     return this.request.get(endpoint);
   };
 
-  like = (data) => {
-    const endpoint = "/api/like";
-    return this.request.post(endpoint, data);
-  };
-
-  unLike = (postId) => {
-    const endpoint = `/api/like/${postId}`;
-    return this.request.delete(endpoint);
-  };
-
-  deleteComment = (commentId) => {
-    const endpoint = `/api/comment/${commentId}`;
-    return this.request.delete(endpoint);
-  };
-
   getListLike = (params) => {
     const endpoint = "/api/like";
     return this.request.get(endpoint, { params: params });
-  };
-
-  postDetail = (postId) => {
-    const endpoint = `/api/post/${postId}`;
-    return this.request.get(endpoint);
   };
 
 }

@@ -2,27 +2,24 @@ import imagefail from '@App/Social/assets/imagefail.svg'
 import { ROUTER_SOCIAL } from "@App/Social/configs/constants"
 import { postService } from "@App/Social/services/postService"
 import { timeAgo } from "@Core/helper/Date"
-import { getSocialUser } from "@Core/helper/Session"
+import { getSocialUser } from '@Core/helper/Session'
 import { Box, Button, CircularProgress, Typography } from "@mui/material"
 import { useRequest } from "ahooks"
 import Image from "mui-image"
 import React, { useEffect, useState } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
-import { useDeleteCommentModal } from "../../Post/hooks/useDeleteCommentModal"
+import { useNavigate } from "react-router-dom"
 import { useShareModal } from "../../PostDetail/hooks/useShareModal"
-import { useEditPost } from "../hooks/useEditPost"
+import { useDeleteCommentModal } from "../hooks/useDeleteCommentModal"
 
-const DataPost = (props) => {
-    const { dataPost, refreshListPost } = props
-    const user = getSocialUser()
-    let [searchParams] = useSearchParams()
-    const user_id = searchParams.get('user_id')
-    const { onOpenEditPost, renderEditPost } = useEditPost(dataPost, refreshListPost)
+const PostItem = props => {
+    const { dataPost } = props
     const navigate = useNavigate()
+    const user = getSocialUser()
 
-    const handleOpenEditPostDialog = (item) => {
-        onOpenEditPost()
-    }
+    const { onOpenShare, renderShare } = useShareModal()
+
+
+    const [isFavorited, setIsFavorited] = useState(false)
 
     const {
         data: listComment,
@@ -51,14 +48,10 @@ const DataPost = (props) => {
 
     const { onOpenDeleteComment, renderDeleteComment } = useDeleteCommentModal(getComment)
 
-
-    const { onOpenShare, renderShare } = useShareModal()
-
-    const [isFavorited, setIsFavorited] = useState(false)
-
     const { data: apiHasLike, run: getFavorite } = useRequest(postService.checkUserLike, {
         manual: true
     })
+
 
     useEffect(() => {
         getFavorite(dataPost.id)
@@ -89,25 +82,23 @@ const DataPost = (props) => {
         <Box className="bg-[white] sm:border border-b-1 max-w-full border-[#e0e0e0] sm:rounded-8 sm:border-[#E0E0E0] sm:min-h-[540px] p-[16px]"
             sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
         >
-            <Box className='flex items-center justify-between'>
-                <Box className='mb-16 flex'>
-                    <img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
-                    <Box>
-                        <Typography className='font-bold text-14'>{dataPost?.userId?.fullName}</Typography>
-                        <Typography className='text-12'>{timeAgo(dataPost?.createdAt)}</Typography>
-                    </Box>
+            <Box className='mb-16 flex'>
+                <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                    onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${dataPost?.userId?.id}`)}
+                />
+                <Box>
+                    <Typography className='font-bold text-14 cursor-pointer'
+                        onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${dataPost?.userId?.id}`)}
+                    >
+                        {dataPost?.userId?.fullName}
+                    </Typography>
+                    <Typography className='text-12'>{timeAgo(dataPost?.createdAt)}</Typography>
                 </Box>
-                {user?.id === user_id ?
-                    <Box className='cursor-pointer' onClick={() => handleOpenEditPostDialog(dataPost)}>
-                        <img src='/Icons/update.png' className='mt-[-22px] h-20 w-20' />
-                    </Box>
-                    : null
-                }
             </Box>
 
             <Box className='mb-16'>
                 <Typography className='break-keep'>
-                    {dataPost?.title}
+                    {dataPost.title}
                 </Typography>
             </Box>
 
@@ -121,6 +112,7 @@ const DataPost = (props) => {
                 <Image
                     className="h-[600px] w-full object-contain cursor-pointer "
                     src={dataPost?.image ?? imagefail}
+                    // duration={5000}
                 />
             </Box>
 
@@ -180,7 +172,6 @@ const DataPost = (props) => {
             <Typography className='text-[#65676b] font-semibold my-16'>
                 Bình luận ({listComment?.totalResults})
             </Typography>
-
             {loadingComment ? (
                 <div className="my-[15%] flex justify-center items-center">
                     <CircularProgress />
@@ -289,10 +280,10 @@ const DataPost = (props) => {
 
             )}
 
-            {renderEditPost()}
             {renderShare()}
         </Box>
+
     )
 }
 
-export default DataPost
+export default React.memo(PostItem)

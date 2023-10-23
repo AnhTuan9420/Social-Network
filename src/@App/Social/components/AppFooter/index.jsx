@@ -1,16 +1,14 @@
-import { Box, Typography } from '@mui/material'
-import React from 'react'
-import { useNavigate, useLocation, Link, useHref } from 'react-router-dom'
-import logoFooter from '@App/Social/assets/logoFooter.svg'
 import appStore from '@App/Social/assets/App_Store.svg'
 import googlePlay from '@App/Social/assets/Google_Play.svg'
+import logo from '@App/Social/assets/logo.png'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
-import bannerFooter from '@App/Social/assets/bannerFooter.png'
 import { getSocialUser } from '@Core/helper/Session'
+import { Box, Typography } from '@mui/material'
+import React from 'react'
+import { useHref, useLocation, useNavigate } from 'react-router-dom'
 
-const AppFooter = props => {
+const AppFooter = (props) => {
 	const navigate = useNavigate()
-	const location = useLocation()
 	const currentUrl = useHref()
 	const user = getSocialUser()
 
@@ -62,11 +60,11 @@ const AppFooter = props => {
 	return (
 		<Box
 			className="bg-white sm:px-0 px-16 pt-[40px] bg-no-repeat bg-cover bg-center"
-			sx={{ backgroundImage: `url('${bannerFooter}')` }}
+			sx={{ backgroundImage: `url('${logo}')` }}
 		>
 			<Box className="max-w-[1000px] w-full sm:w-[80%] lg:w-[1000px] mx-auto ">
 				<Box className="mb-24">
-					<img src={logoFooter} alt="" />
+					<img src={logo} alt="" />
 				</Box>
 				<Typography className="text-16 leading-[140%] font-semibold text-[#222222] mb-16">
 					施設を利用したい方

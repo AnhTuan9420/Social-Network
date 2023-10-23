@@ -1,4 +1,5 @@
-import { menuAboutUserConfig, menuAboutAppConfig, menuBeforeLoginConfig } from '@App/Social/configs/menuConfig'
+import { menuAboutAppConfig, menuAboutUserConfig, menuBeforeLoginConfig } from '@App/Social/configs/menuConfig'
+import { getSocialUser, getToken } from '@Core/helper/Session'
 import {
 	Box,
 	Icon,
@@ -9,7 +10,6 @@ import {
 } from '@mui/material'
 import React from 'react'
 import LeftMenuItem from './components/LeftMenuItem'
-import { getSocialUser, getToken } from '@Core/helper/Session'
 
 const LeftMenu = props => {
 	const { open, setOpen } = props

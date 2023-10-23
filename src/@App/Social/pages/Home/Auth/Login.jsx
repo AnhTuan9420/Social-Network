@@ -1,17 +1,17 @@
-import { Box, Button, IconButton, InputAdornment, Typography } from "@mui/material"
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
-import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
-import CoreInput from '@Core/components/Input/CoreInput'
-import { useNavigate } from "react-router-dom"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import Yup from "@Core/helper/Yup"
-import Cookies from 'js-cookie'
-import React, { useState } from "react"
 import { ROUTER_SOCIAL } from "@App/Social/configs/constants"
 import { authService } from "@App/Social/services/authService"
+import CoreInput from '@Core/components/Input/CoreInput'
 import { errorMsg, successMsg } from "@Core/helper/Message"
 import { setDataSession } from "@Core/helper/Session"
+import Yup from "@Core/helper/Yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
+import { Box, Button, IconButton, InputAdornment, Typography } from "@mui/material"
+import Cookies from 'js-cookie'
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 const Login = props => {
     const navigate = useNavigate()
@@ -43,6 +43,7 @@ const Login = props => {
     })
 
     const onSubmit = handleSubmit(async data => {
+        data.username = data.username.toLowerCase();
         try {
             const res = await authService.login(data)
             setDataSession('local', 'social_user', {

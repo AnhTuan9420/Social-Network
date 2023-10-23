@@ -1,10 +1,9 @@
-import { Collapse, Divider, Icon, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
-import { Box } from '@mui/system'
+import { Collapse, Divider, List, ListItemButton, ListItemText, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 // import PropTypes from 'prop-types'
-import { ArrowRight, ArrowRightAlt, ExpandLess, ExpandMore } from '@mui/icons-material'
-import LeftMenuItem from './LeftMenuItem'
+import { ExpandLess, ExpandMore } from '@mui/icons-material'
 import { useLocation } from 'react-router-dom'
+import LeftMenuItem from './LeftMenuItem'
 
 const needsToBeOpened = (pathname, item) => {
 	return pathname && isUrlInChildren(item, pathname)

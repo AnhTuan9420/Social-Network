@@ -1,13 +1,13 @@
+import { userService } from '@App/Social/services/userService'
+import CoreInput from '@Core/components/Input/CoreInput'
+import { errorMsg, successMsg } from '@Core/helper/Message'
+import Yup from '@Core/helper/Yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
 import { useBoolean } from 'ahooks'
 import { useCallback, useEffect, useState } from 'react'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import Yup from '@Core/helper/Yup'
-import CoreInput from '@Core/components/Input/CoreInput'
-import { userService } from '@App/Social/services/userService'
-import { errorMsg, successMsg } from '@Core/helper/Message'
 
 export const useEditProfile = (profile, getProfile) => {
 	const [open, { setTrue, setFalse }] = useBoolean()

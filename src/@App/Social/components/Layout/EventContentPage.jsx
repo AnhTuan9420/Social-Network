@@ -1,8 +1,7 @@
 import { Box } from '@mui/system'
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import Left from '../Left'
-import Right from '../Right'
 
 const EventContentPage = props => {
 	const { content, header, maxWidth, chat } = props

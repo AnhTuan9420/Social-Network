@@ -1,16 +1,13 @@
-import { Badge, Box, Button, CircularProgress, Divider, Tab, Typography, useMediaQuery } from '@mui/material'
-import React, { memo, useEffect, useRef, useState } from 'react'
 import notice from '@App/Social/assets/notice.svg'
 import notify from '@App/Social/assets/notify.svg'
-import clsx from 'clsx'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
-import { useNavigate } from 'react-router-dom'
-import { TabContext, TabList, TabPanel } from '@mui/lab'
 import CloseIcon from '@mui/icons-material/Close'
-import { notificationsService } from '@App/Social/services/notificationService'
-import { useRequest } from 'ahooks'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
+import { Badge, Box, Button, CircularProgress, Divider, Tab, Typography, useMediaQuery } from '@mui/material'
+import clsx from 'clsx'
+import { memo, useEffect, useRef, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { getSocialUser } from '@Core/helper/Session'
+import { useNavigate } from 'react-router-dom'
 
 const HeaderNotification = props => {
 	const [open, setOpen] = useState(false)
@@ -21,17 +18,17 @@ const HeaderNotification = props => {
 	const [hasRead, setHasRead] = useState(null)
 	const isMobile = useMediaQuery('(max-width:600px)')
 
-	const {
-		data: listNotification,
-		run: getNotification,
-		loading
-	} = useRequest(notificationsService.getList, {
-		manual: true,
-		onSuccess: data => {
-			const hasNotiIds = data?.notifications?.filter(v => v?.status === 2).map(item => item?.id)
-			setHasRead(hasNotiIds)
-		}
-	})
+	// const {
+	// 	data: listNotification,
+	// 	run: getNotification,
+	// 	loading
+	// } = useRequest(notificationsService.getList, {
+	// 	manual: true,
+	// 	onSuccess: data => {
+	// 		const hasNotiIds = data?.notifications?.filter(v => v?.status === 2).map(item => item?.id)
+	// 		setHasRead(hasNotiIds)
+	// 	}
+	// })
 
 	// useEffect(() => {
 	// 	const params = {
@@ -42,13 +39,13 @@ const HeaderNotification = props => {
 
 	const [data, setData] = useState([])
 
-	useEffect(() => {
-		if (listNotification) {
-			setData(prev => {
-				return [...prev, ...listNotification?.notifications]
-			})
-		}
-	}, [listNotification])
+	// useEffect(() => {
+	// 	if (listNotification) {
+	// 		setData(prev => {
+	// 			return [...prev, ...listNotification?.notifications]
+	// 		})
+	// 	}
+	// }, [listNotification])
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue)
@@ -177,7 +174,7 @@ const HeaderNotification = props => {
 									<InfiniteScroll
 										dataLength={data?.length ?? 10}
 										next={() => handleFetchData()}
-										hasMore={listNotification?.page < listNotification?.max_page}
+										hasMore={data?.page < data?.max_page}
 										scrollableTarget="scrollNotify"
 									>
 										{data?.map((item, index) => {
@@ -282,7 +279,7 @@ const HeaderNotification = props => {
 									<InfiniteScroll
 										dataLength={data?.length ?? 10}
 										next={() => handleFetchData()}
-										hasMore={listNotification?.page < listNotification?.max_page}
+										hasMore={data?.page < data?.max_page}
 										scrollableTarget="scrollNotify2"
 									>
 										{data

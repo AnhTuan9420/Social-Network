@@ -1,15 +1,12 @@
-import { AppBar, Box, IconButton, Menu, MenuItem, Toolbar, Typography, useMediaQuery } from '@mui/material'
-import React, { useState } from 'react'
-import logoMobile from '@App/Social/assets/logoMobile.svg'
 import logo from '@App/Social/assets/logo.png'
-import UserHeader from '../UserHeader'
-import { useHref, useNavigate } from 'react-router-dom'
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
-// import PropTypes from 'prop-types'
+import { AppBar, Box, Toolbar, Typography } from '@mui/material'
+import React from 'react'
+import { useHref, useNavigate } from 'react-router-dom'
+import UserHeader from '../UserHeader'
 
 const AppHeader = props => {
 	const navigate = useNavigate()
-	const isMobile = useMediaQuery('(max-width:600px)')
 	const endpoint = useHref()
 
 	return (
@@ -20,8 +17,9 @@ const AppHeader = props => {
 					<Toolbar className='justify-between px-[17%]'>
 						<Typography component="div"
 							className='cursor-pointer flex items-center font-600 text-[#e91c81]'
+							onClick={() => navigate(ROUTER_SOCIAL.event.search)}
 						>
-							<img src={isMobile ? logoMobile : logo} alt="" className="h-[40px] mr-10 text-[#E0E0E0]" onClick={() => navigate(ROUTER_SOCIAL.event.search)} />
+							<img src={logo} alt="" className="h-[40px] mr-10 text-[#E0E0E0]" />
 							PhotoVibe
 						</Typography>
 						<UserHeader />

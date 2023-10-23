@@ -1,8 +1,10 @@
-import { Box } from '@mui/system'
-import React, { useEffect, useState } from 'react'
-import { deleteAccount, userInfoMenuMobile, userInfoMenus } from '@App/Social/configs/menuConfig'
-import { clearSession } from '@Core/helper/Session'
-import PropTypes from 'prop-types'
+import Person from '@App/Social/assets/Person.svg'
+import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
+import { deleteAccount, userInfoMenus } from '@App/Social/configs/menuConfig'
+import { successMsg } from '@Core/helper/Message'
+import { clearSession, getDataSession } from '@Core/helper/Session'
+import { getQueryUrlObject } from '@Core/helper/Url'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import {
 	Breadcrumbs,
@@ -16,14 +18,11 @@ import {
 	Typography,
 	useMediaQuery
 } from '@mui/material'
+import { Box } from '@mui/system'
+import { useBoolean } from 'ahooks'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
-import { useBoolean, useRequest } from 'ahooks'
-import Person from '@App/Social/assets/Person.svg'
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
-import { successMsg } from '@Core/helper/Message'
-import { getDataSession } from '@Core/helper/Session'
-import { getQueryUrlObject } from '@Core/helper/Url'
 
 const UserLayout = props => {
 	const { headerTile, content, maxWidth, breadcrumbText, changeName } = props
@@ -122,7 +121,7 @@ const UserLayout = props => {
 					</Box>
 					<Divider />
 					<>
-						{(isMobile ? userInfoMenuMobile : userInfoMenus)?.map((item, i) => {
+						{userInfoMenus?.map((item, i) => {
 							if (item?.title === headerTile) {
 								return (
 									<Box key={i} onClick={() => navigate(item?.url)}>

@@ -1,20 +1,20 @@
-import { Box, Button, IconButton, InputAdornment, Typography } from "@mui/material"
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
-import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
-import CoreInput from '@Core/components/Input/CoreInput'
-import { useNavigate } from "react-router-dom"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import Yup from "@Core/helper/Yup"
-import React, { useState } from "react"
-import { errorMsg, successMsg } from "@Core/helper/Message"
 import { authService } from "@App/Social/services/authService"
+import CoreInput from '@Core/components/Input/CoreInput'
+import { errorMsg, successMsg } from "@Core/helper/Message"
+import Yup from "@Core/helper/Yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
+import { Box, Button, IconButton, InputAdornment, Typography } from "@mui/material"
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 const Register = props => {
     const { setLogin } = props
     const navigate = useNavigate()
     const [viewPassword, setViewPassword] = useState(false)
-	const [viewConfirmPassword, setViewConfirmPassword] = useState(false)
+    const [viewConfirmPassword, setViewConfirmPassword] = useState(false)
 
     const {
         control,
@@ -52,6 +52,7 @@ const Register = props => {
     })
 
     const onSubmit = handleSubmit(async data => {
+        data.username = data.username.toLowerCase();
         try {
             const res = await authService.register(data)
             successMsg('Register success.')

@@ -10,7 +10,6 @@ import { StyledEngineProvider } from '@mui/material/styles'
 import jaLocale from 'date-fns/locale/ja'
 
 import { useState } from 'react'
-import { registerLocale, setDefaultLocale } from 'react-datepicker'
 import AppContext from './AppContext'
 
 const withAppProviders = Component => props => {

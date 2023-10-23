@@ -1,6 +1,6 @@
+import logo from '@App/Social/assets/logo.png'
 import { Box, Button, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import logo from '@App/Social/assets/logo.png'
 
 import Login from './Auth/Login'
 import Register from './Auth/Register'
@@ -9,7 +9,6 @@ const HomeTop = props => {
 	const [login, setLogin] = useState(true)
 
 	return (
-		//sx={{ backgroundImage: `url('https://wallpaper.dog/large/5461261.jpg')` }}
 		<Box className="!bg-[#e75348]">
 			<Box className="absolute top-[15%] left-[25%] right-[25%] bottom-[15%] bg-[white]">
 				<Box className='grid grid-cols-2 gap-20 p-40 h-full' >

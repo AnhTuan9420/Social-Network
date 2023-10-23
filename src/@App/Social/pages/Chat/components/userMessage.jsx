@@ -1,7 +1,7 @@
+import { timeAgo } from "@Core/helper/Date"
 import { Box, Typography } from "@mui/material"
 import React from "react"
 import { useDeleteMessageModal } from "../hooks/useDeleteCommentModal"
-import { timeAgo } from "@Core/helper/Date"
 
 
 const UserMessage = props => {

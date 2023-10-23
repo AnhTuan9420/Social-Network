@@ -1,21 +1,15 @@
-import { useFirebaseAuthContext } from '@Core/components/Provider/FirebaseAuthProvider'
-import { Collapse, Divider, Icon, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { Divider, Icon, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useState } from 'react'
+import React from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
-// import PropTypes from 'prop-types'
 
 const LeftMenuItem = props => {
 	const { item, color, ...resProps } = props
-	// console.log('============= item', item)
 	const navigate = useNavigate()
 	const match = useMatch(item.url ?? '/')
-	// console.log('============= match', match)
 	const handleClickMenu = url => {
 		if (url) navigate(url)
 	}
-
-	// if (!checkPermission(item?.role, authRole)) return null
 
 	return (
 		<>

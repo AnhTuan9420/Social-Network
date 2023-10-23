@@ -1,18 +1,20 @@
-import { Box, Divider, IconButton, Icon, Typography, Button, Dialog, DialogTitle, DialogContent } from '@mui/material'
-import React, { memo, useEffect, useRef, useState } from 'react'
-import clsx from 'clsx'
-import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { COOKIE, clearSession, getDataSession, getSocialUser } from '@Core/helper/Session'
-import { useBoolean } from 'ahooks'
-import { successMsg } from '@Core/helper/Message'
 import Person from '@App/Social/assets/Person.svg'
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
 import { authService } from '@App/Social/services/authService'
+import { successMsg } from '@Core/helper/Message'
+import { COOKIE, clearSession, getDataSession, getSocialUser } from '@Core/helper/Session'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import { Box, Button, Dialog, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
+import { useBoolean } from 'ahooks'
+import clsx from 'clsx'
+import { memo, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useResetPassword } from './hooks/useResetPassword'
 
 const HeaderPerson = () => {
 	const user = getSocialUser()
 	const [open, setOpen] = useState(false)
+	const { onOpen, renderResetPassword } = useResetPassword()
 	const navigate = useNavigate()
 	const el = useRef()
 
@@ -49,7 +51,7 @@ const HeaderPerson = () => {
 
 	return (
 		<div ref={el}>
-			<Box className="cursor-pointer ml-40 mt-2" onClick={() => setOpen(!open)}>
+			<Box className="cursor-pointer ml-40 mt-2 flex" onClick={() => setOpen(!open)}>
 				<IconButton
 					size="small"
 					aria-label="account of current user"
@@ -59,16 +61,19 @@ const HeaderPerson = () => {
 				>
 					<img src={Person} />
 				</IconButton>
+				<Typography className="font-bold uppercase self-center text-[16px] text-[#e91c81] ">
+					Trang cá nhân
+				</Typography>
 			</Box>
 
 			<Box
 				className={clsx(
-					'z-9999 fixed sm:top-[62px] sm:right-[55px] top-0 right-0 bottom-0 shadow-4 sm:min-w-[300px] sm:w-auto w-[100%] sm:h-[280px] bg-white rounded-[10px] ease-out duration-200 origin-top-left',
+					'z-9999 fixed sm:top-[62px] sm:right-[160px] top-0 right-0 bottom-0 shadow-4 sm:min-w-[300px] sm:w-auto w-[100%] sm:h-[280px] bg-white rounded-[10px] ease-out duration-200 origin-top-left',
 					open ? 'scale-100' : 'scale-0'
 				)}
 			>
 				<Box className="p-16">
-					<Typography className="text-[16px] break-all font-semibold text-[black] ">{user?.fullName}</Typography>
+					<Typography className="text-[16px] break-all font-semibold text-[red] ">{user?.fullName}</Typography>
 				</Box>
 				<Divider />
 
@@ -81,27 +86,27 @@ const HeaderPerson = () => {
 
 				<Typography
 					className="text-[16px] px-16 py-8 text-[#e91c81] leading-[140%] cursor-pointer "
-					onClick={() => navigate(ROUTER_SOCIAL.questions) & setOpen(!open)}
+					onClick={() => navigate(ROUTER_SOCIAL.faq) & setOpen(!open)}
 				>
-					FAQ
-				</Typography>
-
-				<Typography
-					className="text-[16px] px-16 py-8 text-[#e91c81] leading-[140%] cursor-pointer "
-					onClick={() => navigate(ROUTER_SOCIAL.inquiry) & setOpen(!open)}
-				>
-					Chính sách và điều khoản
+					FAQs
 				</Typography>
 
 				<Typography
 					className="text-[16px] px-16 py-8 text-[#e91c81] leading-[140%] cursor-pointer "
 					onClick={() => navigate(ROUTER_SOCIAL.privacy) & setOpen(!open)}
 				>
+					Chính sách và điều khoản
+				</Typography>
+
+				<Typography
+					className="text-[16px] px-16 py-8 text-[#e91c81] leading-[140%] cursor-pointer "
+					onClick={onOpen}
+				>
 					Đổi mật khẩu
 				</Typography>
 				<Divider />
 
-				<Typography className="text-[16px] font-bold p-16 text-[black] leading-[140%] cursor-pointer " onClick={handleOpenModal}>
+				<Typography className="text-[16px] font-bold p-16 text-[red] leading-[140%] cursor-pointer " onClick={handleOpenModal}>
 					Đăng xuất
 				</Typography>
 			</Box>
@@ -140,6 +145,7 @@ const HeaderPerson = () => {
 					</Box>
 				</DialogContent>
 			</Dialog>
+			{renderResetPassword()}
 		</div>
 	)
 }

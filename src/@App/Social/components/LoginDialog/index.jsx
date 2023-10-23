@@ -1,3 +1,5 @@
+import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import {
 	Box,
 	Button,
@@ -10,9 +12,7 @@ import {
 	useMediaQuery
 } from '@mui/material'
 import { useBoolean } from 'ahooks'
-import React, { useCallback, useState } from 'react'
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
-import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
+import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 

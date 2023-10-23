@@ -17,7 +17,7 @@ const Left = props => {
 				onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${user?.id}`)}
 			>
 				<Box className='flex items-center'>
-					<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-20' />
+					<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-20 rounded-[50%]' />
 					<Box>
 						<Typography className='font-bold'>{user?.fullName}</Typography>
 						<Typography >@{user?.username}</Typography>

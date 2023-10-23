@@ -41,6 +41,7 @@ const ListFavoriteContent = props => {
 						listLike?.results?.length > 0 ?
 							<Box className='grid grid-cols-3 gap-[50px]'>
 								{listLike?.results?.map((item, index) => {
+									console.log(item?.postId?.userId?.avatar);
 									return (
 										item?.postId?.id ?
 											<Box key={index}>
@@ -61,7 +62,7 @@ const ListFavoriteContent = props => {
 													</Box>
 
 													<Box className='flex p-20 boder border-t-1'>
-														<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer'
+														<img src={item?.postId?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer rounded-[50%]'
 															onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.postId?.userId?.id}`)}
 														/>
 														<Typography className='font-bold self-center text-14'>{item?.postId?.userId?.fullName}</Typography>

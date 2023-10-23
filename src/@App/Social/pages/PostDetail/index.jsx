@@ -147,7 +147,7 @@ const PostDetail = props => {
 									{postDetail?.title}
 								</Typography>
 								<Box className='my-16 flex'>
-									<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+									<img src={postDetail?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] rounded-[50%]' />
 									<Box>
 										<Typography className='font-bold text-14'>{postDetail?.userId?.fullName}</Typography>
 										<Typography className='text-12'>{timeAgo(postDetail?.createdAt)}</Typography>
@@ -228,7 +228,7 @@ const PostDetail = props => {
 												listComment?.results?.map((item, index) => {
 													return (
 														<Box key={index} className='my-16 flex'>
-															<img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+															<img src={item?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer rounded-[50%]'
 																onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
 															/>
 															<Box>
@@ -274,7 +274,7 @@ const PostDetail = props => {
 								</Box>
 								<Box className='mt-20 h-auto bg-[white]'>
 									<Box className='flex py-10 px-20 items-center'>
-										<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+										<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] rounded-[50%]' />
 										<textarea
 											value={comment}
 											onChange={(value) => setComment(value?.target?.value)}

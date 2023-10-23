@@ -83,7 +83,7 @@ const PostItem = props => {
             sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
         >
             <Box className='mb-16 flex'>
-                <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                <img src={dataPost?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer rounded-[50%]'
                     onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${dataPost?.userId?.id}`)}
                 />
                 <Box>
@@ -181,9 +181,10 @@ const PostItem = props => {
                     (listComment?.results?.length > 5 ?
                         <Box>
                             {listComment?.results?.slice(0, 5)?.map((item, index) => {
+                                console.log(item);
                                 return (
                                     <Box key={index} className='my-16 flex'>
-                                        <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                                        <img src={item?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer rounded-[50%]'
                                             onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
                                         />
                                         <Box>
@@ -237,7 +238,7 @@ const PostItem = props => {
                         listComment?.results?.map((item, index) => {
                             return (
                                 <Box key={index} className='my-16 flex'>
-                                    <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                                    <img src={item?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer rounded-[50%]'
                                         onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
                                     />
                                     <Box>

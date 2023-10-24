@@ -1,14 +1,16 @@
 import { userService } from '@App/Social/services/userService'
 import CoreInput from '@Core/components/Input/CoreInput'
 import { errorMsg, successMsg } from '@Core/helper/Message'
+import { LOCAL_STORAGE, getSocialUser, setDataSession } from '@Core/helper/Session'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
 import { useBoolean } from 'ahooks'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export const useEditProfile = (profile, getProfile) => {
+export const useEditProfile = (profile, getProfile, refreshListPost) => {
 	const [open, { setTrue, setFalse }] = useBoolean()
+    const user = getSocialUser()
 
 	const {
 		control,
@@ -85,7 +87,20 @@ export const useEditProfile = (profile, getProfile) => {
 			if (selectedFile) {
 				formData.append('file', selectedFile);
 			}
-			await userService.updateProfile(formData)
+			const res =	await userService.updateProfile(formData)
+			
+			if (res?.avatar !== user?.avatar) {
+				user.avatar = res.avatar;
+				setDataSession(LOCAL_STORAGE, 'social_user', user)
+				refreshListPost()
+			}
+
+			if (res?.fullName !== user?.fullName) {
+				user.fullName = res.fullName;
+				setDataSession(LOCAL_STORAGE, 'social_user', user)
+				refreshListPost()
+			}
+
 			successMsg('Update profile success.')
 			setFalse()
 			getProfile(profile?.id)

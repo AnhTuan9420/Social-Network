@@ -110,7 +110,7 @@ export const useCreatePostModal = (refreshListPost) => {
 					<DialogContent className="p-0">
 						<Box className="p-16">
 							<Box className='mb-16 flex items-center'>
-								<img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+								<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px]' />
 								<Box>
 									<Typography className='font-bold text-14'>{user?.fullName}</Typography>
 								</Box>

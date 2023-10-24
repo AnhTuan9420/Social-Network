@@ -46,7 +46,7 @@ const Profile = props => {
 	}, [user_id])
 
 	const { onOpen, render } = useCreatePostModal(refreshListPost)
-	const { onOpenEditProfile, renderEditProfile } = useEditProfile(profile, getProfile)
+	const { onOpenEditProfile, renderEditProfile } = useEditProfile(profile, getProfile, refreshListPost)
 
 	const {
 		control,

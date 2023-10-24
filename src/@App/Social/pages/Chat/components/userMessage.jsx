@@ -25,7 +25,7 @@ const UserMessage = props => {
                     </Typography>
                 </Box>
             </Box>
-            <img src='/Icons/man.png' className='h-40 w-40' />
+            <img src={dataMess?.from?.avatar ?? '/Icons/man.png'} className='h-40 w-40 rounded-[50%]' />
             {renderDeleteMessage(dataMess?.id)}
         </Box>
     )

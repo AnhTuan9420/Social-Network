@@ -151,7 +151,7 @@ const PostList = props => {
 					</Typography>
 
 					<Box className='flex items-center mt-20 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
-						<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[30px]' />
+						<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[30px] rounded-[50%]' />
 						<Typography className='cursor-pointer'
 							onClick={onOpen}
 						>Bạn có muốn đăng bài không?</Typography>

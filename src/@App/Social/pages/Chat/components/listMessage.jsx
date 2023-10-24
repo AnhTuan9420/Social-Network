@@ -88,14 +88,14 @@ const ChatMessage = props => {
                     :
                     messages?.length > 0 ?
                         messages?.map((item, index) => {
-                            if (item?.from === user?.id) {
+                            if (item?.from.id === user?.id) {
                                 return (
                                     <UserMessage key={index} dataMess={item} refreshListMessage={refreshListMessage} />
                                 )
                             } else {
                                 return (
                                     <Box key={index} className='flex justify-start'>
-                                        <img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+                                        <img src={item?.from?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] rounded-[50%]' />
 
                                         <Box className='max-w-[40%]'>
                                             <Box className='py-10 px-[18px] bg-[#e4e6eb] rounded-8'>

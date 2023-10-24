@@ -91,7 +91,7 @@ const DataPost = (props) => {
         >
             <Box className='flex items-center justify-between'>
                 <Box className='mb-16 flex'>
-                    <img src='/Icons/man.png' className='h-40 w-40 mr-[15px]' />
+                    <img src={dataPost?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] rounded-[50%]' />
                     <Box>
                         <Typography className='font-bold text-14'>{dataPost?.userId?.fullName}</Typography>
                         <Typography className='text-12'>{timeAgo(dataPost?.createdAt)}</Typography>
@@ -192,7 +192,7 @@ const DataPost = (props) => {
                             {listComment?.results?.slice(0, 5)?.map((item, index) => {
                                 return (
                                     <Box key={index} className='my-16 flex'>
-                                        <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                                        <img src={item?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer rounded-[50%]'
                                             onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
                                         />
                                         <Box>
@@ -246,7 +246,7 @@ const DataPost = (props) => {
                         listComment?.results?.map((item, index) => {
                             return (
                                 <Box key={index} className='my-16 flex'>
-                                    <img src='/Icons/man.png' className='h-40 w-40 mr-[15px] cursor-pointer'
+                                    <img src={item?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer rounded-[50%]'
                                         onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.userId?.id}`)}
                                     />
                                     <Box>

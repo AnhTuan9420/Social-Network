@@ -16,10 +16,12 @@ import { useNavigate } from 'react-router-dom'
 import PostItem from './PostItem'
 import TopLike from './TopLike'
 import { useCreatePostModal } from './hooks/useCreatePostModal'
+import { getSocialUser } from '@Core/helper/Session'
 
 const PostList = props => {
 	const { tags, title } = props
 	const navigate = useNavigate()
+	const user = getSocialUser()
 
 	const { posts, getPost, loadingPost, refreshListPost } = props
 	const { onOpen, render } = useCreatePostModal(refreshListPost)
@@ -149,7 +151,7 @@ const PostList = props => {
 					</Typography>
 
 					<Box className='flex items-center mt-20 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
-						<img src='/Icons/man.png' className='h-40 w-40 mr-[30px]' />
+						<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[30px]' />
 						<Typography className='cursor-pointer'
 							onClick={onOpen}
 						>Bạn có muốn đăng bài không?</Typography>

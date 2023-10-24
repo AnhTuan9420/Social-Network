@@ -181,7 +181,6 @@ const PostItem = props => {
                     (listComment?.results?.length > 5 ?
                         <Box>
                             {listComment?.results?.slice(0, 5)?.map((item, index) => {
-                                console.log(item);
                                 return (
                                     <Box key={index} className='my-16 flex'>
                                         <img src={item?.userId?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] cursor-pointer rounded-[50%]'

@@ -61,7 +61,7 @@ const Left = props => {
 										<Box className='flex items-center cursor-pointer'
 											onClick={() => navigate(`${ROUTER_SOCIAL.user.profile}/?user_id=${item?.id}`)}
 										>
-											<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-20' />
+											<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-20 rounded-[50%]' />
 											<Typography className='font-bold'>
 												{item?.fullName}
 											</Typography>
@@ -76,12 +76,12 @@ const Left = props => {
 			</Box>
 
 			<Box className="mt-20 px-20 py-10 bg-[white] cursor-pointer" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
-				onClick={() => navigate(ROUTER_SOCIAL.privacy)}
+				onClick={() => navigate(ROUTER_SOCIAL.faq)}
 			>
 				<Box className='flex items-center justify-between'>
 					<Box className='flex'>
-						<img src='/Icons/privacy.png' className='h-40 w-40 mr-20' />
-						<Typography className='font-bold self-center'>Chính sách và điều khoản </Typography>
+						<img src='/Icons/faq.png' className='h-40 w-40 mr-20' />
+						<Typography className='font-bold self-center'>FAQs</Typography>
 					</Box>
 					<Box>
 						<img src='/Icons/arrow.png' className='h-[25px] w-[25px]' />
@@ -90,12 +90,12 @@ const Left = props => {
 			</Box>
 
 			<Box className="mt-20 px-20 py-10 bg-[white] cursor-pointer" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
-				onClick={() => navigate(ROUTER_SOCIAL.faq)}
+				onClick={() => navigate(ROUTER_SOCIAL.privacy)}
 			>
 				<Box className='flex items-center justify-between'>
 					<Box className='flex'>
-						<img src='/Icons/faq.png' className='h-40 w-40 mr-20' />
-						<Typography className='font-bold self-center'>FAQs</Typography>
+						<img src='/Icons/privacy.png' className='h-40 w-40 mr-20' />
+						<Typography className='font-bold self-center'>Chính sách và điều khoản </Typography>
 					</Box>
 					<Box>
 						<img src='/Icons/arrow.png' className='h-[25px] w-[25px]' />

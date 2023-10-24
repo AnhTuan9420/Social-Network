@@ -151,7 +151,7 @@ const Profile = props => {
 					<Box className='w-[60%]'>
 						{user_id === user?.id ?
 							<Box className='flex items-center mb-20 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
-								<img src='/Icons/man.png' className='h-40 w-40 mr-[30px]' />
+								<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[30px]' />
 								<Typography className='cursor-pointer'
 									onClick={onOpen}
 								>Bạn có muốn đăng bài không?</Typography>

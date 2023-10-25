@@ -1,15 +1,44 @@
 import { ROUTER_SOCIAL } from '@App/Social/configs/constants'
+import CoreInput from '@Core/components/Input/CoreInput'
 import { getSocialUser } from '@Core/helper/Session'
-import { Box, CircularProgress, Typography } from '@mui/material'
-import React from 'react'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import { Box, CircularProgress, IconButton, InputAdornment, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useListUser } from './hooks/useListUser'
 
 const Left = props => {
 	const navigate = useNavigate()
 	const user = getSocialUser()
+	const [searching, setSearching] = useState(false)
 
-	const { listUser, loadingListUser } = useListUser()
+	const { listUser, loadingListUser, getListUser } = useListUser()
+
+	const { control, getValues, handleSubmit, watch, setValue } = useForm({
+		mode: 'onTouched',
+		defaultValues: {
+			fullName: ''
+		}
+	})
+
+	const onSubmit = handleSubmit(async () => {
+		try {
+			const data = getValues()
+			if (data?.fullName !== '') {
+				await getListUser(data)
+				setSearching(true)
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	})
+
+	const handerClear = (async () => {
+		setValue('fullName', '')
+		setSearching(false)
+		await getListUser()
+	})
 
 	return (
 		<Box>
@@ -31,7 +60,39 @@ const Left = props => {
 				<Typography className='py-20 font-bold'>
 					Danh sách người dùng ({listUser?.totalResults - 1})
 				</Typography>
-				<hr className='bg-[red] text-[red] h-2' />
+
+				<form onSubmit={onSubmit}>
+					<Box className='flex justify-between w-full'>
+						<CoreInput
+							control={control}
+							name="fullName"
+							placeholder="Tìm kiếm"
+							variant="outlined"
+							size="small"
+							className="bg-white text-[20px] w-full"
+							sx={{
+								'.MuiOutlinedInput-input': {
+									padding: '16px',
+									height: '20px'
+								}
+							}}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										{searching ?
+											<IconButton onClick={handerClear} className="p-0">
+												<CloseOutlinedIcon color="error" />
+											</IconButton>
+											: null
+										}
+									</InputAdornment>
+								)
+							}}
+						/>
+					</Box>
+				</form>
+
+				<hr className='bg-[red] text-[red] h-2 mt-10' />
 
 				<Box className='overflow-y-scroll max-h-[300px] my-10'
 					sx={{

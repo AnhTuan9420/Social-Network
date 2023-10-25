@@ -36,21 +36,6 @@ const PostList = props => {
 		}
 	})
 
-	const [data, setData] = useState([])
-
-	useEffect(() => {
-		if (posts) {
-			setData(posts?.results)
-		}
-	}, [])
-
-	useEffect(() => {
-		if (posts) {
-			setData(prev => {
-				return [...prev, ...posts?.results]
-			})
-		}
-	}, [posts])
 
 	useEffect(() => {
 		const params = {
@@ -90,15 +75,26 @@ const PostList = props => {
 		<EventContentPage
 			content={
 				<>
-					<Typography className='mt-20 font-bold'>
+					{/* <Typography className='mt-20 font-bold'>
 						Top lượt thích
 					</Typography>
-					<TopLike />
+					<TopLike /> */}
+
+					<Typography className='mt-20 font-bold'>
+						Đăng bài
+					</Typography>
+
+					<Box className='flex items-center mt-10 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+						<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[30px] rounded-[50%]' />
+						<Typography className='cursor-pointer'
+							onClick={onOpen}
+						>Bạn có muốn đăng bài không?</Typography>
+					</Box>
 
 					<Typography className='mt-20 font-bold'>
 						Tìm kiếm
 					</Typography>
-					<Box className="bg-[white] mt-20 rounded-8" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+					<Box className="bg-[white] mt-10 rounded-8" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
 						<form
 							onSubmit={onSubmit}
 							className=""
@@ -136,31 +132,25 @@ const PostList = props => {
 					</Box>
 
 					<Typography className='mt-20 font-bold'>
-						Đăng bài
-					</Typography>
-
-					<Box className='flex items-center mt-20 p-16 bg-[white] rounded-8' sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
-						<img src={user?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[30px] rounded-[50%]' />
-						<Typography className='cursor-pointer'
-							onClick={onOpen}
-						>Bạn có muốn đăng bài không?</Typography>
-					</Box>
-
-					<Typography className='mt-20 font-bold'>
 						Danh sách bài đăng
 					</Typography>
 
-					<Box className="mt-20">
+					<Box className="mt-10">
 						{loadingPost ? (
 							<div className="my-[15%] flex justify-center items-center">
 								<CircularProgress />
 							</div>
 						) : (
-							<Box className='flex flex-col gap-20 mb-20'>
-								{posts?.results?.map((item, index) => {
-									return <PostItem key={index} dataPost={item} />
-								})}
-							</Box>
+							posts?.results?.length > 0 ?
+								<Box className='flex flex-col gap-20 mb-20'>
+									{posts?.results?.map((item, index) => {
+										return <PostItem key={index} dataPost={item} />
+									})}
+								</Box>
+								:
+								<Typography className='text-16 mt-20 text-center'>
+									Hiện không tìm thấy bài đăng hoặc không có bài đăng nào.
+								</Typography>
 						)}
 
 					</Box>

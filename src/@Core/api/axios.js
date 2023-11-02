@@ -12,7 +12,7 @@ export const createInstance = (baseUrl = null, middleware = () => {}) => {
 		headers: {
 			'X-Requested-With': 'XMLHttpRequest'
 		},
-		withCredentials: true,
+		withCredentials: false,
 		paramsSerializer: {
 			serialize: params => Qs.stringify(params, { arrayFormat: 'brackets' })
 		}

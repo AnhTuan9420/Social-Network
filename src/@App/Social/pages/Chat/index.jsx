@@ -20,7 +20,7 @@ const Chat = (props) => {
 	const [socket, setSocket] = useState(null);
 
 	useEffect(() => {
-		const socket = io('http://localhost:3000', {
+		const socket = io(import.meta.env.VITE_API_URL, {
 			path: '/socket.io',
 			transports: ['websocket'],
 			secure: true,

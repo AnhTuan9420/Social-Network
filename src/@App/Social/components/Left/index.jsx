@@ -58,7 +58,8 @@ const Left = props => {
 				sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
 			>
 				<Typography className='py-20 font-bold'>
-					Danh sách người dùng ({listUser?.totalResults - 1})
+					Danh sách người dùng
+					{/* ({listUser?.totalResults - 1}) */}
 				</Typography>
 
 				<form onSubmit={onSubmit}>

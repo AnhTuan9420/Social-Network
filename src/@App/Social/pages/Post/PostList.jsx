@@ -51,6 +51,7 @@ const PostList = props => {
 			const data = getValues()
 			const params = {
 				...data,
+				limit: 20,
 				page: page,
 			}
 			await getPost(params)

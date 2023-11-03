@@ -26,7 +26,7 @@ const ListFavoriteContent = props => {
 
 	return (
 		<EventContentPage
-			maxWidth={true}
+			maxWidth={1}
 			chat={true}
 			content={
 				<Box className="mx-[100px] mb-[100px]">

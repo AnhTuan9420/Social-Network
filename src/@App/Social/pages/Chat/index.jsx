@@ -46,7 +46,7 @@ const Chat = (props) => {
 
 	return (
 		<EventContentPage
-			maxWidth={true}
+			maxWidth={1}
 			chat={true}
 			content={
 				<Box className="flex my-[50px]" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>

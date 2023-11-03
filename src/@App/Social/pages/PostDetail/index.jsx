@@ -106,7 +106,7 @@ const PostDetail = props => {
 
 	return (
 		<EventContentPage
-			maxWidth={true}
+			maxWidth={1}
 			hasBreadcrumb={false}
 			content={
 				<Box className="sm:pt-[20px] sm:pb-[56px] pb-[80px] w-full">

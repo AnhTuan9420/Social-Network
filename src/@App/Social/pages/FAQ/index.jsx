@@ -116,7 +116,7 @@ const FAQs = () => {
 
 	return (
 		<EventContentPage
-			maxWidth={true}
+			maxWidth={1}
 			content={
 				<Box className="mt-[40px] mb-[100px] px-0">
 					<Typography className="text-center text-[#222222] text-[32px] font-semibold not-italic">

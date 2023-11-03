@@ -31,7 +31,7 @@ export const timeAgo = (dateString) => {
     return hours + "h ago";
   } else if (minutes > 0) {
     return minutes + "m ago";
-  } else if (seconds > 0) {
+  } else if (seconds >= 0) {
     return "Just now";
   } else {
     return "Invalid date";

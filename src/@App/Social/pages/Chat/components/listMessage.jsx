@@ -88,7 +88,7 @@ const ChatMessage = props => {
                     :
                     messages?.length > 0 ?
                         messages?.map((item, index) => {
-                            if (item?.from.id === user?.id) {
+                            if (String(item?.from?.id) === String(user?.id) || String(item?.from) === String(user?.id)) {
                                 return (
                                     <UserMessage key={index} dataMess={item} refreshListMessage={refreshListMessage} />
                                 )

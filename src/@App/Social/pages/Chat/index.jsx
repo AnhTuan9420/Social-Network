@@ -76,7 +76,7 @@ const Chat = (props) => {
 											return (
 												<Box key={i} onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${item.id}`)}>
 													<MenuItem className="p-[16px] text-[#00A0E9] font-semibold bg-[#EFFAFF] sm:text-20 text-16 sm:leading-[160%] leading-[140%]">
-														<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] rounded-[50%]' /> {item?.username}
+														<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] rounded-[50%]' /> {item?.fullName}
 													</MenuItem>
 													<Divider className='m-0' />
 												</Box>
@@ -85,7 +85,7 @@ const Chat = (props) => {
 											return (
 												<Box key={i} onClick={() => navigate(`${ROUTER_SOCIAL.chat}/?user_id=${item.id}`)}>
 													<MenuItem className="p-[16px] text-[#222222] font-normal sm:text-20 text-16 sm:leading-[160%] leading-[140%]">
-														<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] rounded-[50%]' /> {item?.username}
+														<img src={item?.avatar ?? '/Icons/man.png'} className='h-40 w-40 mr-[15px] rounded-[50%]' /> {item?.fullName}
 													</MenuItem>
 													<Divider className='m-0' />
 												</Box>
